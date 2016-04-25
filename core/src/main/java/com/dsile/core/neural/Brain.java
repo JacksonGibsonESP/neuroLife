@@ -1,6 +1,5 @@
 package com.dsile.core.neural;
 
-
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.Neuron;
 import org.neuroph.core.data.DataSet;

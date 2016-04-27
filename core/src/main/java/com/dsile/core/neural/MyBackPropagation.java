@@ -12,4 +12,10 @@ public class MyBackPropagation extends BackPropagation{
         this.setMaxError(0.001);
         this.setMaxIterations(1000);
     }
+
+    public void print_info()
+    {
+        System.out.printf("Last Epoch Error: %f\n", this.previousEpochError);
+        System.out.printf("Epochs passed: %d\n", this.currentIteration);
+    }
 }

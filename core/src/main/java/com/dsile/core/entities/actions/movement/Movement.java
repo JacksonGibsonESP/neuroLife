@@ -15,9 +15,7 @@ public class Movement {
     /**
      * Верхняя и нижния границы для определения направлений по значениям из нейронной сети
      */
-    private static double UPPER_LIMIT_OF_BRAIN_OUTPUT_DIRECTION = 0.7;
-    private static double LOWER_LIMIT_OF_BRAIN_OUTPUT_DIRECTION = 0.2;
-
+    private static double CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION = 0.7;
 
     /**
      * Перемещаемое существо.
@@ -43,64 +41,68 @@ public class Movement {
     }
 
     /**
-     * Выполнение действия передвижения с учетом нейронной сети.
-     * TODO: Логику следует как-то упростить
+     * Выполнение действия передвижения с учетом значений на выходе нейронной сети.
      */
     public void perform(double[] brainOutput){
         //Берем модули от элементов массива
         for(int i = 0; i < 4; i++){
             brainOutput[i] = Math.abs(brainOutput[i]);
         }
-        //Массив означающий текущий порядок элементов массива brainOutput
+        //Массив означающий текущий порядок направлений массива brainOutput
         int[] order = {0,1,2,3};
-        //Делаем сортировку массива order по значениям массива brainOutput
-        //Таким образом мы получаем отсортированный массив индексов массива brainOutput
-        for (int i = 0; i < order.length-1; i++) {
-            for (int j = 0; j < order.length-1; j++) {
+        //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
+        //Таким образом мы получаем отсортированный массив brainOutput и не потеряли направления
+        System.out.println("Check before");
+        System.out.println(Arrays.toString(brainOutput));
+        System.out.println(Arrays.toString(order));
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (brainOutput[j] > brainOutput[j+1]) {
-                    int b = order[j];
+                    int tmp = order[j];
                     order[j] = order[j+1];
-                    order[j+1] = b;
+                    order[j+1] = tmp;
+                    double tmp2 = brainOutput[j];
+                    brainOutput[j] = brainOutput[j + 1];
+                    brainOutput[j + 1] = tmp2;
                 }
             }
         }
-
+        System.out.println("Check after");
+        System.out.println(Arrays.toString(brainOutput));
+        System.out.println(Arrays.toString(order));
         //Как известно, нейронная сеть может вернуть нам в качестве результата сразу два возможных направления.
         boolean fstDir = false; //Наличие первого направления
         boolean sndDir = false; //Наличие второго направления
         DirectionValues dir; //Результирующее направление
-        System.out.println(Arrays.toString(order));
-        //order[2] и order[3] - номера индексов самых больших значений массива brainOutput
-        //Проверяем можно ли считать второе по величине значение направлением.
-        if(brainOutput[order[2]] > UPPER_LIMIT_OF_BRAIN_OUTPUT_DIRECTION){
-            sndDir = true;
-        }
+
+        //2 и 3 - номера индексов самых больших значений массива brainOutput
         //Проверяем можно ли считать первое по величине значение направлением.
-        if(brainOutput[order[3]] > UPPER_LIMIT_OF_BRAIN_OUTPUT_DIRECTION){
+        if(brainOutput[3] > CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION){
             fstDir = true;
         }
-        //Если направления не удовлетворили критериям, то все-равно берем результирующее направление из двух самых самых больших значений.
-        if((fstDir | sndDir) == false){
+
+        //Проверяем можно ли считать второе по величине значение направлением.
+        if(brainOutput[2] > CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION){
+            sndDir = true;
+        }
+
+        if((fstDir & sndDir) == true){
             dir = choseDirection(order[2],order[3]);
+
         } else {
-            //Если вторичное направление удовлетворило критериям, то первое и подавно (сортировка по возрастанию)
-            if(sndDir){
-                //Так что берем результирующее
-                dir = choseDirection(order[2],order[3]);
-            } else {
-                //Иначе удовлетворило только первичное, значит двигаемся строго по нему.
+            if(fstDir){
                 dir = choseDirection(order[3]);
             }
+            else
+            {
+                System.out.println("Decided to go randomly");
+                dir = DirectionValues.random();
+            }
         }
-        //Устанавливаем получившееся направления существу только если оно проходит нижний порог значений направлений.
-        if(brainOutput[order[2]] > LOWER_LIMIT_OF_BRAIN_OUTPUT_DIRECTION|| brainOutput[order[3]] > LOWER_LIMIT_OF_BRAIN_OUTPUT_DIRECTION) {
-            creature.setDirection(dir);
-        } else {
-            System.out.println("random");
-            creature.setDirection(DirectionValues.random());
-        }
-            System.out.println(dir);
-            moveByDirection();
+        creature.setDirection(dir);
+        System.out.println(dir);
+        System.out.println("-------------------------------------------");
+        moveByDirection();
     }
 
     /**
@@ -137,7 +139,7 @@ public class Movement {
                 return DirectionValues.SOUTH;
             }
         }
-        return DirectionValues.EAST; //в случае нештатной ситуации жебошить вправо
+        return DirectionValues.EAST; //в случае нештатной ситуации идти вправо
     }
 
     private void moveByDirection(){
@@ -173,6 +175,4 @@ public class Movement {
     private void move(int difX, int difY){
         creature.setCurrentCell(creature.x() + difX, creature.y() + difY);
     }
-
-
 }

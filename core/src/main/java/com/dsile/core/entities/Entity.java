@@ -17,7 +17,6 @@ public abstract class Entity extends Actor {
     protected World world;
     protected Texture texture;
 
-
     protected boolean alive = true;
     protected int maxHP = 1;
     protected int maxEnergy = 1;
@@ -51,8 +50,6 @@ public abstract class Entity extends Actor {
     protected abstract void setTexture();
 
     protected abstract void dead();
-
-
 
     public World getWorld(){
         return world;

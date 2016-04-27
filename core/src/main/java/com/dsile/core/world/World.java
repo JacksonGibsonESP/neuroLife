@@ -44,7 +44,7 @@ public class World {
         entities.add(new Herb(this,7,7));
 
         System.out.println("Creating complete");
-
+        System.out.println("-------------------------------------------");
     }
 
     public void drawMap(SpriteBatch batch){

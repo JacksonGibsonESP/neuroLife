@@ -22,6 +22,7 @@ import java.util.List;
 public class Brain {
     private NeuralNetwork neuralNetwork;
     private DataSet trainingSet;
+    private MyBackPropagation rule;
 
     public Brain(){
         List<Integer> neuronsInLayers = new ArrayList<>();
@@ -30,7 +31,8 @@ public class Brain {
         neuronsInLayers.add(7);
         neuralNetwork = new MultiLayerPerceptron(neuronsInLayers, new NeuronProperties(TransferFunctionType.SIGMOID, true));
 
-        neuralNetwork.setLearningRule(new MyBackPropagation());
+        rule = new MyBackPropagation();
+        neuralNetwork.setLearningRule(rule);
 
         Neuron[] OutputLayerNeurons = neuralNetwork.getOutputNeurons();
         for(int i = 0; i < OutputLayerNeurons.length; i++) {
@@ -49,6 +51,8 @@ public class Brain {
         System.out.println("Started to learn");
         neuralNetwork.learn(trainingSet);
         System.out.println("Learning finished");
+        rule.print_info();
+        System.out.println("-------------------------------------------");
     }
     public void setInput(double[] inputVector){
         neuralNetwork.setInput(inputVector);

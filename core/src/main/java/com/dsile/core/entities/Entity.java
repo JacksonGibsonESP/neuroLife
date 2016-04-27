@@ -33,8 +33,7 @@ public abstract class Entity extends Actor {
         setOrigin(SIZE / 2, SIZE / 2);
         setBounds(currentCell.getDisplayX(), currentCell.getDisplayY(), SIZE, SIZE);
 
-        System.out.println(getX() + "," + getY() + "," + getOriginX() + "," + getOriginY());
-
+        //System.out.println(getX() + "," + getY() + "," + getOriginX() + "," + getOriginY());
     }
 
     /**

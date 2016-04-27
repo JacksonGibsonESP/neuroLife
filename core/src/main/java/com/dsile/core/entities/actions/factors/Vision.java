@@ -70,11 +70,12 @@ public class Vision {
      */
     public double[] accessSituation(){
         int[] environment = getEnvironment();
+        System.out.println("Sees: " + Arrays.toString(environment));
         Brain brain = creature.getBrain();
         brain.setInput(environment);
         brain.think();
         double[] thinks = brain.getOutput();
-        System.out.println("thinks: " + Arrays.toString(thinks));
+        System.out.println("Decides: " + Arrays.toString(thinks));
         return thinks;
     }
 }

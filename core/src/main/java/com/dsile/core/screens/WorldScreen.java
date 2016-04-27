@@ -67,9 +67,6 @@ public class WorldScreen implements Screen {
             stage.act(delta);
 
         keysProcessor.moveCameraByKeys(cam);
-
-
-
     }
 
     @Override

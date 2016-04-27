@@ -39,22 +39,11 @@ public class World {
 
         System.out.println("Creating entities");
 
-        for(int i = 2; i < 3; i++){
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-            entities.add(new Lizard(this,i,i));
-        }
-        entities.add(new Herb(this,7,7));
-        //entities.add(new TestBeast(this,3,5));
+        entities.add(new Lizard(this,2,3));
 
-        System.out.println("Entites done");
+        entities.add(new Herb(this,7,7));
+
+        System.out.println("Creating complete");
 
     }
 

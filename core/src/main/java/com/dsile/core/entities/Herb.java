@@ -10,6 +10,7 @@ public class Herb extends Entity {
 
     public Herb(World world, int x, int y) {
         super(world, x, y);
+        System.out.printf("Herb created on (%d,%d)\n",x,y);
     }
 
     @Override

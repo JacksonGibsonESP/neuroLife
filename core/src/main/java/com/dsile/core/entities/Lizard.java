@@ -25,7 +25,7 @@ public class Lizard extends Creature {
      */
     public Lizard(World world, int x, int y) {
         super(world,x,y);
-        System.out.printf("Lizard created on (%d,%d)",x,y);
+        System.out.printf("Lizard created on (%d,%d)\n",x,y);
     }
 
     @Override
@@ -65,8 +65,6 @@ public class Lizard extends Creature {
         **/
 
         brain.addRowToTrainingSet(new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, new double[]{0, 0, 0, 0, 1, 0, 0});
-
-
         brain.addRowToTrainingSet(new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1}, new double[]{1, 0, 0, 1, 0, 0, 1});
         brain.addRowToTrainingSet(new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0}, new double[]{0, 0, 0, 1, 0, 0, 1});
         brain.addRowToTrainingSet(new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0}, new double[]{0, 0, 1, 1, 0, 0, 1});
@@ -139,14 +137,10 @@ public class Lizard extends Creature {
         else if(thoughts[6] > 0.5){
             eat(Arrays.copyOfRange(thoughts,0,4));
         }
-
     }
-
-
 
     @Override
     public Brain getBrain() {
         return brain;
     }
-
 }

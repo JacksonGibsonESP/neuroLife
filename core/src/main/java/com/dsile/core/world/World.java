@@ -40,6 +40,7 @@ public class World {
         System.out.println("Creating entities");
 
         entities.add(new Lizard(this,2,3));
+        entities.add(new Lizard(this,6,6));
 
         entities.add(new Herb(this,7,7));
 

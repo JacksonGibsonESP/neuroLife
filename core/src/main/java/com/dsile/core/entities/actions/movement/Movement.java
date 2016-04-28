@@ -52,9 +52,9 @@ public class Movement {
         int[] order = {0,1,2,3};
         //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
         //Таким образом мы получаем отсортированный массив brainOutput и не потеряли направления
-        System.out.println("Check before");
+        /*System.out.println("Check before");
         System.out.println(Arrays.toString(brainOutput));
-        System.out.println(Arrays.toString(order));
+        System.out.println(Arrays.toString(order));*/
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (brainOutput[j] > brainOutput[j+1]) {
@@ -67,9 +67,9 @@ public class Movement {
                 }
             }
         }
-        System.out.println("Check after");
+        /*System.out.println("Check after");
         System.out.println(Arrays.toString(brainOutput));
-        System.out.println(Arrays.toString(order));
+        System.out.println(Arrays.toString(order));*/
         //Как известно, нейронная сеть может вернуть нам в качестве результата сразу два возможных направления.
         boolean fstDir = false; //Наличие первого направления
         boolean sndDir = false; //Наличие второго направления
@@ -101,8 +101,7 @@ public class Movement {
         }
         creature.setDirection(dir);
         System.out.println(dir);
-        System.out.println("-------------------------------------------");
-        moveByDirection();
+         moveByDirection();
     }
 
     /**

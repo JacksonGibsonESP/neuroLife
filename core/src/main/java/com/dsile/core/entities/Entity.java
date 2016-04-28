@@ -18,16 +18,16 @@ public abstract class Entity extends Actor {
     protected Texture texture;
 
     protected boolean alive = true;
-    protected int maxHP = 1;
-    protected int maxEnergy = 1;
-    protected int HP = maxHP;
-    protected int energy = maxEnergy;
+    protected int maxHP = 100;
+//    protected int maxEnergy = 1;
+    protected int HP = 50;
+//    protected int energy = maxEnergy;
 
     public Entity(World world, int x, int y){
         this.world = world;
         this.currentCell = world.getCell(x, y).setEntity(this);
         this.setDirection(DirectionValues.EAST);
-        this.setTexture();
+        this.setAliveTexture();
 
         setOrigin(SIZE / 2, SIZE / 2);
         setBounds(currentCell.getDisplayX(), currentCell.getDisplayY(), SIZE, SIZE);
@@ -47,9 +47,13 @@ public abstract class Entity extends Actor {
                 texture.getWidth(), texture.getHeight(), false, false);
     }
 
-    protected abstract void setTexture();
+    protected abstract void setAliveTexture();
+
+    protected abstract void setDeadTexture();
 
     protected abstract void dead();
+
+    public abstract int bitten();
 
     public World getWorld(){
         return world;
@@ -80,5 +84,22 @@ public abstract class Entity extends Actor {
     public void setDirection(DirectionValues val){
         direction = val;
         setRotation(direction.getAngle());
+    }
+
+    public int getHP()
+    {
+        return this.HP;
+    }
+
+    public void incHP(int deltaHP)
+    {
+        if (this.HP + deltaHP > this.maxHP)
+        {
+            this.HP = this.maxHP;
+        }
+        else
+        {
+            this.HP += deltaHP;
+        }
     }
 }

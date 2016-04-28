@@ -10,11 +10,16 @@ public class Herb extends Entity {
 
     public Herb(World world, int x, int y) {
         super(world, x, y);
+        this.HP = this.maxHP;
         System.out.printf("Herb created on (%d,%d)\n",x,y);
     }
 
     @Override
-    protected void setTexture() {
+    protected void setAliveTexture() {
+        texture = new Texture("herb.png");
+    }
+
+    protected void setDeadTexture() {
         texture = new Texture("herb.png");
     }
 
@@ -24,4 +29,17 @@ public class Herb extends Entity {
         currentCell.removeEntity(this);
     }
 
+    public int bitten()
+    {
+        if(this.alive)
+        {
+            this.HP -= 10;
+            if(this.HP <= 0)
+            {
+                this.dead();
+            }
+            return 10;
+        }
+        return 0;
+    }
 }

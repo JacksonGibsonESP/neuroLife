@@ -2,10 +2,7 @@ package com.dsile.core.world;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dsile.core.entities.Creature;
-import com.dsile.core.entities.Entity;
-import com.dsile.core.entities.Herb;
-import com.dsile.core.entities.Lizard;
+import com.dsile.core.entities.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,14 +38,6 @@ public abstract class Cell{
         return  entitiesWithoutSelf;
     }
 
-    public boolean isHerb(){
-        if(getHerb() == null){
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public Herb getHerb(){
         for(Entity entity : entities){
             if(entity instanceof Herb){
@@ -58,9 +47,44 @@ public abstract class Cell{
         return null;
     }
 
+    public Lizard getLizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Lizard){
+                return (Lizard)entity;
+            }
+        }
+        return null;
+    }
+
+    public Predator_Lizard getPredator_Lizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Predator_Lizard){
+                return (Predator_Lizard)entity;
+            }
+        }
+        return null;
+    }
+
+    public boolean isHerb(){
+        if(getHerb() == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public boolean isLizard(){
         for(Entity entity : entities){
             if(entity instanceof Lizard){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPredator_Lizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Predator_Lizard){
                 return true;
             }
         }

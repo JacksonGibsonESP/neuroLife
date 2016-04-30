@@ -1,5 +1,6 @@
 package com.dsile.core.entities;
 
+import com.dsile.core.entities.actions.attack.Attack;
 import com.dsile.core.entities.actions.factors.Vision;
 import com.dsile.core.entities.actions.movement.Movement;
 import com.dsile.core.neural.Brain;
@@ -15,8 +16,9 @@ public abstract class Creature extends Entity implements HasBrain {
     protected Vision vision;
     protected Movement movement;
     protected Eating eating;
+    protected Attack attack;
 
-    protected int hungrines = 0;
+    //protected int hungrines = 0;
 
     public Creature(World world, int x, int y){
         super(world,x,y);
@@ -24,6 +26,7 @@ public abstract class Creature extends Entity implements HasBrain {
         this.vision = new Vision(this);
         this.movement = new Movement(this);
         this.eating = new Eating(this);
+        this.attack = new Attack(this);
     }
 
     public abstract void learn();

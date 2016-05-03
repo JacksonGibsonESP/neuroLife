@@ -15,7 +15,7 @@ public class Movement {
     /**
      * Верхняя и нижния границы для определения направлений по значениям из нейронной сети
      */
-    private static double CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION = 0.7;
+    private static double CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION = 0.5;
 
     /**
      * Перемещаемое существо.

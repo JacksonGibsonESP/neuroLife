@@ -32,9 +32,9 @@ public abstract class Cell{
         return entities;
     }
 
-    public Set<Entity> getEntityList(Entity self){
+    public Set<Entity> getEntityList(Entity without_self){
         Set<Entity> entitiesWithoutSelf = new HashSet<>(entities);
-        entitiesWithoutSelf.remove(self);
+        entitiesWithoutSelf.remove(without_self);
         return  entitiesWithoutSelf;
     }
 
@@ -73,18 +73,18 @@ public abstract class Cell{
         }
     }
 
-    public boolean isLizard(){
+    public boolean isLizard(Entity caller){
         for(Entity entity : entities){
-            if(entity instanceof Lizard){
+            if(entity instanceof Lizard && entity.isAlive() && entity != caller){
                 return true;
             }
         }
         return false;
     }
 
-    public boolean isPredator_Lizard(){
+    public boolean isPredator_Lizard(Entity caller){
         for(Entity entity : entities){
-            if(entity instanceof Predator_Lizard){
+            if(entity instanceof Predator_Lizard && entity.isAlive() && entity != caller){
                 return true;
             }
         }

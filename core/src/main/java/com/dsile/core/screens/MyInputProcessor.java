@@ -57,8 +57,8 @@ public class MyInputProcessor implements InputProcessor {
         return false;
     }
 
-    public boolean isSpacePressed(){
-        if(currentKey.contains(Input.Keys.SPACE)){
+    public boolean isEnterPressed(){
+        if(currentKey.contains(Input.Keys.ENTER)){
             return true;
         }
         else{

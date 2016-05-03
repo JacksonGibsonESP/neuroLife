@@ -5,6 +5,7 @@ import com.dsile.core.entities.Entity;
 import com.dsile.core.entities.Herb;
 import com.dsile.core.entities.Lizard;
 import com.dsile.core.entities.Creature;
+import com.dsile.core.screens.WorldScreen;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -23,11 +24,15 @@ public class World {
 
     private Set<Entity> entities = new HashSet<>();
 
-    public World(int cellsX, int cellsY, int cellSize){
+    private WorldScreen world_screen;
+
+    public World(int cellsX, int cellsY, int cellSize, WorldScreen screen){
+        System.out.println("Creating world");
+
+        this.world_screen = screen;
+
         this.cellsX = cellsX;
         this.cellsY = cellsY;
-
-        System.out.println("Creating world");
 
         //TODO: Cell fabric?
         cells = new Cell[cellsX][cellsY];
@@ -39,10 +44,16 @@ public class World {
 
         System.out.println("Creating entities");
 
-        entities.add(new Lizard(this,2,3));
-        entities.add(new Lizard(this,6,6));
+        //entities.add(new Lizard(this,2,3));
 
         entities.add(new Herb(this,7,7));
+        entities.add(new Herb(this,7,8));
+
+        Lizard lizard = new Lizard(this,6,6);
+        lizard.learn();
+
+        entities.add(lizard);
+        entities.add(new Lizard(this,6,9, lizard.getBrain()));
 
         System.out.println("Creating complete");
         System.out.println("-------------------------------------------");
@@ -66,7 +77,6 @@ public class World {
         }
         return (GroundCell) cells[randomX][randomY];
     }
-
 
     //TODO: ADD EXCEPTIONS
     public Cell getCell(int x, int y){
@@ -95,5 +105,11 @@ public class World {
 
     public Set<Entity> getEntities(){
         return entities;
+    }
+
+    public void add_to_entities(Entity entity)
+    {
+        entities.add(entity);
+        world_screen.addActor(entity);
     }
 }

@@ -3,6 +3,7 @@ package com.dsile.core.entities;
 import com.dsile.core.entities.actions.attack.Attack;
 import com.dsile.core.entities.actions.factors.Vision;
 import com.dsile.core.entities.actions.movement.Movement;
+import com.dsile.core.entities.actions.reproduce.Reproduce;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 
@@ -17,8 +18,20 @@ public abstract class Creature extends Entity implements HasBrain {
     protected Movement movement;
     protected Eating eating;
     protected Attack attack;
+    protected Reproduce reproduce;
 
     //protected int hungrines = 0;
+
+    public Creature(World world, int x, int y, Brain brain)
+    {
+        super(world,x,y);
+        this.brain = brain;
+        this.vision = new Vision(this);
+        this.movement = new Movement(this);
+        this.eating = new Eating(this);
+        this.attack = new Attack(this);
+        this.reproduce = new Reproduce(this);
+    }
 
     public Creature(World world, int x, int y){
         super(world,x,y);
@@ -27,6 +40,7 @@ public abstract class Creature extends Entity implements HasBrain {
         this.movement = new Movement(this);
         this.eating = new Eating(this);
         this.attack = new Attack(this);
+        this.reproduce = new Reproduce(this);
     }
 
     public abstract void learn();
@@ -41,4 +55,7 @@ public abstract class Creature extends Entity implements HasBrain {
 
     protected abstract void decomposed();
 
+    public abstract void reproduce();
+
+    public abstract void die();
 }

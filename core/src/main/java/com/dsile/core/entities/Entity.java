@@ -102,4 +102,8 @@ public abstract class Entity extends Actor {
             this.HP += deltaHP;
         }
     }
+
+    public boolean isAlive() {
+        return alive;
+    }
 }

@@ -26,8 +26,8 @@ public class Brain {
 
     public Brain(){
         List<Integer> neuronsInLayers = new ArrayList<>();
-        neuronsInLayers.add(28);
-        neuronsInLayers.add(9);
+        neuronsInLayers.add(10);
+        neuronsInLayers.add(7);
         neuronsInLayers.add(8);
         neuralNetwork = new MultiLayerPerceptron(neuronsInLayers, new NeuronProperties(TransferFunctionType.SIGMOID, true));
 
@@ -39,7 +39,7 @@ public class Brain {
             OutputLayerNeurons[i].setTransferFunction(new Linear());
         }
 
-        trainingSet = new DataSet(28, 8);
+        trainingSet = new DataSet(10, 8);
     }
     public void clearTrainingSet(){
         trainingSet.clear();

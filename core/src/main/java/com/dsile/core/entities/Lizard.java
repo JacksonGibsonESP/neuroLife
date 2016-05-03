@@ -28,6 +28,11 @@ public class Lizard extends Creature {
         System.out.printf("Lizard created on (%d,%d)\n",x,y);
     }
 
+    public Lizard(World world, int x, int y, Brain brain) {
+        super(world,x,y, brain);
+        System.out.printf("Lizard was borned on (%d,%d)\n",x,y);
+    }
+
     @Override
     public void learn() {
 
@@ -43,9 +48,27 @@ public class Lizard extends Creature {
         *    | 6 | 7 | 8 |
         *    |---|---|---|
         *
-        *    Повторяется 3 раза для разных сущностей на ячейках (0 - ничего, 1 - растение, 2 - ящерка, 3 - ящерка-хищник)
+        *    Комбинации значений для разных сущностей на ячейках //пока отказываюсь из-за сложноси обучения
+        *    0 - никого
+        *    1 - трава
+        *    2 - трава и обычная ящерица
+        *    3 - ящерица
+        *    4 - ящерица и ящерица-хищник
+        *    5 - ящерица-хищник
+        *    6 - ящерица-хищник и трава           // может быть никогда и не понадобится?
+        *    7 - ящерица-хищник, ящерица и трава  // слишком уж гремучая комбинация
         *
-        *    27 - уровень жизни (HP)
+        *    Но попрбуем сделать проще:
+        *    0 - никого
+        *    1 - трава
+        *    2 - ящерица
+        *    3 - ящерица-хищник
+        *    Значения перезаписывают друг друга в порядке выше
+        *
+        *    9-й вход сети - уровень жизни - hp:
+        *    0 - <= 30 %
+        *    1 - > 30%, <= 70 %
+        *    2 - > 70 %
         *
         *    Output Array: (первые четыре ячейки)
         *
@@ -57,7 +80,6 @@ public class Lizard extends Creature {
         *         v
         *         3
         *
-        *
         *  Остальные ячейки: действия (идти, атакатовать, есть)
         *
         *  4 - перемещение
@@ -67,146 +89,148 @@ public class Lizard extends Creature {
         **/
 
         //поведение при пустом поле, надо бы что-то поумнее придумать
-        for(int i = 1; i <= 10; i++ ) {
+        for(int i = 0; i <= 2; i++ ) {
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, i},
                     new double[]{0, 0, 0, 0, 1, 0, 0, 0});
         }
 
-        //поедание травы при разных значениях hp                          hp
-        for(int i = 1; i <= 7; i+= 2 ) {
+        //поедание травы при малых и средних значениях hp            hp
+        for(int i = 0; i <= 1; i++ ) {
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1, i},
                     new double[]{1, 0, 0, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0, i},
                     new double[]{0, 0, 0, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0, i},
                     new double[]{0, 0, 1, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 1, 0, 0, 0, i},
                     new double[]{1, 0, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 1, 0, 0, 0, 0, i},
                     new double[]{0, 0, 0, 0, 0, 0, 1, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 1, 0, 0, 0, 0, 0, i},
                     new double[]{0, 0, 1, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 1, 0, 0, 0, 0, 0, 0, i},
                     new double[]{1, 1, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 1, 0, 0, 0, 0, 0, 0, 0, i},
                     new double[]{0, 1, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{1, 0, 0, 0, 0, 0, 0, 0, 0, i},
+                    new double[]{0, 1, 1, 0, 1, 0, 0, 0});
+        }
+
+        //Размножение происходит при большом HP             hp
+        for(int i = 2; i <= 2; i++ ) {
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 2, i},
+                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 2, 0, i},
+                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 0, 0, 0, 0, 2, 0, 0, i},
+                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 0, 0, 0, 2, 0, 0, 0, i},
+                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 0, 0, 2, 0, 0, 0, 0, i},
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 1});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 0, 2, 0, 0, 0, 0, 0, i},
+                    new double[]{0, 0, 1, 0, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 0, 2, 0, 0, 0, 0, 0, 0, i},
+                    new double[]{1, 1, 0, 0, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{0, 2, 0, 0, 0, 0, 0, 0, 0, i},
+                    new double[]{0, 1, 0, 0, 1, 0, 0, 0});
+            brain.addRowToTrainingSet(
+                    new double[]{2, 0, 0, 0, 0, 0, 0, 0, 0, i},
                     new double[]{0, 1, 1, 0, 1, 0, 0, 0});
         }
 
         //Убежать от ящерки-хищника
-        for(int i = 1; i <= 9; i+= 2 ) {
+        /*for(int i = 0; i <= 2; i++ ) {
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 3, i},
                     new double[]{0, 1, 1, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 0, 3, 0, i},
                     new double[]{0, 1, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 0, 3, 0, 0, i},
                     new double[]{1, 1, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 0, 0, 3, 0, 0, 0, i},
                     new double[]{0, 0, 1, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, i * 10},
-                    new double[]{0, 0, 0, 0, 0, 1, 0, 0});
+                    new double[]{0, 0, 0, 0, 3, 0, 0, 0, 0, i},
+                    new double[]{0, 0, 0, 0, 0, 1, 0, 0}); //ударит, вдруг спасёт?
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 0, 3, 0, 0, 0, 0, 0, i},
                     new double[]{1, 0, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 0, 3, 0, 0, 0, 0, 0, 0, i},
                     new double[]{0, 0, 1, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{0, 3, 0, 0, 0, 0, 0, 0, 0, i},
                     new double[]{0, 0, 0, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{3, 0, 0, 0, 0, 0, 0, 0, 0, i},
                     new double[]{1, 0, 0, 1, 1, 0, 0, 0});
         }
 
-        //Напасть на ящерку-хищника, если обычных ящерок много
-        for(int i = 5; i <= 9; i+= 2 ) {
+        //Напасть на ящерку-хищника, если обычных ящерок много и много hp
+        for(int i = 2; i <= 2; i++ ) {
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, i * 10},
+                    new double[]{2, 2, 2, 2, 2, 2, 2, 2, 3, i},
                     new double[]{1, 0, 0, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, i * 10},
+                    new double[]{2, 2, 2, 2, 2, 2, 2, 3, 2, i},
                     new double[]{0, 0, 0, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, i * 10},
+                    new double[]{2, 2, 2, 2, 2, 2, 3, 2, 2, i},
                     new double[]{0, 0, 1, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 3, 0, 0, 0, i * 10},
+                    new double[]{2, 2, 2, 2, 2, 3, 2, 2, 2, i},
                     new double[]{1, 0, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 3, 0, 0, 0, 0, i * 10},
+                    new double[]{2, 2, 2, 2, 3, 2, 2, 2, 2, i},
                     new double[]{0, 0, 0, 0, 0, 1, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{2, 2, 2, 3, 2, 2, 2, 2, 2, i},
                     new double[]{1, 0, 0, 0, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 3, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{2, 2, 3, 2, 2, 2, 2, 2, 2, i},
                     new double[]{0, 0, 1, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 3, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{2, 3, 2, 2, 2, 2, 2, 2, 2, i},
                     new double[]{0, 0, 0, 1, 1, 0, 0, 0});
             brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
+                    new double[]{3, 2, 2, 2, 2, 2, 2, 2, 2, i},
                     new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-        }
-
-        //Размножение. Происходит при большом HP.
-        for(int i = 7; i <= 9; i+= 2 ) {
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, i * 10},
-                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, i * 10},
-                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, i * 10},
-                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, i * 10},
-                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, i * 10},
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 1});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, i * 10},
-                    new double[]{0, 0, 1, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, i * 10},
-                    new double[]{1, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, i * 10},
-                    new double[]{0, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, i * 10},
-                    new double[]{0, 1, 1, 0, 1, 0, 0, 0});
-        }
+        }*/
 
         brain.learn();
     }
 
     @Override
     protected void attack() {
-
+        System.out.println("Attacks");
+        attack.perform();
     }
 
     @Override
     protected void move(double[] signal) {
+        System.out.println("Moves");
         movement.perform(signal);
     }
 
@@ -218,6 +242,7 @@ public class Lizard extends Creature {
 
     @Override
     protected void decomposed() {
+        System.out.println("Decomposed");
         currentCell.removeEntity(this);
         remove();
     }
@@ -271,6 +296,8 @@ public class Lizard extends Creature {
                 attack();
             } else if (thoughts[6] > 0.5) {
                 eat();
+            } else if (thoughts[7] > 0.5) {
+                reproduce();
             }
             System.out.printf("HP: %d\n", this.HP);
         }
@@ -282,7 +309,7 @@ public class Lizard extends Creature {
         return brain;
     }
 
-    public int bitten()
+    public int bitten() //укушен когда мёртв
     {
         this.HP -= 10;
         if(this.HP <= 0)
@@ -303,5 +330,16 @@ public class Lizard extends Creature {
         if (this.alive & this.HP <= 0) {
             dead();
         }
+    }
+
+    public void reproduce()
+    {
+        System.out.println("Trying to reproduce");
+        reproduce.perform();
+    }
+
+    public void die()
+    {
+        dead();
     }
 }

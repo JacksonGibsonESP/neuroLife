@@ -9,8 +9,8 @@ public class MyBackPropagation extends BackPropagation{
     MyBackPropagation()
     {
         super();
-        this.setMaxError(0.001);
-        this.setMaxIterations(10000);
+        this.setMaxError(0.01);
+        this.setMaxIterations(1000);
     }
 
     public void print_info()

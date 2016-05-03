@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.async.ThreadUtils;
 import com.dsile.core.NeuroLife;
 import com.dsile.core.entities.Creature;
+import com.dsile.core.entities.Entity;
 import com.dsile.core.entities.HasBrain;
 import com.dsile.core.neural.BrainTrainer;
 import com.dsile.core.world.World;
@@ -29,7 +30,7 @@ public class WorldScreen implements Screen {
     public void show() {
 
         batch = new SpriteBatch();
-        world = new World(40, 23, 32);
+        world = new World(40, 23, 32, this);
         stage = new Stage();
         // Constructs a new OrthographicCamera, using the given viewport width and height
         // Height is multiplied by aspect ratio.
@@ -46,7 +47,7 @@ public class WorldScreen implements Screen {
 
         stage.getViewport().setCamera(cam);
 
-        world.getEntities().stream().filter(e-> e instanceof Creature).forEach(e -> bt.train((Creature)e));
+        //world.getEntities().stream().filter(e-> e instanceof Creature).forEach(e -> bt.train((Creature)e)); //зачем обучать всех? скопируй сети
         world.getEntities().stream().forEach(stage::addActor);
     }
 
@@ -64,6 +65,9 @@ public class WorldScreen implements Screen {
         stage.draw();
 
         if (keysProcessor.isSpaceClicked())
+            stage.act(delta);
+
+        if (keysProcessor.isEnterPressed())
             stage.act(delta);
 
         keysProcessor.moveCameraByKeys(cam);
@@ -95,4 +99,10 @@ public class WorldScreen implements Screen {
     public void dispose() {
 
     }
+
+    public void addActor(Entity entity)
+    {
+        stage.addActor(entity);
+    }
+
 }

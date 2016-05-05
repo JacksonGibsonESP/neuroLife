@@ -91,6 +91,11 @@ public abstract class Entity extends Actor {
         return this.HP;
     }
 
+    public void setHP(int new_hp) // only for testing
+    {
+        this.HP = new_hp;
+    }
+
     public void incHP(int deltaHP)
     {
         if (this.HP + deltaHP > this.maxHP)

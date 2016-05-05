@@ -290,7 +290,7 @@ public class Lizard extends Creature {
         else {
             this.HP -= 5; //плата за жизнь
             double[] thoughts = vision.accessSituation();
-            if (thoughts[4] > 0.5) {
+            /*if (thoughts[4] > 0.5) {
                 move(Arrays.copyOfRange(thoughts, 0, 4));
             } else if (thoughts[5] > 0.5) {
                 attack();
@@ -298,10 +298,56 @@ public class Lizard extends Creature {
                 eat();
             } else if (thoughts[7] > 0.5) {
                 reproduce();
+            }*/
+            //Ищем победителя среди индексов 4 - 7:
+            int decision = find_winner(Arrays.copyOfRange(thoughts, 4, 8));
+
+            switch(decision){
+                case 0:
+                    move(Arrays.copyOfRange(thoughts, 0, 4));
+                    break;
+                case 1:
+                    attack();
+                    break;
+                case 2:
+                    eat();
+                    break;
+                case 3:
+                    reproduce();
+                    break;
             }
+
             System.out.printf("HP: %d\n", this.HP);
         }
         System.out.println("-------------------------------------------");
+    }
+
+    private int find_winner(double[] brainOutput)
+    {
+        //Метод возвращает индекс победителя
+        //Массив означающий текущий порядок индексов массива brainOutput
+        int[] order = new int[brainOutput.length];
+        for (int i = 0; i < brainOutput.length; i++) {
+            order[i] = i;
+        }
+        //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
+        //Таким образом мы получаем отсортированный массив brainOutput и не потеряли индексы
+        /*System.out.println("Check before");
+        System.out.println(Arrays.toString(brainOutput));
+        System.out.println(Arrays.toString(order));*/
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (brainOutput[j] > brainOutput[j+1]) {
+                    int tmp = order[j];
+                    order[j] = order[j+1];
+                    order[j+1] = tmp;
+                    double tmp2 = brainOutput[j];
+                    brainOutput[j] = brainOutput[j + 1];
+                    brainOutput[j + 1] = tmp2;
+                }
+            }
+        }
+        return order[order.length - 1];
     }
 
     @Override

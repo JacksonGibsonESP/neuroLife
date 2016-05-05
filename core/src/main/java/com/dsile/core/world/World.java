@@ -34,7 +34,6 @@ public class World {
         this.cellsX = cellsX;
         this.cellsY = cellsY;
 
-        //TODO: Cell fabric?
         cells = new Cell[cellsX][cellsY];
         for(int i = 0; i < cellsX; i++){
             for(int j = 0; j < cellsY; j++){
@@ -44,16 +43,29 @@ public class World {
 
         System.out.println("Creating entities");
 
+        //TODO: Сделать класс spawner
+
         //entities.add(new Lizard(this,2,3));
 
-        entities.add(new Herb(this,7,7));
-        entities.add(new Herb(this,7,8));
+        //entities.add(new Herb(this,7,7));
+        //entities.add(new Herb(this,7,8));
 
         Lizard lizard = new Lizard(this,6,6);
         lizard.learn();
 
+        //lizard.getBrain().saveNNToFile("lizard_nnt");
+
         entities.add(lizard);
-        entities.add(new Lizard(this,6,9, lizard.getBrain()));
+        //entities.add(new Lizard(this,6,9, lizard.getBrain()));
+
+        //Lizard lizard2 = new Lizard(this,6,7);
+        //lizard2.learn();
+        //entities.add(lizard2);
+
+        /*for(Entity e : entities)
+        {
+            e.setHP(100);
+        }*/
 
         System.out.println("Creating complete");
         System.out.println("-------------------------------------------");

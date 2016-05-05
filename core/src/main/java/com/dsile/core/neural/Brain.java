@@ -70,7 +70,11 @@ public class Brain {
     public double[] getOutput(){
         return neuralNetwork.getOutput();
     }
-    public void saveNNToFile(String fileName){
-        neuralNetwork.save(fileName + ".nnet");
+    public void saveNNToFile(String filePath){
+        neuralNetwork.save(filePath);
     }
+    public void loadFileToNNT(String filePath){
+        neuralNetwork = neuralNetwork.createFromFile(filePath);
+    }
+    public NeuralNetwork getNNT(){return neuralNetwork;}
 }

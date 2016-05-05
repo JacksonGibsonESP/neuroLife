@@ -6,7 +6,10 @@ import com.dsile.core.entities.Lizard;
 import com.dsile.core.entities.Predator_Lizard;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
+import org.neuroph.core.NeuralNetwork;
 
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -66,7 +69,52 @@ public class Reproduce {
 
     private Brain genetic_algorithm(Brain brain)
     {
-        //this.creature.getBrain() + brain
-        return brain;
+        NeuralNetwork parent_A = creature.getBrain().getNNT();
+        NeuralNetwork parent_B = brain.getNNT();
+
+        Double weights_A[] = parent_A.getWeights();
+        Double weights_B[] = parent_B.getWeights();
+
+        System.out.println("Weights A: " + Arrays.toString(weights_A));
+        System.out.println("Weights B: " + Arrays.toString(weights_B));
+
+        // Будем считать все веса одной сети одной хромосомой, будем скрещивать две хромосомы
+        // Пускай будет равномерное скрещивание
+
+        Random r = new Random();
+
+        Double weights_child[] = new Double[weights_A.length];
+
+        for (int i = 0; i < weights_child.length; i++)
+        {
+            weights_child[i] = (r.nextDouble() < 0.5) ? weights_A[i] : weights_B[i];
+        }
+
+        // Производим мутации генов
+        for (int i = 0; i < weights_child.length; i++)
+        {
+            // Gaussian ("normally") distributed double value with mean 0.0 and standard deviation 1.0 from this random number generator's sequence.
+            if (r.nextDouble() < 0.05) {
+                weights_child[i] = r.nextGaussian() + weights_child[i];
+            }
+        }
+
+        // Приведение типов
+
+        double weights_child_casted[] = new double[weights_child.length];
+
+        for (int i = 0; i < weights_child_casted.length; i++)
+        {
+            weights_child_casted [i] = weights_child[i].doubleValue();
+        }
+
+        System.out.println("Weights C: " + Arrays.toString(weights_child_casted));
+
+        Brain child_brain = new Brain();
+
+        child_brain.getNNT().setWeights(weights_child_casted);
+
+        return child_brain;
     }
+
 }

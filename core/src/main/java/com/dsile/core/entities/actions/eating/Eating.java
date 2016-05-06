@@ -1,6 +1,8 @@
 package com.dsile.core.entities.actions.eating;
 
 import com.dsile.core.entities.Creature;
+import com.dsile.core.entities.Lizard;
+import com.dsile.core.entities.Predator_Lizard;
 
 /**
  * Created by Никита on 28.04.2016.
@@ -14,10 +16,17 @@ public class Eating {
     }
 
     public void perform() {
-        if(creature.getCurrentCell().isHerb())
+        if(creature instanceof Lizard && creature.getCurrentCell().isHerb())
         {
             creature.incHP(creature.getCurrentCell().getHerb().bitten()); //кусаем и получаем некоторый прирост hp
         }
-
+        else if(creature instanceof Predator_Lizard) {
+            if (creature.getCurrentCell().isDeadLizard(creature)) {
+                creature.incHP(creature.getCurrentCell().getDeadLizard().bitten()); //кусаем и получаем некоторый прирост hp
+            }
+            else if (creature.getCurrentCell().isDeadPredator_Lizard(creature)){
+                creature.incHP(creature.getCurrentCell().getDeadPredator_Lizard().bitten());
+            }
+        }
     }
 }

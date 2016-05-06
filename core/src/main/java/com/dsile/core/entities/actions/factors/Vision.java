@@ -185,60 +185,60 @@ public class Vision {
         }
 
         //Проверяем наличие обычных ящериц
-        if (creature.getWorld().getCell(x-1,y+1).isLizard(creature)){
+        if (creature.getWorld().getCell(x-1,y+1).isAliveLizard(creature)){
             env[0] = 2;
         }
-        if (creature.getWorld().getCell(x,y+1).isLizard(creature)){
+        if (creature.getWorld().getCell(x,y+1).isAliveLizard(creature)){
             env[1] = 2;
         }
-        if (creature.getWorld().getCell(x+1,y+1).isLizard(creature)){
+        if (creature.getWorld().getCell(x+1,y+1).isAliveLizard(creature)){
             env[2] = 2;
         }
-        if (creature.getWorld().getCell(x-1,y).isLizard(creature)){
+        if (creature.getWorld().getCell(x-1,y).isAliveLizard(creature)){
             env[3] = 2;
         }
-        if (creature.getWorld().getCell(x,y).isLizard(creature)){
+        if (creature.getWorld().getCell(x,y).isAliveLizard(creature)){
             env[4] = 2;
         }
-        if (creature.getWorld().getCell(x+1,y).isLizard(creature)){
+        if (creature.getWorld().getCell(x+1,y).isAliveLizard(creature)){
             env[5] = 2;
         }
-        if (creature.getWorld().getCell(x-1,y-1).isLizard(creature)){
+        if (creature.getWorld().getCell(x-1,y-1).isAliveLizard(creature)){
             env[6] = 2;
         }
-        if (creature.getWorld().getCell(x,y-1).isLizard(creature)){
+        if (creature.getWorld().getCell(x,y-1).isAliveLizard(creature)){
             env[7] = 2;
         }
-        if (creature.getWorld().getCell(x+1,y-1).isLizard(creature)){
+        if (creature.getWorld().getCell(x+1,y-1).isAliveLizard(creature)){
             env[8] = 2;
         }
 
         //Проверяем наличие ящериц-хищников
-        if (creature.getWorld().getCell(x-1,y+1).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x-1,y+1).isAlivePredator_Lizard(creature)){
             env[0] = 3;
         }
-        if (creature.getWorld().getCell(x,y+1).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x,y+1).isAlivePredator_Lizard(creature)){
             env[1] = 3;
         }
-        if (creature.getWorld().getCell(x+1,y+1).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x+1,y+1).isAlivePredator_Lizard(creature)){
             env[2] = 3;
         }
-        if (creature.getWorld().getCell(x-1,y).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x-1,y).isAlivePredator_Lizard(creature)){
             env[3] = 3;
         }
-        if (creature.getWorld().getCell(x,y).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x,y).isAlivePredator_Lizard(creature)){
             env[4] = 3;
         }
-        if (creature.getWorld().getCell(x+1,y).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x+1,y).isAlivePredator_Lizard(creature)){
             env[5] = 3;
         }
-        if (creature.getWorld().getCell(x-1,y-1).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x-1,y-1).isAlivePredator_Lizard(creature)){
             env[6] = 3;
         }
-        if (creature.getWorld().getCell(x,y-1).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x,y-1).isAlivePredator_Lizard(creature)){
             env[7] = 3;
         }
-        if (creature.getWorld().getCell(x+1,y-1).isPredator_Lizard(creature)){
+        if (creature.getWorld().getCell(x+1,y-1).isAlivePredator_Lizard(creature)){
             env[8] = 3;
         }
 

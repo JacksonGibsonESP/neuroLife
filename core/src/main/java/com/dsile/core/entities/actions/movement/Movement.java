@@ -96,12 +96,13 @@ public class Movement {
             else
             {
                 System.out.println("Decided to go randomly");
-                dir = DirectionValues.random();
+                //dir = DirectionValues.random();
+                dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
             }
         }
         creature.setDirection(dir);
         System.out.println(dir);
-         moveByDirection();
+        moveByDirection();
     }
 
     /**

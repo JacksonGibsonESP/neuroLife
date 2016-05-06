@@ -26,7 +26,7 @@ public abstract class Entity extends Actor {
     public Entity(World world, int x, int y){
         this.world = world;
         this.currentCell = world.getCell(x, y).setEntity(this);
-        this.setDirection(DirectionValues.EAST);
+        this.setDirection(DirectionValues.random());
         this.setAliveTexture();
 
         setOrigin(SIZE / 2, SIZE / 2);

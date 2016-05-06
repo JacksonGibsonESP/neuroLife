@@ -6,6 +6,7 @@ import com.dsile.core.entities.Herb;
 import com.dsile.core.entities.Lizard;
 import com.dsile.core.entities.Creature;
 import com.dsile.core.screens.WorldScreen;
+import com.dsile.core.spawner.Spawner;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -21,6 +22,7 @@ public class World {
     private int cellsX;
     private int cellsY;
     private Cell[][] cells;
+    private Spawner spawner;
 
     private Set<Entity> entities = new HashSet<>();
 
@@ -28,6 +30,8 @@ public class World {
 
     public World(int cellsX, int cellsY, int cellSize, WorldScreen screen){
         System.out.println("Creating world");
+
+        this.spawner = new Spawner(this);
 
         this.world_screen = screen;
 
@@ -41,34 +45,6 @@ public class World {
             }
         }
 
-        System.out.println("Creating entities");
-
-        //TODO: Сделать класс spawner
-
-        //entities.add(new Lizard(this,2,3));
-
-        //entities.add(new Herb(this,7,7));
-        //entities.add(new Herb(this,7,8));
-
-        Lizard lizard = new Lizard(this,6,6);
-        lizard.learn();
-
-        //lizard.getBrain().saveNNToFile("lizard_nnt");
-
-        entities.add(lizard);
-        //entities.add(new Lizard(this,6,9, lizard.getBrain()));
-
-        //Lizard lizard2 = new Lizard(this,6,7);
-        //lizard2.learn();
-        //entities.add(lizard2);
-
-        /*for(Entity e : entities)
-        {
-            e.setHP(100);
-        }*/
-
-        System.out.println("Creating complete");
-        System.out.println("-------------------------------------------");
     }
 
     public void drawMap(SpriteBatch batch){
@@ -90,7 +66,6 @@ public class World {
         return (GroundCell) cells[randomX][randomY];
     }
 
-    //TODO: ADD EXCEPTIONS
     public Cell getCell(int x, int y){
         if(x >= cellsX){
             x = 0;
@@ -124,4 +99,6 @@ public class World {
         entities.add(entity);
         world_screen.addActor(entity);
     }
+
+    public Spawner getSpawner(){return spawner;}
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.async.ThreadUtils;
 import com.dsile.core.NeuroLife;
@@ -11,6 +12,7 @@ import com.dsile.core.entities.Creature;
 import com.dsile.core.entities.Entity;
 import com.dsile.core.entities.HasBrain;
 import com.dsile.core.neural.BrainTrainer;
+import com.dsile.core.spawner.Spawner;
 import com.dsile.core.world.World;
 
 /**
@@ -47,8 +49,12 @@ public class WorldScreen implements Screen {
 
         stage.getViewport().setCamera(cam);
 
+        this.addActor(world.getSpawner());
+
+        world.getSpawner().init();
+
         //world.getEntities().stream().filter(e-> e instanceof Creature).forEach(e -> bt.train((Creature)e)); //зачем обучать всех? скопируй сети
-        world.getEntities().stream().forEach(stage::addActor);
+        //world.getEntities().stream().forEach(stage::addActor);
     }
 
     @Override
@@ -100,9 +106,9 @@ public class WorldScreen implements Screen {
 
     }
 
-    public void addActor(Entity entity)
+    public void addActor(Actor actor)
     {
-        stage.addActor(entity);
+        stage.addActor(actor);
     }
 
 }

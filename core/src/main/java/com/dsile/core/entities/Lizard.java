@@ -12,7 +12,6 @@ import java.util.Arrays;
  *
  * Created by DeSile on 08.12.2015.
  */
-//TODO: Создать абстрактный класс, чтобы избежать создания анонимного класса в WorldScreen.
 public class Lizard extends Creature {
 
     /*protected int maxHp = 50;
@@ -35,9 +34,6 @@ public class Lizard extends Creature {
 
     @Override
     public void learn() {
-
-        //TODO: Генерировать массивы в отдельном классе
-
         /*
         *    Input Array: (на 4ой ячейке находимся мы)
         *    |---|---|---|

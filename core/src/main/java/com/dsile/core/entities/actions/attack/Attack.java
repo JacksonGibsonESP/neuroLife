@@ -16,13 +16,13 @@ public class Attack {
     }
 
     public void perform() {
-        if(creature instanceof Predator_Lizard)
+        if(creature instanceof Predator_Lizard && creature.getCurrentCell().isAliveLizard(creature))
         {
-            creature.getCurrentCell().getLizard().attacked(creature); //атакуем чтобы убить
+            creature.getCurrentCell().getAliveLizard().attacked(creature); //атакуем чтобы убить
         }
-        if(creature instanceof Lizard)
+        else if(creature instanceof Lizard && creature.getCurrentCell().isAlivePredator_Lizard(creature))
         {
-            creature.getCurrentCell().getPredator_Lizard().attacked(creature); //атакуем чтобы убить
+            creature.getCurrentCell().getAlivePredator_Lizard().attacked(creature); //атакуем чтобы убить
         }
     }
 }

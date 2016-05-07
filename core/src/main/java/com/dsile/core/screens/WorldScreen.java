@@ -8,9 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.async.ThreadUtils;
 import com.dsile.core.NeuroLife;
-import com.dsile.core.entities.Creature;
-import com.dsile.core.entities.Entity;
-import com.dsile.core.entities.HasBrain;
+import com.dsile.core.entities.*;
 import com.dsile.core.neural.BrainTrainer;
 import com.dsile.core.spawner.Spawner;
 import com.dsile.core.world.World;
@@ -26,7 +24,10 @@ public class WorldScreen implements Screen {
     private BrainTrainer bt = new BrainTrainer();
     private SpriteBatch batch;
     private World world;
-    private Stage stage;
+    //private Stage stage;
+    private Stage herb_stage;
+    private Stage lizard_stage;
+    private Stage predator_lizard_stage;
     private MyInputProcessor keysProcessor;
     private OrthographicCamera cam;
 
@@ -36,7 +37,10 @@ public class WorldScreen implements Screen {
 
         batch = new SpriteBatch();
         world = new World(40, 23, 32, this);
-        stage = new Stage();
+        //stage = new Stage();
+        herb_stage = new Stage();
+        lizard_stage = new Stage();
+        predator_lizard_stage = new Stage();
         // Constructs a new OrthographicCamera, using the given viewport width and height
         // Height is multiplied by aspect ratio.
         cam = new OrthographicCamera(30, 30 * (NeuroLife.HEIGHT / NeuroLife.WIDTH));
@@ -46,11 +50,17 @@ public class WorldScreen implements Screen {
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         keysProcessor = new MyInputProcessor();
-        inputMultiplexer.addProcessor(stage);
+        //inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(herb_stage);
+        inputMultiplexer.addProcessor(lizard_stage);
+        inputMultiplexer.addProcessor(predator_lizard_stage);
         inputMultiplexer.addProcessor(keysProcessor);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
-        stage.getViewport().setCamera(cam);
+        //stage.getViewport().setCamera(cam);
+        herb_stage.getViewport().setCamera(cam);
+        lizard_stage.getViewport().setCamera(cam);
+        predator_lizard_stage.getViewport().setCamera(cam);
 
         //this.addActor(world.getSpawner());
 
@@ -71,16 +81,26 @@ public class WorldScreen implements Screen {
         batch.begin();
         world.drawMap(batch);
         batch.end();
-        Collections.sort(Arrays.asList(stage.getActors().toArray()), new ActorComparator());
-        stage.draw();
+
+        //Сортировка актёров в стедже перед рисовкой
+        //stage.getActors().sort(new ActorComparator());
+
+        //stage.draw();
+        herb_stage.draw();
+        lizard_stage.draw();
+        predator_lizard_stage.draw();
 
         if (keysProcessor.isSpaceClicked()) {
-            stage.act(delta);
+            //stage.act(delta);
+            lizard_stage.act(delta);
+            predator_lizard_stage.act(delta);
             world.getSpawner().act(delta);
         }
 
         if (keysProcessor.isEnterPressed()) {
-            stage.act(delta);
+            //stage.act(delta);
+            lizard_stage.act(delta);
+            predator_lizard_stage.act(delta);
             world.getSpawner().act(delta);
         }
 
@@ -116,7 +136,18 @@ public class WorldScreen implements Screen {
 
     public void addActor(Actor actor)
     {
-        stage.addActor(actor);
+        //stage.addActor(actor);
+        if (actor instanceof Herb)
+        {
+            herb_stage.addActor(actor);
+        }
+        else if (actor instanceof Lizard)
+        {
+            lizard_stage.addActor(actor);
+        }
+        else
+        {
+            predator_lizard_stage.addActor(actor);
+        }
     }
-
 }

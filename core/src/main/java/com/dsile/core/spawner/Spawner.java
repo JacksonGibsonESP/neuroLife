@@ -30,8 +30,6 @@ public class Spawner extends Actor {
         //Стартовое положение вещей на карте мира
         System.out.println("Creating entities");
 
-
-
         //Заполним мир ящерками
         boolean first = true;
         Brain brain = null;
@@ -43,7 +41,7 @@ public class Spawner extends Actor {
                 {
                     if(first) {
                         Lizard lizard = new Lizard(world, x, y);
-                        //lizard.learn();
+                        lizard.learn();
                         brain = lizard.getBrain();
                         first = false;
                         world.add_to_entities(lizard);
@@ -66,7 +64,7 @@ public class Spawner extends Actor {
                 {
                     if(first) {
                         Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);
-                       //predator_lizard.learn();
+                        predator_lizard.learn();
                         brain = predator_lizard.getBrain();
                         first = false;
                         world.add_to_entities(predator_lizard);
@@ -88,13 +86,21 @@ public class Spawner extends Actor {
                 }
             }
         }
-        //Lizard lizard = new Lizard(world,6,6);
-        //lizard.learn();
+
+        //world.add_to_entities(new Lizard(world,6,7, lizard.getBrain()));
+
+        /*Predator_Lizard predator_lizard = new Predator_Lizard(world,6,6);
+        predator_lizard.learn();
+        world.add_to_entities(predator_lizard);
+
+        world.add_to_entities((new Herb(world, 6, 6)));
+
+        Lizard lizard = new Lizard(world,6,6);
+        lizard.learn();
 
         //lizard.getBrain().saveNNToFile("lizard_nnt");
 
-        //entities.add(lizard);
-        //entities.add(new Lizard(world,6,25, lizard.getBrain()));
+        world.add_to_entities(lizard);*/
 
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();

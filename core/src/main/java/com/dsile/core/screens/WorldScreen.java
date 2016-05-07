@@ -15,6 +15,9 @@ import com.dsile.core.neural.BrainTrainer;
 import com.dsile.core.spawner.Spawner;
 import com.dsile.core.world.World;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Created by DeSile on 07.12.2015.
  */
@@ -49,7 +52,7 @@ public class WorldScreen implements Screen {
 
         stage.getViewport().setCamera(cam);
 
-        this.addActor(world.getSpawner());
+        //this.addActor(world.getSpawner());
 
         world.getSpawner().init();
 
@@ -68,13 +71,18 @@ public class WorldScreen implements Screen {
         batch.begin();
         world.drawMap(batch);
         batch.end();
+        Collections.sort(Arrays.asList(stage.getActors().toArray()), new ActorComparator());
         stage.draw();
 
-        if (keysProcessor.isSpaceClicked())
+        if (keysProcessor.isSpaceClicked()) {
             stage.act(delta);
+            world.getSpawner().act(delta);
+        }
 
-        if (keysProcessor.isEnterPressed())
+        if (keysProcessor.isEnterPressed()) {
             stage.act(delta);
+            world.getSpawner().act(delta);
+        }
 
         keysProcessor.moveCameraByKeys(cam);
     }

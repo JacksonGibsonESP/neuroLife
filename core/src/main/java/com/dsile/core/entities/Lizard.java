@@ -1,6 +1,7 @@
 package com.dsile.core.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.dsile.core.entities.actions.factors.Lizard_Vision;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 
@@ -24,11 +25,15 @@ public class Lizard extends Creature {
      */
     public Lizard(World world, int x, int y) {
         super(world,x,y);
+        this.vision = new Lizard_Vision(this);
+        this.id = 1;
         System.out.printf("Lizard created on (%d,%d)\n",x,y);
     }
 
     public Lizard(World world, int x, int y, Brain brain) {
         super(world,x,y, brain);
+        this.vision = new Lizard_Vision(this);
+        this.id = 1;
         System.out.printf("Lizard was borned on (%d,%d)\n",x,y);
     }
 
@@ -153,8 +158,8 @@ public class Lizard extends Creature {
                     new double[]{0, 1, 1, 0, 1, 0, 0, 0});
         }
 
-        //Убежать от ящерки-хищника
-        /*for(int i = 0; i <= 2; i++ ) {
+        //Убегать от ящерки-хищника
+        for(int i = 0; i <= 2; i++ ) {
             brain.addRowToTrainingSet(
                     new double[]{0, 0, 0, 0, 0, 0, 0, 0, 3, i},
                     new double[]{0, 1, 1, 0, 1, 0, 0, 0});
@@ -213,7 +218,7 @@ public class Lizard extends Creature {
             brain.addRowToTrainingSet(
                     new double[]{3, 2, 2, 2, 2, 2, 2, 2, 2, i},
                     new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-        }*/
+        }
 
         brain.learn();
     }

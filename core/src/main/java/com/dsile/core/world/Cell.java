@@ -127,6 +127,15 @@ public abstract class Cell{
         return false;
     }
 
+    public boolean isDeadBody(Entity caller){
+        for(Entity entity : entities){
+            if(!entity.isAlive() && entity != caller){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Cell setEntity(Entity e){
         entities.add(e);
         return this;

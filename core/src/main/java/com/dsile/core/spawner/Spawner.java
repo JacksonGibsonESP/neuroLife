@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dsile.core.entities.Entity;
 import com.dsile.core.entities.Herb;
 import com.dsile.core.entities.Lizard;
+import com.dsile.core.entities.Predator_Lizard;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 
@@ -29,17 +30,7 @@ public class Spawner extends Actor {
         //Стартовое положение вещей на карте мира
         System.out.println("Creating entities");
 
-        //Заполним мир травой
-        for(int y = 0; y < world.getWorldYsize(); y++)
-        {
-            for (int x = 0; x < world.getWorldXsize(); x++)
-            {
-                if (r.nextDouble() < 0.3)
-                {
-                    world.add_to_entities((new Herb(world, x, y)));
-                }
-            }
-        }
+
 
         //Заполним мир ящерками
         boolean first = true;
@@ -52,7 +43,7 @@ public class Spawner extends Actor {
                 {
                     if(first) {
                         Lizard lizard = new Lizard(world, x, y);
-                        lizard.learn();
+                        //lizard.learn();
                         brain = lizard.getBrain();
                         first = false;
                         world.add_to_entities(lizard);
@@ -64,6 +55,39 @@ public class Spawner extends Actor {
             }
         }
 
+        //Заполним мир ящерками-хищниками-падальщиками
+        first = true;
+        brain = null;
+        for(int y = 0; y < world.getWorldYsize(); y++)
+        {
+            for (int x = 0; x < world.getWorldXsize(); x++)
+            {
+                if (r.nextDouble() < 0.3)
+                {
+                    if(first) {
+                        Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);
+                       //predator_lizard.learn();
+                        brain = predator_lizard.getBrain();
+                        first = false;
+                        world.add_to_entities(predator_lizard);
+                    }
+                    else {
+                        world.add_to_entities(new Predator_Lizard(world, x, y, brain));
+                    }
+                }
+            }
+        }
+        //Заполним мир травой
+        for(int y = 0; y < world.getWorldYsize(); y++)
+        {
+            for (int x = 0; x < world.getWorldXsize(); x++)
+            {
+                if (r.nextDouble() < 0.3)
+                {
+                    world.add_to_entities((new Herb(world, x, y)));
+                }
+            }
+        }
         //Lizard lizard = new Lizard(world,6,6);
         //lizard.learn();
 

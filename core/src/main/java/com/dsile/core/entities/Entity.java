@@ -23,6 +23,8 @@ public abstract class Entity extends Actor {
     protected int HP = 50;
 //    protected int energy = maxEnergy;
 
+    protected int id; //для сортировки объектов перед рисовкой на экране
+
     public Entity(World world, int x, int y){
         this.world = world;
         this.currentCell = world.getCell(x, y).setEntity(this);
@@ -111,4 +113,6 @@ public abstract class Entity extends Actor {
     public boolean isAlive() {
         return alive;
     }
+
+    public int getId(){return id;}
 }

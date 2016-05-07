@@ -15,7 +15,6 @@ import org.neuroph.util.TransferFunctionType;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by Никита on 15.12.2015.
  */

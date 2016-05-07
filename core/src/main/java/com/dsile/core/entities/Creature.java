@@ -26,7 +26,7 @@ public abstract class Creature extends Entity implements HasBrain {
     {
         super(world,x,y);
         this.brain = brain;
-        this.vision = new Vision(this);
+        //this.vision = new Vision(this);
         this.movement = new Movement(this);
         this.eating = new Eating(this);
         this.attack = new Attack(this);
@@ -36,7 +36,7 @@ public abstract class Creature extends Entity implements HasBrain {
     public Creature(World world, int x, int y){
         super(world,x,y);
         this.brain = new Brain();
-        this.vision = new Vision(this);
+        //this.vision = new Vision(this);
         this.movement = new Movement(this);
         this.eating = new Eating(this);
         this.attack = new Attack(this);

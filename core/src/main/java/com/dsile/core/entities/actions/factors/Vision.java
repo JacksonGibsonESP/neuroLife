@@ -20,7 +20,7 @@ abstract public class Vision {
         this.creature = creature;
     }
 
-    abstract public int[] getEnvironment();
+    abstract public double[] getEnvironment();
 
     /**
      * Обработка окружения нейронной сетью (мозгом существа)
@@ -28,7 +28,7 @@ abstract public class Vision {
      */
     public double[] accessSituation(){
         System.out.println(creature);
-        int[] environment = getEnvironment();
+        double[] environment = getEnvironment();
         System.out.println("Sees: " + Arrays.toString(environment));
         Brain brain = creature.getBrain();
         brain.setInput(environment);

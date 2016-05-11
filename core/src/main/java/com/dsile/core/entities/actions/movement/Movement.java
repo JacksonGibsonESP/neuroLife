@@ -1,6 +1,7 @@
 package com.dsile.core.entities.actions.movement;
 
 import com.dsile.core.entities.Creature;
+import com.dsile.core.world.Cell;
 
 import java.util.Arrays;
 
@@ -9,7 +10,6 @@ import java.util.Arrays;
  *
  * Created by DeSile on 1/6/2016.
  */
-//TODO: Unit-тесты
 public class Movement {
 
     /**
@@ -39,15 +39,55 @@ public class Movement {
     public void perform(){
 
     }
-
-    /**
-     * Выполнение действия передвижения с учетом значений на выходе нейронной сети.
-     */
-    public void perform(double[] brainOutput){
-        //Берем модули от элементов массива
-        for(int i = 0; i < 4; i++){
-            brainOutput[i] = Math.abs(brainOutput[i]);
+    public Cell getCellByDirection(double[] brainOutput)
+    {
+        Cell target_cell = null;
+        DirectionValues dir = getDirection(brainOutput);
+        if (dir == null)
+        {
+            target_cell = creature.getCurrentCell(); //берём текущую
         }
+        else{
+            Cell current_cell = creature.getCurrentCell();
+            int x = current_cell.getX();
+            int y = current_cell.getY();
+            switch (dir)
+            {
+                case EAST:
+                    target_cell = creature.getWorld().getCell(x + 1, y);
+                    break;
+                case NORTH_EAST:
+                    target_cell = creature.getWorld().getCell(x + 1, y + 1);
+                    break;
+                case NORTH:
+                    target_cell = creature.getWorld().getCell(x, y + 1);
+                    break;
+                case NORTH_WEST:
+                    target_cell = creature.getWorld().getCell(x - 1, y + 1);
+                    break;
+                case WEST:
+                    target_cell = creature.getWorld().getCell(x - 1, y);
+                    break;
+                case SOUTH_WEST:
+                    target_cell = creature.getWorld().getCell(x - 1, y - 1);
+                    break;
+                case SOUTH:
+                    target_cell = creature.getWorld().getCell(x, y - 1);
+                    break;
+                case SOUTH_EAST:
+                    target_cell = creature.getWorld().getCell(x + 1, y - 1);
+                    break;
+            }
+        }
+        return target_cell;
+    }
+
+    public DirectionValues getDirection(double[] brainOutput)
+    {
+        //Берем модули от элементов массива
+        /*for(int i = 0; i < 4; i++){
+            brainOutput[i] = Math.abs(brainOutput[i]);
+        }*/
         //Массив означающий текущий порядок направлений массива brainOutput
         int[] order = {0,1,2,3};
         //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
@@ -95,10 +135,21 @@ public class Movement {
             }
             else
             {
-                System.out.println("Decided to go randomly");
-                //dir = DirectionValues.random();
-                dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
+                dir = null; //рельзя сказать, какое направление
             }
+        }
+        return dir;
+    }
+
+    /**
+     * Выполнение действия передвижения с учетом значений на выходе нейронной сети.
+     */
+    public void perform(double[] brainOutput){
+        DirectionValues dir = getDirection(brainOutput);
+        if (dir == null) {
+            System.out.println("Decided to go randomly");
+            //dir = DirectionValues.random();
+            dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
         }
         creature.setDirection(dir);
         System.out.println(dir);

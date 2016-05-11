@@ -5,7 +5,12 @@ import com.dsile.core.entities.actions.factors.Lizard_Vision;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Тестовое существо для отладки функций приложения.
@@ -19,6 +24,8 @@ public class Lizard extends Creature {
     protected int maxEnergy = 20;
     protected int hp = maxHp;
     protected int energy = maxEnergy;*/
+
+    protected String data_set_filename = "Lizard_data_set.txt";
 
     /**
      * Создание существа (актера) в клеточном мире.
@@ -49,27 +56,11 @@ public class Lizard extends Creature {
         *    | 6 | 7 | 8 |
         *    |---|---|---|
         *
-        *    Комбинации значений для разных сущностей на ячейках //пока отказываюсь из-за сложноси обучения
-        *    0 - никого
-        *    1 - трава
-        *    2 - трава и обычная ящерица
-        *    3 - ящерица
-        *    4 - ящерица и ящерица-хищник
-        *    5 - ящерица-хищник
-        *    6 - ящерица-хищник и трава           // может быть никогда и не понадобится?
-        *    7 - ящерица-хищник, ящерица и трава  // слишком уж гремучая комбинация
+        *    Значения в каждой ячейке описываются тремя входами идущими подряд.
+        *    Значения это HP за исключением травы и падали (просто 1)
         *
-        *    Но попрбуем сделать проще:
-        *    0 - никого
-        *    1 - трава
-        *    2 - ящерица
-        *    3 - ящерица-хищник
-        *    Значения перезаписывают друг друга в порядке выше
-        *
-        *    9-й вход сети - уровень жизни - hp:
-        *    0 - <= 30 %
-        *    1 - > 30%, <= 70 %
-        *    2 - > 70 %
+        *    9-й вход сети - уровень жизни существа - hp, значения:
+        *    0.0 ... 1.0
         *
         *    Output Array: (первые четыре ячейки)
         *
@@ -89,144 +80,37 @@ public class Lizard extends Creature {
         *  7 - размножение
         **/
 
-        //поведение при пустом поле, надо бы что-то поумнее придумать
-        for(int i = 0; i <= 2; i++ ) {
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 0, 0, 1, 0, 0, 0});
+        //Будем считывать из файла
+        Scanner scan;
+        File file = new File(data_set_filename);
+        try {
+            scan = new Scanner(file);
+            while(scan.hasNextDouble())
+            {
+                double [] in    = new double[28];
+                double [] out   = new double [8];
+                for (int i = 0; i < 28; i++)
+                {
+                    in[i] = scan.nextDouble();
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    out[i] = scan.nextDouble();
+                }
+                System.out.println(Arrays.toString(in));
+                System.out.println(Arrays.toString(out));
+                brain.addRowToTrainingSet(in, out);
+            }
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
         }
-
-        //поедание травы при малых и средних значениях hp            hp
-        for(int i = 0; i <= 1; i++ ) {
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 1, i},
-                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 1, 0, i},
-                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 1, 0, 0, i},
-                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 1, 0, 0, 0, i},
-                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 1, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 0, 0, 0, 0, 1, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 1, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 1, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 1, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{1, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 1, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{1, 0, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 1, 1, 0, 1, 0, 0, 0});
-        }
-
-        //Размножение происходит при большом HP             hp
-        for(int i = 2; i <= 2; i++ ) {
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 2, i},
-                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 2, 0, i},
-                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 2, 0, 0, i},
-                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 2, 0, 0, 0, i},
-                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 2, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 1});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 2, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 1, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 2, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{1, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 2, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 0, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 1, 1, 0, 1, 0, 0, 0});
-        }
-
-        //Убегать от ящерки-хищника
-        for(int i = 0; i <= 2; i++ ) {
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 0, 3, i},
-                    new double[]{0, 1, 1, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 0, 3, 0, i},
-                    new double[]{0, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 0, 3, 0, 0, i},
-                    new double[]{1, 1, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 0, 3, 0, 0, 0, i},
-                    new double[]{0, 0, 1, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 0, 3, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 0, 0, 0, 1, 0, 0}); //ударит, вдруг спасёт?
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 0, 3, 0, 0, 0, 0, 0, i},
-                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 0, 3, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{0, 3, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{3, 0, 0, 0, 0, 0, 0, 0, 0, i},
-                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-        }
-
-        //Напасть на ящерку-хищника, если обычных ящерок много и много hp
-        for(int i = 2; i <= 2; i++ ) {
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 2, 2, 2, 2, 2, 2, 3, i},
-                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 2, 2, 2, 2, 2, 3, 2, i},
-                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 2, 2, 2, 2, 3, 2, 2, i},
-                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 2, 2, 2, 3, 2, 2, 2, i},
-                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 2, 2, 3, 2, 2, 2, 2, i},
-                    new double[]{0, 0, 0, 0, 0, 1, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 2, 3, 2, 2, 2, 2, 2, i},
-                    new double[]{1, 0, 0, 0, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 2, 3, 2, 2, 2, 2, 2, 2, i},
-                    new double[]{0, 0, 1, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{2, 3, 2, 2, 2, 2, 2, 2, 2, i},
-                    new double[]{0, 0, 0, 1, 1, 0, 0, 0});
-            brain.addRowToTrainingSet(
-                    new double[]{3, 2, 2, 2, 2, 2, 2, 2, 2, i},
-                    new double[]{1, 0, 0, 1, 1, 0, 0, 0});
-        }
-
         brain.learn();
     }
 
     @Override
-    protected void attack() {
+    protected void attack(double[] signal) {
         System.out.println("Attacks");
-        attack.perform();
+        attack.perform(movement.getCellByDirection(signal));
     }
 
     @Override
@@ -291,15 +175,6 @@ public class Lizard extends Creature {
         else {
             this.HP -= 5; //плата за жизнь
             double[] thoughts = vision.accessSituation();
-            /*if (thoughts[4] > 0.5) {
-                move(Arrays.copyOfRange(thoughts, 0, 4));
-            } else if (thoughts[5] > 0.5) {
-                attack();
-            } else if (thoughts[6] > 0.5) {
-                eat();
-            } else if (thoughts[7] > 0.5) {
-                reproduce();
-            }*/
             //Ищем победителя среди индексов 4 - 7:
             int decision = find_winner(Arrays.copyOfRange(thoughts, 4, 8));
 
@@ -308,7 +183,7 @@ public class Lizard extends Creature {
                     move(Arrays.copyOfRange(thoughts, 0, 4));
                     break;
                 case 1:
-                    attack();
+                    attack(Arrays.copyOfRange(thoughts, 0, 4)); //Атака в соседнюю клетку или в ту же
                     break;
                 case 2:
                     eat();
@@ -368,11 +243,11 @@ public class Lizard extends Creature {
 
     public void attacked(Creature attacker){
         if (attacker instanceof Predator_Lizard) {
-            this.HP -= 20;
+            this.HP -= attacker.getnormalizedHP() * 20;
         }
         else if (attacker instanceof Lizard) //используется только в наследнике
         {
-            this.HP -= 5;
+            this.HP -= 10;
         }
         if (this.alive & this.HP <= 0) {
             dead();

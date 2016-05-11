@@ -47,7 +47,7 @@ public abstract class Creature extends Entity implements HasBrain {
 
     public abstract void attacked(Creature attacker);
 
-    protected abstract void attack();
+    protected abstract void attack(double[] signal);
 
     protected abstract void move(double[] signal);
 

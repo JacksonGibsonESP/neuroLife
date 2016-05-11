@@ -95,6 +95,11 @@ public abstract class Entity extends Actor {
         return this.HP;
     }
 
+    public double getnormalizedHP()
+    {
+        return (double) this.HP / (double) 100;
+    }
+
     public void setHP(int new_hp) // only for testing
     {
         this.HP = new_hp;

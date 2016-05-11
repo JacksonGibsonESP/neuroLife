@@ -28,29 +28,11 @@ public class Reproduce {
 
     public void perform() { //нужен паттерн проектирования
         Brain newborn_brain;
-        if(creature instanceof Lizard) // с любой в клетке и с любым hp?
-        {
-            Set<Entity> entities = creature.getCurrentCell().getEntityList(creature); //пытаемся размножиться
-            for(Entity entity : entities){
-                if (entity instanceof Lizard && entity.getHP() > 70) // для всех?
-                {
-                    newborn_brain = genetic_algorithm(((Lizard) entity).getBrain());
-                    //birth
-                    World world = creature.getWorld();
-                    int x = creature.getCurrentCell().getX();
-                    int y = creature.getCurrentCell().getY();
-                    world.add_to_entities(new Lizard(world, x, y, newborn_brain));
-                    System.out.println("Birth complete");
-                    creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
-                    ((Lizard) entity).die();
-                }
-            }
-        }
         if(creature instanceof Predator_Lizard)
         {
             Set<Entity> entities = creature.getCurrentCell().getEntityList(creature); //пытаемся размножиться
             for(Entity entity : entities){
-                if (entity instanceof Predator_Lizard && entity.getHP() > 70) // для всех?
+                if (entity instanceof Predator_Lizard && entity.isAlive() && entity.getHP() > 70)
                 {
                     newborn_brain = genetic_algorithm(((Predator_Lizard) entity).getBrain());
                     //birth
@@ -62,6 +44,28 @@ public class Reproduce {
                     System.out.println("Birth complete");
                     creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     ((Predator_Lizard) entity).die();
+                    return;
+                }
+            }
+        }
+        else if(creature instanceof Lizard)
+        {
+            Set<Entity> entities = creature.getCurrentCell().getEntityList(creature); //пытаемся размножиться
+            for(Entity entity : entities){
+                if (entity.getClass() == creature.getClass() && entity.isAlive() && entity.getHP() > 70)
+                {
+                    //System.out.println(creature);
+                    //System.out.println(entities);
+                    newborn_brain = genetic_algorithm(((Lizard) entity).getBrain());
+                    //birth
+                    World world = creature.getWorld();
+                    int x = creature.getCurrentCell().getX();
+                    int y = creature.getCurrentCell().getY();
+                    world.add_to_entities(new Lizard(world, x, y, newborn_brain));
+                    System.out.println("Birth complete");
+                    creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
+                    ((Lizard) entity).die();
+                    return;
                 }
             }
         }

@@ -37,7 +37,7 @@ public class Spawner extends Actor {
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.3)
+                if (r.nextDouble() < 0.2)
                 {
                     if(first) {
                         Lizard lizard = new Lizard(world, x, y);
@@ -60,7 +60,7 @@ public class Spawner extends Actor {
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.3)
+                if (r.nextDouble() < 0.05)
                 {
                     if(first) {
                         Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);
@@ -80,7 +80,7 @@ public class Spawner extends Actor {
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.3)
+                if (r.nextDouble() < 0.1)
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }
@@ -89,18 +89,26 @@ public class Spawner extends Actor {
 
         //world.add_to_entities(new Lizard(world,6,7, lizard.getBrain()));
 
-        /*Predator_Lizard predator_lizard = new Predator_Lizard(world,6,6);
+        /*Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
         predator_lizard.learn();
-        world.add_to_entities(predator_lizard);
+        world.add_to_entities(predator_lizard);*/
 
-        world.add_to_entities((new Herb(world, 6, 6)));
+        //world.add_to_entities((new Herb(world, 6, 6)));
 
-        Lizard lizard = new Lizard(world,6,6);
+        /*Lizard lizard = new Lizard(world,6,6);
         lizard.learn();
+        //lizard.setHP(100);
+
+        world.add_to_entities(lizard);*/
+
+        //lizard = new Lizard(world,6,7, lizard.getBrain());
+        //lizard.setHP(100);
 
         //lizard.getBrain().saveNNToFile("lizard_nnt");
 
-        world.add_to_entities(lizard);*/
+        //world.add_to_entities(lizard);
+
+        //world.add_to_entities((new Herb(world, 7, 6)));
 
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();

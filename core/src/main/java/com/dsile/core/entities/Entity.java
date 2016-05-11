@@ -25,6 +25,8 @@ public abstract class Entity extends Actor {
 
     protected int id; //для сортировки объектов перед рисовкой на экране
 
+    //protected boolean reproducing = false;
+
     public Entity(World world, int x, int y){
         this.world = world;
         this.currentCell = world.getCell(x, y).setEntity(this);
@@ -115,4 +117,13 @@ public abstract class Entity extends Actor {
     }
 
     public int getId(){return id;}
+
+    /*public boolean isReproducing()
+    {
+        return reproducing;
+    }
+
+    public void switchReproducing(){
+        reproducing = !reproducing;
+    }*/
 }

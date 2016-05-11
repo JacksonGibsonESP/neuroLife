@@ -27,6 +27,7 @@ abstract public class Vision {
      * @return результат работы нейронной сети
      */
     public double[] accessSituation(){
+        System.out.println(creature);
         int[] environment = getEnvironment();
         System.out.println("Sees: " + Arrays.toString(environment));
         Brain brain = creature.getBrain();

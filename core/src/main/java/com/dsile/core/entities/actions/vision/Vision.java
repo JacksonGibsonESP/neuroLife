@@ -1,11 +1,9 @@
-package com.dsile.core.entities.actions.factors;
+package com.dsile.core.entities.actions.vision;
 
 import com.dsile.core.entities.Creature;
 import com.dsile.core.neural.Brain;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Класс, отслеживающий сущностей в окружении.

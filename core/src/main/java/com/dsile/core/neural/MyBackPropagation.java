@@ -10,7 +10,8 @@ public class MyBackPropagation extends BackPropagation{
     {
         super();
         this.setMaxError(0.01);
-        this.setMaxIterations(1000);
+        this.setMaxIterations(10000);
+        this.learningRate = 0.01;
     }
 
     public void print_info()

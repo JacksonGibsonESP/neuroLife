@@ -1,7 +1,7 @@
 package com.dsile.core.entities;
 
 import com.dsile.core.entities.actions.attack.Attack;
-import com.dsile.core.entities.actions.factors.Vision;
+import com.dsile.core.entities.actions.vision.Vision;
 import com.dsile.core.entities.actions.movement.Movement;
 import com.dsile.core.entities.actions.reproduce.Reproduce;
 import com.dsile.core.neural.Brain;

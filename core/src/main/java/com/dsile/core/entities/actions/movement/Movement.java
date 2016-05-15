@@ -15,7 +15,7 @@ public class Movement {
     /**
      * Верхняя и нижния границы для определения направлений по значениям из нейронной сети
      */
-    private static double CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION = 0.5;
+    private static double CONFIDENCE_VALUE_OF_BRAIN_OUTPUT_DIRECTION = 0.7;
 
     /**
      * Перемещаемое существо.
@@ -43,42 +43,39 @@ public class Movement {
     {
         Cell target_cell = null;
         DirectionValues dir = getDirection(brainOutput);
-        if (dir == null)
+        Cell current_cell = creature.getCurrentCell();
+        int x = current_cell.getX();
+        int y = current_cell.getY();
+        switch (dir)
         {
-            target_cell = creature.getCurrentCell(); //берём текущую
-        }
-        else{
-            Cell current_cell = creature.getCurrentCell();
-            int x = current_cell.getX();
-            int y = current_cell.getY();
-            switch (dir)
-            {
-                case EAST:
-                    target_cell = creature.getWorld().getCell(x + 1, y);
-                    break;
-                case NORTH_EAST:
-                    target_cell = creature.getWorld().getCell(x + 1, y + 1);
-                    break;
-                case NORTH:
-                    target_cell = creature.getWorld().getCell(x, y + 1);
-                    break;
-                case NORTH_WEST:
-                    target_cell = creature.getWorld().getCell(x - 1, y + 1);
-                    break;
-                case WEST:
-                    target_cell = creature.getWorld().getCell(x - 1, y);
-                    break;
-                case SOUTH_WEST:
-                    target_cell = creature.getWorld().getCell(x - 1, y - 1);
-                    break;
-                case SOUTH:
-                    target_cell = creature.getWorld().getCell(x, y - 1);
-                    break;
-                case SOUTH_EAST:
-                    target_cell = creature.getWorld().getCell(x + 1, y - 1);
-                    break;
+            case EAST:
+                target_cell = creature.getWorld().getCell(x + 1, y);
+                break;
+            case NORTH_EAST:
+                target_cell = creature.getWorld().getCell(x + 1, y + 1);
+                break;
+            case NORTH:
+                target_cell = creature.getWorld().getCell(x, y + 1);
+                break;
+            case NORTH_WEST:
+                target_cell = creature.getWorld().getCell(x - 1, y + 1);
+                break;
+            case WEST:
+                target_cell = creature.getWorld().getCell(x - 1, y);
+                break;
+            case SOUTH_WEST:
+                target_cell = creature.getWorld().getCell(x - 1, y - 1);
+                break;
+            case SOUTH:
+                target_cell = creature.getWorld().getCell(x, y - 1);
+                break;
+            case SOUTH_EAST:
+                target_cell = creature.getWorld().getCell(x + 1, y - 1);
+                break;
+            case NO_DIRECTION:
+                target_cell = creature.getCurrentCell(); //берём текущую
+                break;
             }
-        }
         return target_cell;
     }
 
@@ -113,7 +110,7 @@ public class Movement {
         //Как известно, нейронная сеть может вернуть нам в качестве результата сразу два возможных направления.
         boolean fstDir = false; //Наличие первого направления
         boolean sndDir = false; //Наличие второго направления
-        DirectionValues dir; //Результирующее направление
+        DirectionValues dir = DirectionValues.NO_DIRECTION; //Результирующее направление
 
         //2 и 3 - номера индексов самых больших значений массива brainOutput
         //Проверяем можно ли считать первое по величине значение направлением.
@@ -133,10 +130,6 @@ public class Movement {
             if(fstDir){
                 dir = choseDirection(order[3]);
             }
-            else
-            {
-                dir = null; //рельзя сказать, какое направление
-            }
         }
         return dir;
     }
@@ -146,9 +139,8 @@ public class Movement {
      */
     public void perform(double[] brainOutput){
         DirectionValues dir = getDirection(brainOutput);
-        if (dir == null) {
+        if (dir == DirectionValues.NO_DIRECTION) {
             System.out.println("Decided to go randomly");
-            //dir = DirectionValues.random();
             dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
         }
         creature.setDirection(dir);
@@ -190,7 +182,7 @@ public class Movement {
                 return DirectionValues.SOUTH;
             }
         }
-        return DirectionValues.EAST; //в случае нештатной ситуации идти вправо
+        return DirectionValues.NO_DIRECTION; //в случае нештатной ситуации
     }
 
     private void moveByDirection(){

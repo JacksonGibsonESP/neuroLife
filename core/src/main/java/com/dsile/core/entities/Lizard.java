@@ -1,15 +1,14 @@
 package com.dsile.core.entities;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dsile.core.entities.actions.factors.Lizard_Vision;
+import com.dsile.core.entities.actions.vision.Lizard_Vision;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -81,10 +80,10 @@ public class Lizard extends Creature {
         **/
 
         //Будем считывать из файла
-        Scanner scan;
-        File file = new File(data_set_filename);
         try {
-            scan = new Scanner(file);
+            FileReader file = new FileReader(data_set_filename);
+            Scanner scan = new Scanner(file);
+            scan.useLocale(Locale.US);
             while(scan.hasNextDouble())
             {
                 double [] in    = new double[28];
@@ -97,8 +96,8 @@ public class Lizard extends Creature {
                 {
                     out[i] = scan.nextDouble();
                 }
-                System.out.println(Arrays.toString(in));
-                System.out.println(Arrays.toString(out));
+                //System.out.println(Arrays.toString(in));
+                //System.out.println(Arrays.toString(out));
                 brain.addRowToTrainingSet(in, out);
             }
         } catch (FileNotFoundException e1) {

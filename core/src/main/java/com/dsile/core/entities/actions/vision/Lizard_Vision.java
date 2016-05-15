@@ -1,4 +1,4 @@
-package com.dsile.core.entities.actions.factors;
+package com.dsile.core.entities.actions.vision;
 
 import com.dsile.core.entities.Creature;
 

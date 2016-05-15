@@ -42,8 +42,10 @@ public class Reproduce {
                     Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y, newborn_brain);
                     world.add_to_entities(predator_lizard);
                     System.out.println("Birth complete");
-                    creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
-                    ((Predator_Lizard) entity).die();
+                    //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
+                    //((Predator_Lizard) entity).die();
+                    creature.incHP(-50);
+                    entity.incHP(-50);
                     return;
                 }
             }
@@ -63,8 +65,10 @@ public class Reproduce {
                     int y = creature.getCurrentCell().getY();
                     world.add_to_entities(new Lizard(world, x, y, newborn_brain));
                     System.out.println("Birth complete");
-                    creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
-                    ((Lizard) entity).die();
+                    //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
+                    //((Lizard) entity).die();
+                    creature.incHP(-50);
+                    entity.incHP(-50);
                     return;
                 }
             }

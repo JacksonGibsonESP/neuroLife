@@ -1,7 +1,7 @@
 package com.dsile.core.entities;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.dsile.core.entities.actions.factors.Predator_Vision;
+import com.dsile.core.entities.actions.vision.Predator_Vision;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 

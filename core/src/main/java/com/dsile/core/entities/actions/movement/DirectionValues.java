@@ -10,7 +10,7 @@ import java.util.Random;
  * Возможные направления
  */
 public enum DirectionValues {
-    EAST(0),NORTH_EAST(45),NORTH(90),NORTH_WEST(135),WEST(180),SOUTH_WEST(225),SOUTH(270),SOUTH_EAST(315);
+    EAST(0),NORTH_EAST(45),NORTH(90),NORTH_WEST(135),WEST(180),SOUTH_WEST(225),SOUTH(270),SOUTH_EAST(315), NO_DIRECTION(-1);
 
     private int angle;
     private static Random r = new Random();
@@ -24,7 +24,7 @@ public enum DirectionValues {
     }
 
     public static DirectionValues random(){
-        return values()[(int) (Math.random() * values().length)];
+        return values()[(int) (Math.random() * values().length - 1)];
     }
 
     public static DirectionValues random_Gauss(DirectionValues dir){

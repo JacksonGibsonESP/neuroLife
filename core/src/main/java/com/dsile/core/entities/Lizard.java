@@ -241,8 +241,10 @@ public class Lizard extends Creature {
     }
 
     public void attacked(Creature attacker){
+        System.out.println(attacker);
         if (attacker instanceof Predator_Lizard) {
-            this.HP -= attacker.getnormalizedHP() * 20;
+            //System.out.println("Hey!");
+            this.HP -= attacker.getnormalizedHP() * 200;
         }
         else if (attacker instanceof Lizard) //используется только в наследнике
         {

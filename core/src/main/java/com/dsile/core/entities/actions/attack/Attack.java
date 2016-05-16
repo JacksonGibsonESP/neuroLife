@@ -29,16 +29,20 @@ public class Attack {
 
     public void perform(Cell cell) {
         //Получим ячейку по направлению
-        if(creature instanceof Predator_Lizard && creature.getCurrentCell().isAliveLizard(creature))
+        if(creature instanceof Predator_Lizard)
         {
             Lizard lizard = cell.getAliveLizard();
+            //System.out.println(lizard);
+            //System.out.println(cell);
             if (lizard != null) {
                 cell.getAliveLizard().attacked(creature); //атакуем чтобы убить
             }
         }
-        else if(creature instanceof Lizard && creature.getCurrentCell().isAlivePredator_Lizard(creature))
+        else if(creature instanceof Lizard)
         {
             Predator_Lizard predator_lizard = cell.getAlivePredator_Lizard();
+            //System.out.println(predator_lizard);
+            //System.out.println(cell);
             if (predator_lizard != null) {
                 cell.getAlivePredator_Lizard().attacked(creature); //атакуем чтобы убить
             }

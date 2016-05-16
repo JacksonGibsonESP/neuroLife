@@ -76,8 +76,8 @@ public class Movement {
                 target_cell = creature.getCurrentCell(); //берём текущую
                 break;
             }
-        System.out.println(target_cell.getX());
-        System.out.println(target_cell.getY());
+        //System.out.println(target_cell.getX());
+        //System.out.println(target_cell.getY());
         if (dir != DirectionValues.NO_DIRECTION)
             creature.setDirection(dir);
         return target_cell;

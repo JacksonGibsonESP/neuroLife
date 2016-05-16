@@ -35,7 +35,7 @@ public class Spawner extends Actor {
         Generator generator = new Generator();
         generator.lizard_gen();
         generator.predator_lizard_gen();
-/*
+
         //Заполним мир ящерками
         boolean first = true;
         Brain brain = null;
@@ -49,6 +49,7 @@ public class Spawner extends Actor {
                         Lizard lizard = new Lizard(world, x, y);
                         lizard.learn();
                         brain = lizard.getBrain();
+                        //brain.loadFileToNNT("lizard_brain");
                         first = false;
                         world.add_to_entities(lizard);
                     }
@@ -72,6 +73,7 @@ public class Spawner extends Actor {
                         Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);
                         predator_lizard.learn();
                         brain = predator_lizard.getBrain();
+                        //brain.loadFileToNNT("predator_lizard_brain");
                         first = false;
                         world.add_to_entities(predator_lizard);
                     }
@@ -93,27 +95,27 @@ public class Spawner extends Actor {
                 }
             }
         }
-*/
-        //world.add_to_entities(new Lizard(world,6,7, lizard.getBrain()));
 
-        Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
-        predator_lizard.learn();
-        world.add_to_entities(predator_lizard);
+        //Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
+        //predator_lizard.learn();
+        //predator_lizard.getBrain().saveNNToFile("predator_lizard_brain");
+        //predator_lizard.getBrain().loadFileToNNT("predator_lizard_brain");
+        //world.add_to_entities(predator_lizard);
 
-        world.add_to_entities((new Herb(world, 6, 6)));
+        //world.add_to_entities((new Herb(world, 6, 6)));
 
-        Lizard lizard = new Lizard(world,6,6);
-        lizard.learn();
-        //lizard.setHP(100);
+        /*Lizard lizard = new Lizard(world,6,6);
+        //lizard.learn();
+        //lizard.getBrain().saveNNToFile("lizard_brain");
+        lizard.getBrain().loadFileToNNT("lizard_brain");
+        lizard.setHP(100);
 
         world.add_to_entities(lizard);
 
-        //lizard = new Lizard(world,6,7, lizard.getBrain());
-        //lizard.setHP(100);
+        lizard = new Lizard(world,6,7, lizard.getBrain());
+        lizard.setHP(100);
 
-        //lizard.getBrain().saveNNToFile("lizard_nnt");
-
-        //world.add_to_entities(lizard);
+        world.add_to_entities(lizard);*/
 
         //world.add_to_entities((new Herb(world, 7, 6)));
 

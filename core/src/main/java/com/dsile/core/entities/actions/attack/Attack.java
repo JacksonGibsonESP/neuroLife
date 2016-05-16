@@ -31,11 +31,17 @@ public class Attack {
         //Получим ячейку по направлению
         if(creature instanceof Predator_Lizard && creature.getCurrentCell().isAliveLizard(creature))
         {
-            cell.getAliveLizard().attacked(creature); //атакуем чтобы убить
+            Lizard lizard = cell.getAliveLizard();
+            if (lizard != null) {
+                cell.getAliveLizard().attacked(creature); //атакуем чтобы убить
+            }
         }
         else if(creature instanceof Lizard && creature.getCurrentCell().isAlivePredator_Lizard(creature))
         {
-            cell.getAlivePredator_Lizard().attacked(creature); //атакуем чтобы убить
+            Predator_Lizard predator_lizard = cell.getAlivePredator_Lizard();
+            if (predator_lizard != null) {
+                cell.getAlivePredator_Lizard().attacked(creature); //атакуем чтобы убить
+            }
         }
     }
 }

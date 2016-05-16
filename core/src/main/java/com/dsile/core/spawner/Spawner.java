@@ -35,7 +35,7 @@ public class Spawner extends Actor {
         Generator generator = new Generator();
         generator.lizard_gen();
         generator.predator_lizard_gen();
-
+/*
         //Заполним мир ящерками
         boolean first = true;
         Brain brain = null;
@@ -60,7 +60,7 @@ public class Spawner extends Actor {
         }
 
         //Заполним мир ящерками-хищниками-падальщиками
-        /*first = true;
+        first = true;
         brain = null;
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
@@ -80,32 +80,33 @@ public class Spawner extends Actor {
                     }
                 }
             }
-        }*/
+        }
+
         //Заполним мир травой
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.3)
+                if (r.nextDouble() < 0.4)
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }
             }
         }
-
+*/
         //world.add_to_entities(new Lizard(world,6,7, lizard.getBrain()));
 
-        /*Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
+        Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
         predator_lizard.learn();
-        world.add_to_entities(predator_lizard);*/
+        world.add_to_entities(predator_lizard);
 
-        //world.add_to_entities((new Herb(world, 6, 6)));
+        world.add_to_entities((new Herb(world, 6, 6)));
 
-        /*Lizard lizard = new Lizard(world,6,6);
+        Lizard lizard = new Lizard(world,6,6);
         lizard.learn();
         //lizard.setHP(100);
 
-        world.add_to_entities(lizard);*/
+        world.add_to_entities(lizard);
 
         //lizard = new Lizard(world,6,7, lizard.getBrain());
         //lizard.setHP(100);

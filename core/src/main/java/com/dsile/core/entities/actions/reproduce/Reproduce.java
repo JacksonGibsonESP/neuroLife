@@ -1,9 +1,6 @@
 package com.dsile.core.entities.actions.reproduce;
 
-import com.dsile.core.entities.Creature;
-import com.dsile.core.entities.Entity;
-import com.dsile.core.entities.Lizard;
-import com.dsile.core.entities.Predator_Lizard;
+import com.dsile.core.entities.*;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
 import org.neuroph.core.NeuralNetwork;
@@ -39,7 +36,7 @@ public class Reproduce {
                     World world = creature.getWorld();
                     int x = creature.getCurrentCell().getX();
                     int y = creature.getCurrentCell().getY();
-                    Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y, newborn_brain);
+                    Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y, newborn_brain, true);
                     world.add_to_entities(predator_lizard);
                     System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
@@ -63,7 +60,7 @@ public class Reproduce {
                     World world = creature.getWorld();
                     int x = creature.getCurrentCell().getX();
                     int y = creature.getCurrentCell().getY();
-                    world.add_to_entities(new Lizard(world, x, y, newborn_brain));
+                    world.add_to_entities(new Herb_Lizard(world, x, y, newborn_brain, true));
                     System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     //((Lizard) entity).die();

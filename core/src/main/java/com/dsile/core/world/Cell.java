@@ -47,7 +47,7 @@ public abstract class Cell{
         return null;
     }
 
-    public Lizard getAliveLizard(){
+    public Lizard getAliveHerb_Lizard(){
         for(Entity entity : entities){
             if(entity instanceof Lizard && entity.isAlive()){
                 return (Lizard)entity;
@@ -56,9 +56,27 @@ public abstract class Cell{
         return null;
     }
 
-    public Lizard getDeadLizard(){
+    public Lizard getAliveHerb_Lizard(Entity caller){
+        for(Entity entity : entities){
+            if(entity instanceof Lizard && entity.isAlive() && entity != caller){
+                return (Lizard)entity;
+            }
+        }
+        return null;
+    }
+
+    public Lizard getDeadHerb_Lizard(){
         for(Entity entity : entities){
             if(entity instanceof Lizard && !entity.isAlive()){
+                return (Lizard)entity;
+            }
+        }
+        return null;
+    }
+
+    public Lizard getDeadHerb_Lizard(Entity caller){
+        for(Entity entity : entities){
+            if(entity instanceof Lizard && !entity.isAlive() && entity != caller){
                 return (Lizard)entity;
             }
         }
@@ -74,9 +92,27 @@ public abstract class Cell{
         return null;
     }
 
+    public Predator_Lizard getAlivePredator_Lizard(Entity caller){
+        for(Entity entity : entities){
+            if(entity instanceof Predator_Lizard && entity.isAlive() && entity != caller){
+                return (Predator_Lizard)entity;
+            }
+        }
+        return null;
+    }
+
     public Predator_Lizard getDeadPredator_Lizard(){
         for(Entity entity : entities){
             if(entity instanceof Predator_Lizard && !entity.isAlive()){
+                return (Predator_Lizard)entity;
+            }
+        }
+        return null;
+    }
+
+    public Predator_Lizard getDeadPredator_Lizard(Entity caller){
+        for(Entity entity : entities){
+            if(entity instanceof Predator_Lizard && !entity.isAlive() && entity != caller){
                 return (Predator_Lizard)entity;
             }
         }
@@ -91,7 +127,7 @@ public abstract class Cell{
         }
     }
 
-    public boolean isAliveLizard(Entity caller){
+    public boolean isAliveHerb_Lizard(Entity caller){
         for(Entity entity : entities){
             if(entity instanceof Lizard && entity.isAlive() && entity != caller){
                 return true;
@@ -100,9 +136,27 @@ public abstract class Cell{
         return false;
     }
 
-    public boolean isDeadLizard(Entity caller){
+    public boolean isAliveHerb_Lizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Lizard && entity.isAlive()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isDeadHerb_Lizard(Entity caller){
         for(Entity entity : entities){
             if(entity instanceof Lizard && !entity.isAlive() && entity != caller){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isDeadHerb_Lizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Lizard && !entity.isAlive()){
                 return true;
             }
         }
@@ -118,6 +172,15 @@ public abstract class Cell{
         return false;
     }
 
+    public boolean isAlivePredator_Lizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Predator_Lizard && entity.isAlive()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isDeadPredator_Lizard(Entity caller){
         for(Entity entity : entities){
             if(entity instanceof Predator_Lizard && !entity.isAlive() && entity != caller){
@@ -127,9 +190,27 @@ public abstract class Cell{
         return false;
     }
 
+    public boolean isDeadPredator_Lizard(){
+        for(Entity entity : entities){
+            if(entity instanceof Predator_Lizard && !entity.isAlive()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isDeadBody(Entity caller){
         for(Entity entity : entities){
             if(!entity.isAlive() && entity != caller){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isDeadBody(){
+        for(Entity entity : entities){
+            if(!entity.isAlive()){
                 return true;
             }
         }

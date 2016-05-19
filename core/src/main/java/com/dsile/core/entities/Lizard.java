@@ -17,30 +17,33 @@ import java.util.Scanner;
  *
  * Created by DeSile on 08.12.2015.
  */
-public class Lizard extends Creature {
+public abstract class Lizard extends Creature {
 
     /*protected int maxHp = 50;
     protected int maxEnergy = 20;
     protected int hp = maxHp;
     protected int energy = maxEnergy;*/
 
-    protected String data_set_filename = "Lizard_data_set.txt";
-
     /**
      * Создание существа (актера) в клеточном мире.
      */
     public Lizard(World world, int x, int y) {
         super(world,x,y);
-        this.vision = new Lizard_Vision(this);
-        this.id = 1;
-        System.out.printf("Lizard created on (%d,%d)\n",x,y);
+        //data_set_filename = "Lizard_data_set.txt";
+        //this.vision = new Lizard_Vision(this);
+        //this.id = 1;
+        //System.out.printf("Lizard created on (%d,%d)\n",x,y);
     }
 
-    public Lizard(World world, int x, int y, Brain brain) {
+    public Lizard(World world, int x, int y, Brain brain, boolean newborn) {
         super(world,x,y, brain);
-        this.vision = new Lizard_Vision(this);
-        this.id = 1;
-        System.out.printf("Lizard was borned on (%d,%d)\n",x,y);
+        //data_set_filename = "Lizard_data_set.txt";
+        //this.vision = new Lizard_Vision(this);
+        //this.id = 1;
+        if (newborn){
+            //System.out.printf("Lizard was born on (%d,%d)\n",x,y);
+            setNewbornTexture();
+        }
     }
 
     @Override
@@ -129,15 +132,6 @@ public class Lizard extends Creature {
         System.out.println("Decomposed");
         currentCell.removeEntity(this);
         remove();
-    }
-
-    @Override
-    protected void setAliveTexture(){
-        texture = new Texture("alive_lizard.png");
-    }
-
-    protected void setDeadTexture(){
-        texture = new Texture("dead_lizard.png");
     }
 
     @Override

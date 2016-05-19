@@ -21,8 +21,8 @@ public class Eating {
             creature.incHP(creature.getCurrentCell().getHerb().bitten()); //кусаем и получаем некоторый прирост hp
         }
         else if(creature instanceof Predator_Lizard) {
-            if (creature.getCurrentCell().isDeadLizard(creature)) {
-                creature.incHP(creature.getCurrentCell().getDeadLizard().bitten()); //кусаем и получаем некоторый прирост hp
+            if (creature.getCurrentCell().isDeadHerb_Lizard()) {
+                creature.incHP(creature.getCurrentCell().getDeadHerb_Lizard().bitten()); //кусаем и получаем некоторый прирост hp
             }
             else if (creature.getCurrentCell().isDeadPredator_Lizard(creature)){
                 creature.incHP(creature.getCurrentCell().getDeadPredator_Lizard().bitten());

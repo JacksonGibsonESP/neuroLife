@@ -85,17 +85,10 @@ public class Movement {
 
     public DirectionValues getDirection(double[] brainOutput)
     {
-        //Берем модули от элементов массива
-        /*for(int i = 0; i < 4; i++){
-            brainOutput[i] = Math.abs(brainOutput[i]);
-        }*/
         //Массив означающий текущий порядок направлений массива brainOutput
         int[] order = {0,1,2,3};
         //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
         //Таким образом мы получаем отсортированный массив brainOutput и не потеряли направления
-        /*System.out.println("Check before");
-        System.out.println(Arrays.toString(brainOutput));
-        System.out.println(Arrays.toString(order));*/
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (brainOutput[j] > brainOutput[j+1]) {
@@ -108,9 +101,7 @@ public class Movement {
                 }
             }
         }
-        /*System.out.println("Check after");
-        System.out.println(Arrays.toString(brainOutput));
-        System.out.println(Arrays.toString(order));*/
+
         //Как известно, нейронная сеть может вернуть нам в качестве результата сразу два возможных направления.
         boolean fstDir = false; //Наличие первого направления
         boolean sndDir = false; //Наличие второго направления
@@ -138,10 +129,46 @@ public class Movement {
         return dir;
     }
 
+    public SidesDirectionValues getSidesDirection(double[] brainOutput){
+        DirectionValues dir = getDirection(brainOutput);
+        SidesDirectionValues sides = SidesDirectionValues.NO_DIRECTION;
+        //Приведение типов
+        switch (dir){
+            case NO_DIRECTION:
+                sides = SidesDirectionValues.NO_DIRECTION;
+                break;
+            case NORTH:
+                sides = SidesDirectionValues.FORWARD;
+                break;
+            case NORTH_EAST:
+                sides = SidesDirectionValues.FORWARD_RIGHT;
+                break;
+            case EAST:
+                sides = SidesDirectionValues.RIGHT;
+                break;
+            case SOUTH_EAST:
+                sides = SidesDirectionValues.BACKWARD_RIGHT;
+                break;
+            case SOUTH:
+                sides = SidesDirectionValues.BACKWARD;
+                break;
+            case SOUTH_WEST:
+                sides = SidesDirectionValues.BACKWARD_LEFT;
+                break;
+            case WEST:
+                sides = SidesDirectionValues.LEFT;
+                break;
+            case NORTH_WEST:
+                sides = SidesDirectionValues.FORWARD_LEFT;
+                break;
+        }
+        return sides;
+    }
+
     /**
      * Выполнение действия передвижения с учетом значений на выходе нейронной сети.
      */
-    public void perform(double[] brainOutput){
+    /*public void perform(double[] brainOutput){
         DirectionValues dir = getDirection(brainOutput);
         if (dir == DirectionValues.NO_DIRECTION) {
             System.out.println("Decided to go randomly");
@@ -150,13 +177,28 @@ public class Movement {
         creature.setDirection(dir);
         System.out.println(dir);
         moveByDirection();
+    }*/
+
+    public void perform(double[] brainOutput) {
+        SidesDirectionValues sides = getSidesDirection(brainOutput);
+        if (sides == SidesDirectionValues.NO_DIRECTION) {
+            System.out.println("Decided to go randomly");
+            DirectionValues dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
+            creature.setDirection(dir);
+            System.out.println(dir);
+        }
+        else {
+            creature.setDirection(sides);
+            System.out.println(sides);
+        }
+        moveByDirection();
     }
 
     /**
      * Конвертация численных значений в конкретное направление.
      * @param dir массив из одного или двух элементов со значениями от 0 до 3, которые интерпретируются в направления.
      * @return Конкретное направление.
-     */
+    */
     private DirectionValues choseDirection(int... dir){ //либо одно, либо два числа
         if(dir.length == 2){
             if((dir[0] == 0 && dir[1] == 1)||(dir[0] == 1 && dir[1] == 0)){

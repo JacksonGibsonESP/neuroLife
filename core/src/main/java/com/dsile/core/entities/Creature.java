@@ -12,13 +12,14 @@ import com.dsile.core.entities.actions.eating.Eating;
 /**
  * Created by DeSile on 2/18/2016.
  */
-public abstract class Creature extends Entity implements HasBrain {
+public abstract class Creature extends Entity{
     protected Brain brain;
     protected Vision vision;
     protected Movement movement;
     protected Eating eating;
     protected Attack attack;
     protected Reproduce reproduce;
+    protected String data_set_filename;
 
     //protected int hungrines = 0;
 
@@ -58,4 +59,6 @@ public abstract class Creature extends Entity implements HasBrain {
     public abstract void reproduce();
 
     public abstract void die();
+
+    public abstract Brain getBrain();
 }

@@ -24,6 +24,10 @@ public class Herb extends Entity {
         texture = new Texture("herb.png");
     }
 
+    protected void setNewbornTexture() {
+        texture = new Texture("herb.png");
+    }
+
     @Override
     protected void dead() {
         remove();

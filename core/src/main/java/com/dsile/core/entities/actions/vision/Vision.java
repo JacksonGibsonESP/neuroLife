@@ -20,14 +20,21 @@ abstract public class Vision {
 
     abstract public double[] getEnvironment();
 
+    abstract public double[] getEnvironmentByDirection();
+
     /**
      * Обработка окружения нейронной сетью (мозгом существа)
      * @return результат работы нейронной сети
      */
     public double[] accessSituation(){
         System.out.println(creature);
-        double[] environment = getEnvironment();
-        System.out.println("Sees: " + Arrays.toString(environment));
+        double[] environment = getEnvironmentByDirection();
+
+        System.out.println("Sees:\nFood:         Lizards:      Predators:");
+        System.out.print(environment[0] + " " + environment[3] + " " + environment[6] + " | " + environment[1] + " " + environment[4] + " " + environment[7] + " | " + environment[2] + " " + environment[5] + " " + environment[8] + "\n");
+        System.out.print(environment[9] + " " + environment[12] + " " + environment[15] + " | " + environment[10] + " " + environment[13] + " " + environment[16] + " | " + environment[11] + " " + environment[14] + " " + environment[17] + "\n");
+        System.out.print(environment[18] + " " + environment[21] + " " + environment[24] + " | " + environment[19] + " " + environment[22] + " " + environment[25] + " | " + environment[20] + " " + environment[23] + " " + environment[26] + "\n");
+
         Brain brain = creature.getBrain();
         brain.setInput(environment);
         brain.think();

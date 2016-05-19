@@ -31,11 +31,11 @@ public class Attack {
         //Получим ячейку по направлению
         if(creature instanceof Predator_Lizard)
         {
-            Lizard lizard = cell.getAliveLizard();
+            Lizard lizard = cell.getAliveHerb_Lizard();
             //System.out.println(lizard);
             //System.out.println(cell);
             if (lizard != null) {
-                cell.getAliveLizard().attacked(creature); //атакуем чтобы убить
+                cell.getAliveHerb_Lizard().attacked(creature); //атакуем чтобы убить
             }
         }
         else if(creature instanceof Lizard)

@@ -1,10 +1,7 @@
 package com.dsile.core.spawner;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.dsile.core.entities.Entity;
-import com.dsile.core.entities.Herb;
-import com.dsile.core.entities.Lizard;
-import com.dsile.core.entities.Predator_Lizard;
+import com.dsile.core.entities.*;
 import com.dsile.core.generator.Generator;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
@@ -34,7 +31,7 @@ public class Spawner extends Actor {
         //Сгенерируем обучающее множество для нейросети
         Generator generator = new Generator();
         generator.lizard_gen();
-        generator.predator_lizard_gen();
+        //generator.predator_lizard_gen();
 
         //Заполним мир ящерками
         boolean first = true;
@@ -43,10 +40,10 @@ public class Spawner extends Actor {
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.2)
+                if (r.nextDouble() < 0.01)
                 {
                     if(first) {
-                        Lizard lizard = new Lizard(world, x, y);
+                        Lizard lizard = new Herb_Lizard(world, x, y);
                         lizard.learn();
                         brain = lizard.getBrain();
                         //brain.loadFileToNNT("lizard_brain");
@@ -54,14 +51,14 @@ public class Spawner extends Actor {
                         world.add_to_entities(lizard);
                     }
                     else {
-                        world.add_to_entities(new Lizard(world, x, y, brain));
+                        world.add_to_entities(new Herb_Lizard(world, x, y, brain, false));
                     }
                 }
             }
         }
 
         //Заполним мир ящерками-хищниками-падальщиками
-        first = true;
+        /*first = true;
         brain = null;
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
@@ -71,7 +68,7 @@ public class Spawner extends Actor {
                 {
                     if(first) {
                         Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);
-                        predator_lizard.learn();
+                        //predator_lizard.learn();
                         brain = predator_lizard.getBrain();
                         //brain.loadFileToNNT("predator_lizard_brain");
                         first = false;
@@ -82,14 +79,14 @@ public class Spawner extends Actor {
                     }
                 }
             }
-        }
+        }*/
 
         //Заполним мир травой
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.4)
+                if (r.nextDouble() < 0.7)
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }
@@ -104,20 +101,22 @@ public class Spawner extends Actor {
 
         //world.add_to_entities((new Herb(world, 6, 6)));
 
-        /*Lizard lizard = new Lizard(world,6,6);
-        //lizard.learn();
-        //lizard.getBrain().saveNNToFile("lizard_brain");
-        lizard.getBrain().loadFileToNNT("lizard_brain");
+        /*Lizard lizard = new Herb_Lizard(world,6,6);
+        lizard.learn();
+        lizard.getBrain().saveNNToFile("herb_lizard_brain");
+        //lizard.getBrain().loadFileToNNT("lizard_brain");
+        //lizard.setHP(100);
+
+        world.add_to_entities(lizard);
+
+        lizard = new Herb_Lizard(world,6,7, lizard.getBrain(), false);
         lizard.setHP(100);
 
         world.add_to_entities(lizard);
 
-        lizard = new Lizard(world,6,7, lizard.getBrain());
-        lizard.setHP(100);
+        world.add_to_entities((new Herb(world, 5, 6)));
 
-        world.add_to_entities(lizard);*/
-
-        //world.add_to_entities((new Herb(world, 7, 6)));
+        world.add_to_entities((new Herb(world, 7, 6)));*/
 
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();

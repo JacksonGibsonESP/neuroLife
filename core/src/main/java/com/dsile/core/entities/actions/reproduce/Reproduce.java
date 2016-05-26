@@ -25,11 +25,11 @@ public class Reproduce {
 
     public void perform() { //нужен паттерн проектирования
         Brain newborn_brain;
-        if(creature instanceof Predator_Lizard)
+        if(creature instanceof Predator_Lizard && creature.getHP() >= 70)
         {
             Set<Entity> entities = creature.getCurrentCell().getEntityList(creature); //пытаемся размножиться
             for(Entity entity : entities){
-                if (entity instanceof Predator_Lizard && entity.isAlive() && entity.getHP() > 70)
+                if (entity instanceof Predator_Lizard && entity.isAlive() && entity.getHP() >= 70)
                 {
                     newborn_brain = genetic_algorithm(((Predator_Lizard) entity).getBrain());
                     //birth
@@ -47,11 +47,11 @@ public class Reproduce {
                 }
             }
         }
-        else if(creature instanceof Lizard)
+        else if(creature instanceof Lizard && creature.getHP() >= 70)
         {
             Set<Entity> entities = creature.getCurrentCell().getEntityList(creature); //пытаемся размножиться
             for(Entity entity : entities){
-                if (entity.getClass() == creature.getClass() && entity.isAlive() && entity.getHP() > 70)
+                if (entity.getClass() == creature.getClass() && entity.isAlive() && entity.getHP() >= 70)
                 {
                     //System.out.println(creature);
                     //System.out.println(entities);

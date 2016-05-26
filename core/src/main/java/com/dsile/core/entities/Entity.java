@@ -322,7 +322,13 @@ public abstract class Entity extends Actor {
 
     public double getnormalizedHP()
     {
-        return (double) this.HP / (double) 100;
+        //return (double) this.HP / (double) 100;
+        if (this.HP >= 70)
+            return 0.7;
+        else if (this.HP >= 0.5)
+            return 0.5;
+        else
+            return 0.3;
     }
 
     public void setHP(int new_hp) // only for testing

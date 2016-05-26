@@ -33,9 +33,11 @@ public class Lizard_Vision extends Vision {
         switch(dir){
             case NO_DIRECTION:
                 //Такого произойти не должно
+                vision_out = vision_in;
                 break;
             case NORTH:
                 //Не нужно ничего делать
+                vision_out = vision_in;
                 break;
             case NORTH_EAST:
                 /*

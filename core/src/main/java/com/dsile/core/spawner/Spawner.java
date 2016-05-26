@@ -2,6 +2,7 @@ package com.dsile.core.spawner;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dsile.core.entities.*;
+import com.dsile.core.entities.actions.movement.DirectionValues;
 import com.dsile.core.generator.Generator;
 import com.dsile.core.neural.Brain;
 import com.dsile.core.world.World;
@@ -30,8 +31,8 @@ public class Spawner extends Actor {
 
         //Сгенерируем обучающее множество для нейросети
         Generator generator = new Generator();
-        generator.lizard_gen();
-        //generator.predator_lizard_gen();
+        generator.herb_lizard_gen();
+        generator.predator_lizard_gen();
 
         //Заполним мир ящерками
         boolean first = true;
@@ -46,7 +47,8 @@ public class Spawner extends Actor {
                         Lizard lizard = new Herb_Lizard(world, x, y);
                         lizard.learn();
                         brain = lizard.getBrain();
-                        //brain.loadFileToNNT("lizard_brain");
+                        brain.saveNNToFile("herb_lizard_brain");
+                        //brain.loadFileToNNT("herb_lizard_brain");
                         first = false;
                         world.add_to_entities(lizard);
                     }
@@ -104,9 +106,9 @@ public class Spawner extends Actor {
         /*Lizard lizard = new Herb_Lizard(world,6,6);
         lizard.learn();
         lizard.getBrain().saveNNToFile("herb_lizard_brain");
-        //lizard.getBrain().loadFileToNNT("lizard_brain");
+        //lizard.getBrain().loadFileToNNT("herb_lizard_brain");
         //lizard.setHP(100);
-
+        lizard.setDirection(DirectionValues.NORTH);
         world.add_to_entities(lizard);
 
         lizard = new Herb_Lizard(world,6,7, lizard.getBrain(), false);
@@ -114,9 +116,9 @@ public class Spawner extends Actor {
 
         world.add_to_entities(lizard);
 
-        world.add_to_entities((new Herb(world, 5, 6)));
+        world.add_to_entities((new Herb(world, 5, 7)));
 
-        world.add_to_entities((new Herb(world, 7, 6)));*/
+        world.add_to_entities((new Herb(world, 5, 6)));*/
 
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();

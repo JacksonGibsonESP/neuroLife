@@ -6,7 +6,7 @@ import com.dsile.core.entities.actions.movement.DirectionValues;
 /**
  * Created by Светлана on 07.05.2016.
  */
-public class Lizard_Vision extends Vision {
+public class      Lizard_Vision extends Vision {
     public Lizard_Vision(Creature creature){
         super(creature);
     }

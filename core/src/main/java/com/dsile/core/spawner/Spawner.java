@@ -41,7 +41,7 @@ public class Spawner extends Actor {
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.01)
+                if (r.nextDouble() < 0.02)
                 {
                     if(first) {
                         Lizard lizard = new Herb_Lizard(world, x, y);
@@ -60,7 +60,7 @@ public class Spawner extends Actor {
         }
 
         //Заполним мир ящерками-хищниками-падальщиками
-        first = true;
+        /*first = true;
         brain = null;
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
@@ -82,7 +82,7 @@ public class Spawner extends Actor {
                     }
                 }
             }
-        }
+        }*/
 
         //Заполним мир травой
         for(int y = 0; y < world.getWorldYsize(); y++)
@@ -103,28 +103,28 @@ public class Spawner extends Actor {
         //world.add_to_entities(predator_lizard);
 
         //world.add_to_entities((new Herb(world, 6, 6)));
-
-        /*Lizard lizard = new Herb_Lizard(world,6,6);
-        lizard.learn();
-        lizard.getBrain().saveNNToFile("herb_lizard_brain");
+/*
+        Lizard lizard = new Herb_Lizard(world,6,6);
+        //lizard.learn();
+        //lizard.getBrain().saveNNToFile("herb_lizard_brain");
         //lizard.getBrain().loadFileToNNT("herb_lizard_brain");
         //lizard.setHP(100);
         lizard.setDirection(DirectionValues.NORTH);
         world.add_to_entities(lizard);
 
         lizard = new Herb_Lizard(world,6,7, lizard.getBrain(), false);
-        lizard.setHP(100);
+        //lizard.setHP(100);
 
         world.add_to_entities(lizard);
 
         world.add_to_entities((new Herb(world, 5, 7)));
 
-        world.add_to_entities((new Herb(world, 5, 6)));*/
+        world.add_to_entities((new Herb(world, 5, 6)));
 
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();
         //entities.add(lizard2);
-
+*/
         /*for(Entity e : entities)
         {
             e.setHP(100);

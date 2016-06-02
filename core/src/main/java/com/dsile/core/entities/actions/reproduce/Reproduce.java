@@ -41,8 +41,10 @@ public class Reproduce {
                     System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     //((Predator_Lizard) entity).die();
-                    creature.incHP(-50);
-                    entity.incHP(-50);
+                    //creature.incHP(-50);
+                    //entity.incHP(-50);
+                    creature.setHP(50);
+                    entity.setHP(50);
                     return;
                 }
             }
@@ -64,8 +66,10 @@ public class Reproduce {
                     System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     //((Lizard) entity).die();
-                    creature.incHP(-50);
-                    entity.incHP(-50);
+                    //creature.incHP(-50);
+                    //entity.incHP(-50);
+                    creature.setHP(50);
+                    entity.setHP(50);
                     return;
                 }
             }
@@ -100,7 +104,7 @@ public class Reproduce {
         {
             // Gaussian ("normally") distributed double value with mean 0.0 and standard deviation 1.0 from this random number generator's sequence.
             if (r.nextDouble() < 0.05) {
-                weights_child[i] = r.nextGaussian() + weights_child[i];
+                weights_child[i] = r.nextGaussian() / 2 + weights_child[i];
             }
         }
 

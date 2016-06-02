@@ -26,7 +26,8 @@ public class Brain {
     public Brain(){
         List<Integer> neuronsInLayers = new ArrayList<>();
         neuronsInLayers.add(28);
-        neuronsInLayers.add(50);
+        neuronsInLayers.add(70);
+        neuronsInLayers.add(30);
         neuronsInLayers.add(8);
         neuralNetwork = new MultiLayerPerceptron(neuronsInLayers, new NeuronProperties(TransferFunctionType.SIGMOID, true));
 

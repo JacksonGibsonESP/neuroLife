@@ -193,12 +193,17 @@ public abstract class Lizard extends Creature {
 
     private int find_winner(double[] brainOutput)
     {
+        if (this.getnormalizedHP() < 0.7) {
+            brainOutput[3] = 0;
+        }
+        System.out.println(Arrays.toString(brainOutput));
         //Метод возвращает индекс победителя
         //Массив означающий текущий порядок индексов массива brainOutput
         int[] order = new int[brainOutput.length];
         for (int i = 0; i < brainOutput.length; i++) {
             order[i] = i;
         }
+
         //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
         //Таким образом мы получаем отсортированный массив brainOutput и не потеряли индексы
         /*System.out.println("Check before");

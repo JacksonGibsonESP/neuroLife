@@ -216,17 +216,10 @@ public class Generator {
     }
 
     private void herb_lizard_eating_random(double [] herb_field, double [] lizard_field, int i){
-        if (i == 1) {
-            for (int j = 0; j < 9; j++) {
-                //lizard_field[j] = 0;
-                //if (herb_field[j] != 1) {
-                    lizard_field[j] = 0.7;
-                //}
-            }
-        }
-        if (i == 2){
+        if (i == 1){
             Random r = new Random();
             for (int k = 0; k < 9; k++) {
+                lizard_field[k] = 0;
                 if (r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
                     if (tmp >= 0.7) {
@@ -263,7 +256,7 @@ public class Generator {
                         0, 0, 0
                 };
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             //1
             herb_field = new double[]
                     {
@@ -641,8 +634,8 @@ public class Generator {
     }
 
     private void herb_lizard_reproduce_random(double [] herb_field, double[] lizard_field, int i) {
-        Random r = new Random();
         if (i == 1){
+            Random r = new Random();
             for (int j = 0; j < 9; j++){
                 if (lizard_field[i] != 0 && r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
@@ -1033,8 +1026,8 @@ public class Generator {
     }
 
     private void herb_lizard_escape_predator_random(double [] herb_field, double[] lizard_field, int i){
-        Random r = new Random();
         if (i == 1) {
+            Random r = new Random();
             for (int j = 0; j < 9; j++) {
                 lizard_field[j] = 0;
                 if (r.nextDouble() < 0.8) {
@@ -1208,8 +1201,8 @@ public class Generator {
     }
 
     private void herb_lizard_attack_predator_random(double [] herb_field, double[] lizard_field, int i){
-        Random r = new Random();
         if (i == 1) {
+            Random r = new Random();
             for (int j = 0; j < 9; j++) {
                 herb_field[j] = 0;
                 if (r.nextDouble() < 0.8) {
@@ -1738,9 +1731,9 @@ public class Generator {
         //Запись в файл обучаемого множества для травоядных ящерок.
         herb_lizard_confusion_pack();
         herb_lizard_eating_pack();
-        //herb_lizard_reproduction_pack();
-        //herb_lizard_escape_predator_pack();
-        //herb_lizard_attack_predator_pack();
+        herb_lizard_reproduction_pack();
+        herb_lizard_escape_predator_pack();
+        herb_lizard_attack_predator_pack();
 
         try {
             writer.close();
@@ -1818,6 +1811,7 @@ public class Generator {
         if (i == 1) {
             Random r = new Random();
             for (int k = 0; k < 9; k++) {
+                lizard_field[k] = 0;
                 if (r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
                     if (tmp >= 0.7) {
@@ -1830,6 +1824,7 @@ public class Generator {
                 }
             }
             for (int k = 0; k < 9; k++) {
+                predator_field[k] = 0;
                 if (r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
                     if (tmp >= 0.7) {
@@ -2243,6 +2238,39 @@ public class Generator {
         }
     }
 
+    private void predator_lizard_hunting_random(double[] lizard_field, double[] predator_field, int i){
+        Random r = new Random();
+        for (int j = 0; j < 9; j++){
+            if (lizard_field[j] == 1){
+                double tmp = r.nextDouble();
+                if (tmp >= 0.7) {
+                    predator_field[j] = 0.7;
+                } else if (tmp >= 0.5) {
+                    predator_field[j] = 0.5;
+                } else {
+                    predator_field[j] = 0.3;
+                }
+            }
+        }
+        if (i == 1) {
+            for (int j = 0; j < 9; j++) {
+                predator_field[j] = 0;
+            }
+            for (int k = 0; k < 9; k++) {
+                if (r.nextDouble() < 0.8) {
+                    double tmp = r.nextDouble();
+                    if (tmp >= 0.7) {
+                        predator_field[k] = 0.7;
+                    } else if (tmp >= 0.5) {
+                        predator_field[k] = 0.5;
+                    } else {
+                        predator_field[k] = 0.3;
+                    }
+                }
+            }
+        }
+    }
+
     private void predator_lizard_hunting_pack(){
         double [] corpse_field;
         double [] lizard_field;
@@ -2268,111 +2296,394 @@ public class Generator {
             //1
             lizard_field = new double[]
                     {
-                            0.7, 0, 0,
+                            1, 0, 0,
                             0, 0, 0,
                             0, 0, 0
                     };
 
             dir = SidesDirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //2
             lizard_field = new double[]
                     {
-                            0, 0.7, 0,
+                            0, 1, 0,
                             0, 0, 0,
                             0, 0, 0
                     };
             dir = SidesDirectionValues.FORWARD;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //3
             lizard_field = new double[]
                     {
-                            0, 0, 0.7,
+                            0, 0, 1,
                             0, 0, 0,
                             0, 0, 0
                     };
             dir = SidesDirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //4
             lizard_field = new double[]
                     {
                             0, 0, 0,
-                            0.7, 0, 0,
+                            1, 0, 0,
                             0, 0, 0
                     };
             dir = SidesDirectionValues.LEFT;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //5
             lizard_field = new double[]
                     {
                             0, 0, 0,
-                            0, 0.7, 0,
+                            0, 1, 0,
                             0, 0, 0
                     };
             dir = SidesDirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //6
             lizard_field = new double[]
                     {
                             0, 0, 0,
-                            0, 0, 0.7,
+                            0, 0, 1,
                             0, 0, 0
                     };
             dir = SidesDirectionValues.RIGHT;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //7
             lizard_field = new double[]
                     {
                             0, 0, 0,
                             0, 0, 0,
-                            0.7, 0, 0
+                            1, 0, 0
                     };
             dir = SidesDirectionValues.BACKWARD_LEFT;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //8
             lizard_field = new double[]
                     {
                             0, 0, 0,
                             0, 0, 0,
-                            0, 0.7, 0
+                            0, 1, 0
                     };
             dir = SidesDirectionValues.BACKWARD;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //9
             lizard_field = new double[]
                     {
                             0, 0, 0,
                             0, 0, 0,
-                            0, 0, 0.7
+                            0, 0, 1
                     };
             dir = SidesDirectionValues.BACKWARD_RIGHT;
             decision = Actions.ATTACK;
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            //Комбинации:
+            lizard_field = new double[]
+                    {
+                            1, 1, 0,
+                            1, 0, 0,
+                            0, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 1, 1,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 1, 1,
+                            0, 0, 1,
+                            0, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 1,
+                            0, 0, 1,
+                            0, 0, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 1,
+                            0, 1, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            1, 1, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.BACKWARD;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            1, 0, 0,
+                            1, 1, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.BACKWARD_LEFT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 0, 0,
+                            1, 0, 0,
+                            1, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.LEFT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 1, 1,
+                            0, 0, 0,
+                            1, 1, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 1, 1,
+                            1, 0, 1,
+                            1, 1, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 1, 1,
+                            1, 0, 1,
+                            1, 1, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 1,
+                            0, 0, 0,
+                            1, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 0, 1,
+                            1, 0, 1,
+                            1, 0, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            1, 0, 1,
+                            0, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 1, 0,
+                            1, 0, 1,
+                            0, 1, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 0, 0,
+                            0, 0, 0,
+                            0, 0, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            1, 0, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 0, 1,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+
+            lizard_field = new double[]
+                    {
+                            1, 1, 1,
+                            1, 1, 1,
+                            1, 1, 1
+                    };
+
+            predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.ATTACK;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+        }
+    }
+
+    private void predator_lizard_reproduction_random(double[] corpse_field, double[] lizard_field, int i){
+        Random r = new Random();
+        if (i == 1) {
+            for(int j = 0; j < 9; j++) {
+                corpse_field[j] = 0;
+                double tmp = r.nextDouble();
+                if (tmp >= 0.5) {
+                    corpse_field[j] = 1;
+                }
+            }
+            for (int k = 0; k < 9; k++) {
+                lizard_field[k] = 0;
+                if (r.nextDouble() < 0.8) {
+                    double tmp = r.nextDouble();
+                    if (tmp >= 0.7) {
+                        lizard_field[k] = 0.7;
+                    } else if (tmp >= 0.5) {
+                        lizard_field[k] = 0.5;
+                    } else {
+                        lizard_field[k] = 0.3;
+                    }
+                }
+            }
         }
     }
 
@@ -2397,105 +2708,345 @@ public class Generator {
                         0, 0, 0
                 };
 
-        //1
-        predator_lizard_field = new double[]
-                {
-                        0.7, 0, 0,
-                        0, 0, 0,
-                        0, 0, 0
-                };
+        for (int i = 0; i < 2; i++) {
+            //1
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0, 0,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
 
-        dir = SidesDirectionValues.FORWARD_LEFT;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //2
-        predator_lizard_field = new double[]
-                {
-                        0, 0.7, 0,
-                        0, 0, 0,
-                        0, 0, 0
-                };
-        dir = SidesDirectionValues.FORWARD;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //2
+            predator_lizard_field = new double[]
+                    {
+                            0, 0.7, 0,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //3
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0.7,
-                        0, 0, 0,
-                        0, 0, 0
-                };
-        dir = SidesDirectionValues.FORWARD_RIGHT;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //3
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0.7,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //4
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0,
-                        0.7, 0, 0,
-                        0, 0, 0
-                };
-        dir = SidesDirectionValues.LEFT;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //4
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0.7, 0, 0,
+                            0, 0, 0
+                    };
+            dir = SidesDirectionValues.LEFT;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //5
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0,
-                        0, 0.7, 0,
-                        0, 0, 0
-                };
-        dir = SidesDirectionValues.NO_DIRECTION;
-        decision = Actions.REPRODUCE;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //5
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0.7, 0,
+                            0, 0, 0
+                    };
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.REPRODUCE;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //6
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0,
-                        0, 0, 0.7,
-                        0, 0, 0
-                };
-        dir = SidesDirectionValues.RIGHT;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //6
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0.7,
+                            0, 0, 0
+                    };
+            dir = SidesDirectionValues.RIGHT;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //7
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0,
-                        0, 0, 0,
-                        0.7, 0, 0
-                };
-        dir = SidesDirectionValues.BACKWARD_LEFT;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //7
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            0.7, 0, 0
+                    };
+            dir = SidesDirectionValues.BACKWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //8
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0,
-                        0, 0, 0,
-                        0, 0.7, 0
-                };
-        dir = SidesDirectionValues.BACKWARD;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //8
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            0, 0.7, 0
+                    };
+            dir = SidesDirectionValues.BACKWARD;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
-        //9
-        predator_lizard_field = new double[]
-                {
-                        0, 0, 0,
-                        0, 0, 0,
-                        0, 0, 0.7
-                };
-        dir = SidesDirectionValues.BACKWARD_RIGHT;
-        decision = Actions.MOVEMENT;
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+            //9
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            0, 0, 0.7
+                    };
+            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            //Комбинации
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0.7, 0,
+                            0.7, 0, 0,
+                            0, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0.7, 0.7,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0.7, 0.7,
+                            0, 0, 0.7,
+                            0, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0.7,
+                            0, 0, 0.7,
+                            0, 0, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0.7,
+                            0, 0.7, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            0.7, 0.7, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.BACKWARD;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0.7, 0, 0,
+                            0.7, 0.7, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.BACKWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0, 0,
+                            0.7, 0, 0,
+                            0.7, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.LEFT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0.7, 0.7,
+                            0, 0, 0,
+                            0.7, 0.7, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0.7, 0.7,
+                            0.7, 0, 0.7,
+                            0.7, 0.7, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0.7, 0.7,
+                            0.7, 0, 0.7,
+                            0.7, 0.7, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0.7,
+                            0, 0, 0,
+                            0.7, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_RIGHT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0, 0.7,
+                            0.7, 0, 0.7,
+                            0.7, 0, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0.7, 0, 0.7,
+                            0, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0.7, 0,
+                            0.7, 0, 0.7,
+                            0, 0.7, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0, 0,
+                            0, 0, 0,
+                            0, 0, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.FORWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0, 0, 0,
+                            0, 0, 0,
+                            0.7, 0, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0, 0.7,
+                            0, 0, 0,
+                            0, 0, 0
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.MOVEMENT;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            predator_lizard_field = new double[]
+                    {
+                            0.7, 0.7, 0.7,
+                            0.7, 0.7, 0.7,
+                            0.7, 0.7, 0.7
+                    };
+
+            predator_lizard_reproduction_random(corpse_field, lizard_field, i);
+            dir = SidesDirectionValues.NO_DIRECTION;
+            decision = Actions.REPRODUCE;
+            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+        }
     }
 
     public void predator_lizard_gen(){
@@ -2509,8 +3060,8 @@ public class Generator {
         //Запись в файл обучаемого множества для хищных ящерок.
         predator_lizard_confusion_pack();
         predator_lizard_eating_pack();
-        predator_lizard_hunting_pack();      //доделать рандом
-        predator_lizard_reproduction_pack(); //доделать рандом
+        predator_lizard_hunting_pack();
+        predator_lizard_reproduction_pack();
 
         try {
             writer.close();

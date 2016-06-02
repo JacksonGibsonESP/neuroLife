@@ -45,10 +45,10 @@ public class Spawner extends Actor {
                 {
                     if(first) {
                         Lizard lizard = new Herb_Lizard(world, x, y);
-                        lizard.learn();
+                        //lizard.learn();
                         brain = lizard.getBrain();
-                        brain.saveNNToFile("herb_lizard_brain");
-                        //brain.loadFileToNNT("herb_lizard_brain");
+                        //brain.saveNNToFile("herb_lizard_brain");
+                        brain.loadFileToNNT("herb_lizard_brain");
                         first = false;
                         world.add_to_entities(lizard);
                     }
@@ -60,35 +60,36 @@ public class Spawner extends Actor {
         }
 
         //Заполним мир ящерками-хищниками-падальщиками
-        /*first = true;
+        first = true;
         brain = null;
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.05)
+                if (r.nextDouble() < 0.0025)
                 {
                     if(first) {
                         Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);
                         //predator_lizard.learn();
                         brain = predator_lizard.getBrain();
-                        //brain.loadFileToNNT("predator_lizard_brain");
+                        //brain.saveNNToFile("predator_lizard_brain");
+                        brain.loadFileToNNT("predator_lizard_brain");
                         first = false;
                         world.add_to_entities(predator_lizard);
                     }
                     else {
-                        world.add_to_entities(new Predator_Lizard(world, x, y, brain));
+                        world.add_to_entities(new Predator_Lizard(world, x, y, brain, false));
                     }
                 }
             }
-        }*/
+        }
 
         //Заполним мир травой
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.7)
+                if (r.nextDouble() < 0.5)
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }
@@ -140,7 +141,7 @@ public class Spawner extends Actor {
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.001 && !world.getCell(x, y).isHerb())
+                if (r.nextDouble() < 0.005 && !world.getCell(x, y).isHerb())
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }

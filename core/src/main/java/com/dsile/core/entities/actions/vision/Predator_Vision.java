@@ -10,10 +10,6 @@ public class Predator_Vision extends Vision {
         super(creature);
     }
 
-    public double[] getEnvironmentByDirection() {
-        return null;
-    }
-
     public double[] getEnvironment(){
         //Создаем массив наполненный нулевыми элементами
         double[] env = new double[28];

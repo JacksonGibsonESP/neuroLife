@@ -16,7 +16,7 @@ import java.util.Set;
  * Класс Spawner отвечает за спаун объектов на поле
  *
  */
-public class Spawner extends Actor {
+public class Spawner{
     private World world;
     private Random r;
 
@@ -134,8 +134,7 @@ public class Spawner extends Actor {
         System.out.println("-------------------------------------------");
     }
 
-    @Override
-    public void act(float delta) {
+    public void act() {
         //Подбрасываем травы
         for(int y = 0; y < world.getWorldYsize(); y++)
         {

@@ -13,7 +13,7 @@ public class Herb_Lizard extends Lizard {
         super(world,x,y);
         this.data_set_filename = "Herb_Lizard_data_set.txt";
         this.vision = new Lizard_Vision(this);
-        this.id = 1;
+        //this.id = 1;
         System.out.printf("Herb Lizard created on (%d,%d)\n",x,y);
     }
 
@@ -21,12 +21,12 @@ public class Herb_Lizard extends Lizard {
         super(world,x,y, brain, newborn);
         this.data_set_filename = "Herb_Lizard_data_set.txt";
         this.vision = new Lizard_Vision(this);
-        this.id = 1;
+        //this.id = 1;
         if (newborn){
-            System.out.printf("Herb Lizard was born on (%d,%d)\n",x,y);
+            System.out.printf("Herb Lizard was born on (%d,%d)\n", x, y);
         }
         else{
-            System.out.printf("Herb Lizard created on (%d,%d)\n",x,y);
+            System.out.printf("Herb Lizard created on (%d,%d)\n", x ,y);
         }
     }
 

@@ -1,12 +1,10 @@
 package com.dsile.core.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dsile.core.entities.Entity;
-import com.dsile.core.entities.Herb;
-import com.dsile.core.entities.Lizard;
-import com.dsile.core.entities.Creature;
+import com.dsile.core.entities.*;
 import com.dsile.core.screens.WorldScreen;
 import com.dsile.core.spawner.Spawner;
+import com.dsile.core.statistics.Statistics;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -23,6 +21,7 @@ public class World {
     private int cellsY;
     private Cell[][] cells;
     private Spawner spawner;
+    private Statistics statistics;
 
     private Set<Entity> entities = new HashSet<>();
 
@@ -32,7 +31,7 @@ public class World {
         System.out.println("Creating world");
 
         this.spawner = new Spawner(this);
-
+        this.statistics = new Statistics(this, 10);
         this.world_screen = screen;
 
         this.cellsX = cellsX;
@@ -100,5 +99,72 @@ public class World {
         world_screen.addActor(entity);
     }
 
+    public int get_herb_lizard_count(){
+        int count = 0;
+        for(Entity e: entities){
+            if (e instanceof Herb_Lizard){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int get_predator_lizard_count(){
+        int count = 0;
+        for(Entity e: entities){
+            if (e instanceof Predator_Lizard){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int get_dead_bodies_count(){
+        int count = 0;
+        for(Entity e: entities){
+            if (e instanceof Herb_Lizard && !e.isAlive()){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int get_herbs_count(){
+        int count = 0;
+        for(Entity e: entities){
+            if (e instanceof Herb){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int[] get_generations_stat(){
+        int max_generations = 0;
+        for (Entity e: entities){
+            if (e instanceof Herb_Lizard){
+                if (((Herb_Lizard) e).getGeneration() > max_generations){
+                    max_generations = ((Herb_Lizard) e).getGeneration();
+                }
+            }
+        }
+        int[] stat = new int[max_generations];
+        for (int e : stat){
+            e = 0;
+        }
+        for (Entity e: entities){
+            if (e instanceof Herb_Lizard){
+                stat[((Herb_Lizard) e).getGeneration() - 1]++;
+            }
+        }
+        return stat;
+    }
+
     public Spawner getSpawner(){return spawner;}
+
+    public Statistics getStatistics(){return statistics;}
+
+    public void removeEntity(Entity e){
+        entities.remove(e);
+    }
 }

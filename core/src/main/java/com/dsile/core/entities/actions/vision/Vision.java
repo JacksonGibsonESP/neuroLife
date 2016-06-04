@@ -172,6 +172,7 @@ abstract public class Vision {
      */
     public double[] accessSituation(){
         System.out.println(creature);
+        System.out.println(creature.getGeneration());
         double[] environment = getEnvironmentByDirection();
 
         System.out.println("Sees:\nFood:         Lizards:      Predators:");

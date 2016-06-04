@@ -94,14 +94,16 @@ public class WorldScreen implements Screen {
             //stage.act(delta);
             lizard_stage.act(delta);
             predator_lizard_stage.act(delta);
-            world.getSpawner().act(delta);
+            world.getSpawner().act();
+            world.getStatistics().act();
         }
 
         if (keysProcessor.isEnterPressed()) {
             //stage.act(delta);
             lizard_stage.act(delta);
             predator_lizard_stage.act(delta);
-            world.getSpawner().act(delta);
+            world.getSpawner().act();
+            world.getStatistics().act();
         }
 
         keysProcessor.moveCameraByKeys(cam);

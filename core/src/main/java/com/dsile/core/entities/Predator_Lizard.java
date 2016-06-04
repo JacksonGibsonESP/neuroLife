@@ -13,7 +13,7 @@ public class Predator_Lizard extends Lizard {
         super(world,x,y);
         this.data_set_filename = "Predator_Lizard_data_set.txt";
         this.vision = new Predator_Vision(this);
-        this.id = 2;
+        //this.id = 2;
         System.out.printf("Predator lizard created on (%d,%d)\n",x,y);
     }
 
@@ -21,7 +21,7 @@ public class Predator_Lizard extends Lizard {
         super(world, x, y, brain, newborn);
         this.data_set_filename = "Predator_Lizard_data_set.txt";
         this.vision = new Predator_Vision(this);
-        this.id = 2;
+        //this.id = 2;
         if (newborn){
             System.out.printf("Predator Lizard was born on (%d,%d)\n", x, y);
         }

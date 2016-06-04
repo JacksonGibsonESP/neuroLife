@@ -37,6 +37,7 @@ public class Reproduce {
                     int x = creature.getCurrentCell().getX();
                     int y = creature.getCurrentCell().getY();
                     Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y, newborn_brain, true);
+                    predator_lizard.setGeneration(Math.max(creature.getGeneration(), ((Creature)entity).getGeneration()) + 1);
                     world.add_to_entities(predator_lizard);
                     System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
@@ -62,7 +63,9 @@ public class Reproduce {
                     World world = creature.getWorld();
                     int x = creature.getCurrentCell().getX();
                     int y = creature.getCurrentCell().getY();
-                    world.add_to_entities(new Herb_Lizard(world, x, y, newborn_brain, true));
+                    Herb_Lizard herb_lizard = new Herb_Lizard(world, x, y, newborn_brain, true);
+                    herb_lizard.setGeneration(Math.max(creature.getGeneration(), ((Creature)entity).getGeneration()) + 1);
+                    world.add_to_entities(herb_lizard);
                     System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     //((Lizard) entity).die();

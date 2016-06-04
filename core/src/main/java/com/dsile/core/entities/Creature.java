@@ -20,7 +20,7 @@ public abstract class Creature extends Entity{
     protected Attack attack;
     protected Reproduce reproduce;
     protected String data_set_filename;
-
+    protected int generation = 1;
     //protected int hungrines = 0;
 
     public Creature(World world, int x, int y, Brain brain)
@@ -61,4 +61,10 @@ public abstract class Creature extends Entity{
     public abstract void die();
 
     public abstract Brain getBrain();
+
+    public int getGeneration() {return generation;}
+
+    //protected void incGeneration() {generation++;}
+
+    public void setGeneration(int new_generation_number) {this.generation = new_generation_number;}
 }

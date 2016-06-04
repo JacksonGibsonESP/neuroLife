@@ -11,7 +11,7 @@ public class Herb extends Entity {
     public Herb(World world, int x, int y) {
         super(world, x, y);
         this.HP = this.maxHP;
-        this.id = 0;
+        //this.id = 0;
         System.out.printf("Herb created on (%d,%d)\n",x,y);
     }
 
@@ -32,6 +32,7 @@ public class Herb extends Entity {
     protected void dead() {
         remove();
         currentCell.removeEntity(this);
+        world.removeEntity(this);
     }
 
     public int bitten()

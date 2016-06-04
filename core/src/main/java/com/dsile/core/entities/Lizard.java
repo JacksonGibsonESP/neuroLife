@@ -131,6 +131,7 @@ public abstract class Lizard extends Creature {
     protected void decomposed() {
         System.out.println("Decomposed");
         currentCell.removeEntity(this);
+        world.removeEntity(this);
         remove();
     }
 

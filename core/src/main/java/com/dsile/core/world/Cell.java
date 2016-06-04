@@ -222,9 +222,8 @@ public abstract class Cell{
         return this;
     }
 
-    public Cell removeEntity(Entity e){
+    public void removeEntity(Entity e){
         entities.remove(e);
-        return this;
     }
 
     public Texture getTexture(){

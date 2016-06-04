@@ -24,7 +24,7 @@ public abstract class Entity extends Actor {
     protected int HP = 50;
 //    protected int energy = maxEnergy;
 
-    protected int id; //для сортировки объектов перед рисовкой на экране
+    //protected int id; //для сортировки объектов перед рисовкой на экране
 
     //protected boolean reproducing = false;
 
@@ -352,7 +352,7 @@ public abstract class Entity extends Actor {
         return alive;
     }
 
-    public int getId(){return id;}
+    //public int getId(){return id;}
 
     /*public boolean isReproducing()
     {

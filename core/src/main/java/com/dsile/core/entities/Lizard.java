@@ -168,6 +168,7 @@ public abstract class Lizard extends Creature {
         }
         else {
             this.HP -= 5; //плата за жизнь
+            System.out.printf("HP: %d\n", this.HP);
             double[] thoughts = vision.accessSituation();
             //Ищем победителя среди индексов 4 - 7:
             int decision = find_winner(Arrays.copyOfRange(thoughts, 4, 8));
@@ -186,18 +187,16 @@ public abstract class Lizard extends Creature {
                     reproduce();
                     break;
             }
-
-            System.out.printf("HP: %d\n", this.HP);
         }
         System.out.println("-------------------------------------------");
     }
 
     private int find_winner(double[] brainOutput)
     {
-        if (this.getnormalizedHP() < 0.7) {
+        /*if (this.getnormalizedHP() < 0.7) {
             brainOutput[3] = 0;
         }
-        System.out.println(Arrays.toString(brainOutput));
+        System.out.println(Arrays.toString(brainOutput));*/
         //Метод возвращает индекс победителя
         //Массив означающий текущий порядок индексов массива brainOutput
         int[] order = new int[brainOutput.length];

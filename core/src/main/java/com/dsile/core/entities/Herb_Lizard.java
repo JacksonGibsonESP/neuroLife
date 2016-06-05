@@ -26,7 +26,7 @@ public class Herb_Lizard extends Lizard {
             System.out.printf("Herb Lizard was born on (%d,%d)\n", x, y);
         }
         else{
-            System.out.printf("Herb Lizard created on (%d,%d)\n", x ,y);
+            System.out.printf("Herb Lizard created on (%d,%d)\n", x, y);
         }
     }
 

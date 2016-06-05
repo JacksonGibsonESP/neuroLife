@@ -66,7 +66,7 @@ public class Spawner{
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.0025)
+                if (r.nextDouble() < 0.2)
                 {
                     if(first) {
                         Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y);

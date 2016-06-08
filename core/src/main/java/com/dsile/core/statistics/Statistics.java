@@ -1,10 +1,9 @@
 package com.dsile.core.statistics;
 
 import com.dsile.core.world.World;
-import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil;
-import org.knowm.xchart.XYChart;
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
+//import org.knowm.xchart.XYChart;
+//import org.knowm.xchart.QuickChart;
+//import org.knowm.xchart.SwingWrapper;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,8 +14,8 @@ import java.util.Arrays;
  */
 public class Statistics{
     private World world;
-    private SwingWrapper swing_wrapper;
-    private XYChart chart;
+    //private SwingWrapper swing_wrapper;
+    //private XYChart chart;
     private final String statistics_file_name          = "statistics.txt";
     private FileWriter writer;
     private int counter = 0;
@@ -40,8 +39,8 @@ public class Statistics{
         }
 
         try {
-            this.writer.write("delta: " + this.delta + '\n' + "Herb lizards count:\t" + "Deaths:\t" + "Herbs:\n"
-                    + "Generations stat:\n");
+            this.writer.write("delta: " + this.delta + '\n' + "Herb lizards count:\t" + "Deaths:\t" + "Herbs:\t"
+                    + "Generations stat length:\t" + "Generations stat:\n");
         }
         catch(IOException ex){
             System.out.println(ex.getMessage());
@@ -76,10 +75,12 @@ public class Statistics{
             }
 
             try {
+                int [] generations = world.get_generations_stat();
                 this.writer.write(world.get_herb_lizard_count() + "\t"
                         + world.get_dead_bodies_count() + "\t"
-                        + world.get_herbs_count() + "\n"
-                        + Arrays.toString(world.get_generations_stat()) + "\n");
+                        + world.get_herbs_count() + "\t"
+                        + generations.length + "\t"
+                        + Arrays.toString(generations) + "\n");
             }
             catch(IOException ex){
                 System.out.println(ex.getMessage());

@@ -75,6 +75,15 @@ public class MyInputProcessor implements InputProcessor {
         }
     }
 
+    public boolean isRClicked(){
+        if(currentKey.contains(Input.Keys.R)){
+            currentKey.remove(Input.Keys.R);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void moveCameraByKeys(OrthographicCamera cam){
         if (currentKey.contains(Input.Keys.LEFT)) {
             cam.translate(-3, 0, 0);

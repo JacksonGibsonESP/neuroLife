@@ -30,7 +30,7 @@ public class WorldScreen implements Screen {
     private Stage predator_lizard_stage;
     private MyInputProcessor keysProcessor;
     private OrthographicCamera cam;
-
+    private boolean continuously = false;
 
     @Override
     public void show() {
@@ -99,6 +99,18 @@ public class WorldScreen implements Screen {
         }
 
         if (keysProcessor.isEnterPressed()) {
+            //stage.act(delta);
+            lizard_stage.act(delta);
+            predator_lizard_stage.act(delta);
+            world.getSpawner().act();
+            world.getStatistics().act();
+        }
+
+        if (keysProcessor.isRClicked()) {
+            continuously = !continuously;
+        }
+
+        if (continuously) {
             //stage.act(delta);
             lizard_stage.act(delta);
             predator_lizard_stage.act(delta);

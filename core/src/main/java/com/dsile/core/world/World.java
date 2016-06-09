@@ -47,13 +47,13 @@ public class World {
 
     }
 
-    public void drawMap(SpriteBatch batch){
+    /*public void drawMap(SpriteBatch batch){
         for(Cell[] cc : cells){
             for(Cell c : cc){
                 c.drawCell(batch);
             }
         }
-    }
+    }*/
 
     //DANGEROUS METHOD
     public GroundCell getRandomGroundCell(){

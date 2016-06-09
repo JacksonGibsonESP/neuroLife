@@ -42,7 +42,7 @@ public abstract class Lizard extends Creature {
         //this.id = 1;
         if (newborn){
             //System.out.printf("Lizard was born on (%d,%d)\n",x,y);
-            setNewbornTexture();
+            //setNewbornTexture();
         }
     }
 
@@ -141,7 +141,7 @@ public abstract class Lizard extends Creature {
             alive = false;
             this.HP = this.maxHP; //Пусть будет энергией от поедания разлагающегося трупа
             //energy = maxEnergy;
-            setDeadTexture();
+            //setDeadTexture();
         }
         //процесс разложения
         this.HP -= 10; //разложение тела

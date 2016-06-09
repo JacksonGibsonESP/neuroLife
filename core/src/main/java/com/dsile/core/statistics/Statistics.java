@@ -25,7 +25,7 @@ public class Statistics{
     public Statistics(World world, int delta){
         this.world = world;
         //this.delta = delta;
-        this.delta = 100;
+        this.delta = 1;
         this.counter = this.delta; //запись начальной ситуации
         /*this.chart = new XYChart(500, 500);
         this.swing_wrapper = new SwingWrapper(chart);

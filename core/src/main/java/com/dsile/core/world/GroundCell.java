@@ -9,7 +9,7 @@ public class GroundCell extends Cell {
 
     public GroundCell(int size, int x, int y) {
         super(size,x,y);
-        texture = new Texture("sand.png");
+        //texture = new Texture("sand.png");
     }
 
 }

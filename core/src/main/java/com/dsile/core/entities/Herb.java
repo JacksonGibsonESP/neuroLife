@@ -16,19 +16,19 @@ public class Herb extends Entity {
     }
 
     @Override
-    protected void setAliveTexture() {
+    /*protected void setAliveTexture() {
         texture = new Texture("herb.png");
-    }
+    }*/
 
-    protected void setDeadTexture() {
+    /*protected void setDeadTexture() {
         texture = new Texture("herb.png");
-    }
+    }*/
 
-    protected void setNewbornTexture() {
+    /*protected void setNewbornTexture() {
         texture = new Texture("herb.png");
-    }
+    }*/
 
-    @Override
+    //@Override
     protected void dead() {
         remove();
         currentCell.removeEntity(this);

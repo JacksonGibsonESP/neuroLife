@@ -30,8 +30,8 @@ public class Herb_Lizard extends Lizard {
         }
     }
 
-    @Override
-    protected void setAliveTexture(){
+    //@Override
+    /*protected void setAliveTexture(){
         texture = new Texture("alive_herb_lizard.png");
     }
 
@@ -41,5 +41,5 @@ public class Herb_Lizard extends Lizard {
 
     protected void setNewbornTexture(){
         texture = new Texture("newborn_herb_lizard.png");
-    }
+    }*/
 }

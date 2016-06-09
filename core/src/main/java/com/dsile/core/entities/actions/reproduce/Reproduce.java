@@ -39,7 +39,7 @@ public class Reproduce {
                     Predator_Lizard predator_lizard = new Predator_Lizard(world, x, y, newborn_brain, true);
                     predator_lizard.setGeneration(Math.max(creature.getGeneration(), ((Creature)entity).getGeneration()) + 1);
                     world.add_to_entities(predator_lizard);
-                    System.out.println("Birth complete");
+                    //System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     //((Predator_Lizard) entity).die();
                     //creature.incHP(-50);
@@ -66,7 +66,7 @@ public class Reproduce {
                     Herb_Lizard herb_lizard = new Herb_Lizard(world, x, y, newborn_brain, true);
                     herb_lizard.setGeneration(Math.max(creature.getGeneration(), ((Creature)entity).getGeneration()) + 1);
                     world.add_to_entities(herb_lizard);
-                    System.out.println("Birth complete");
+                    //System.out.println("Birth complete");
                     //creature.die(); // временно, пока нет памяти у нейросети, а то их слишком много становится
                     //((Lizard) entity).die();
                     //creature.incHP(-50);
@@ -87,8 +87,8 @@ public class Reproduce {
         Double weights_A[] = parent_A.getWeights();
         Double weights_B[] = parent_B.getWeights();
 
-        System.out.println("Weights A: " + Arrays.toString(weights_A));
-        System.out.println("Weights B: " + Arrays.toString(weights_B));
+        //System.out.println("Weights A: " + Arrays.toString(weights_A));
+        //System.out.println("Weights B: " + Arrays.toString(weights_B));
 
         // Будем считать все веса одной сети одной хромосомой, будем скрещивать две хромосомы
         // Пускай будет равномерное скрещивание
@@ -120,7 +120,7 @@ public class Reproduce {
             weights_child_casted [i] = weights_child[i].doubleValue();
         }
 
-        System.out.println("Weights C: " + Arrays.toString(weights_child_casted));
+        //System.out.println("Weights C: " + Arrays.toString(weights_child_casted));
 
         Brain child_brain = new Brain();
 

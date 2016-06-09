@@ -25,7 +25,7 @@ public class Statistics{
     public Statistics(World world, int delta){
         this.world = world;
         //this.delta = delta;
-        this.delta = 10;
+        this.delta = 100;
         this.counter = this.delta; //запись начальной ситуации
         /*this.chart = new XYChart(500, 500);
         this.swing_wrapper = new SwingWrapper(chart);
@@ -39,8 +39,11 @@ public class Statistics{
         }
 
         try {
-            this.writer.write("delta: " + this.delta + '\n' + "Herb lizards count:\t" + "Deaths:\t" + "Herbs:\t"
-                    + "Generations stat length:\t" + "Generations stat:\n");
+            this.writer.write("Delta: " + this.delta + '\n'
+                    + "Herb lizards count:\t"
+                    + "Dead bodies count:\t"
+                    + "Herbs:\t"
+                    + "Generations stat:\n");
         }
         catch(IOException ex){
             System.out.println(ex.getMessage());
@@ -75,12 +78,14 @@ public class Statistics{
             }
 
             try {
-                int [] generations = world.get_generations_stat();
+                int [] generations_stat = world.get_generations_stat();
                 this.writer.write(world.get_herb_lizard_count() + "\t"
                         + world.get_dead_bodies_count() + "\t"
-                        + world.get_herbs_count() + "\t"
-                        + generations.length + "\t"
-                        + Arrays.toString(generations) + "\n");
+                        + world.get_herbs_count() + "\t");
+                for (int i = 0; i < generations_stat.length / 2; i++){
+                    this.writer.write( "[" + (i + 1) + ": " + generations_stat[i * 2] + ", " + generations_stat[i * 2 + 1] + "] ");
+                }
+                this.writer.write("\n");
             }
             catch(IOException ex){
                 System.out.println(ex.getMessage());

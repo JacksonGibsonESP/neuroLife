@@ -111,25 +111,25 @@ public abstract class Lizard extends Creature {
 
     @Override
     protected void attack(double[] signal) {
-        System.out.println("Attacks");
+        //System.out.println("Attacks");
         attack.perform(movement.getCellByDirection(signal));
     }
 
     @Override
     protected void move(double[] signal) {
-        System.out.println("Moves");
+        //System.out.println("Moves");
         movement.perform(signal);
     }
 
     @Override
     protected void eat() {
-        System.out.println("Eats");
+        //System.out.println("Eats");
         eating.perform();
     }
 
     @Override
     protected void decomposed() {
-        System.out.println("Decomposed");
+        //System.out.println("Decomposed");
         currentCell.removeEntity(this);
         world.removeEntity(this);
         remove();
@@ -147,9 +147,9 @@ public abstract class Lizard extends Creature {
         this.HP -= 10; //разложение тела
         if(this.HP <= 0){
             decomposed();
-            System.out.println("Dead Lizard Body Decomposed");
+            //System.out.println("Dead Lizard Body Decomposed");
         }
-        System.out.printf("Dead Lizard Body Energy: %d\n", this.HP);
+        //System.out.printf("Dead Lizard Body Energy: %d\n", this.HP);
     }
 
     /**
@@ -159,6 +159,7 @@ public abstract class Lizard extends Creature {
      */
     @Override
     public void act(float delta) {
+        this.incLife_duration();
         if(this.alive & this.HP <= 0){
             dead();
         }
@@ -168,7 +169,7 @@ public abstract class Lizard extends Creature {
         }
         else {
             this.HP -= 5; //плата за жизнь
-            System.out.printf("HP: %d\n", this.HP);
+            //System.out.printf("HP: %d\n", this.HP);
             double[] thoughts = vision.accessSituation();
             //Ищем победителя среди индексов 4 - 7:
             int decision = find_winner(Arrays.copyOfRange(thoughts, 4, 8));
@@ -188,7 +189,7 @@ public abstract class Lizard extends Creature {
                     break;
             }
         }
-        System.out.println("-------------------------------------------");
+        //System.out.println("-------------------------------------------");
     }
 
     private int find_winner(double[] brainOutput)
@@ -240,7 +241,7 @@ public abstract class Lizard extends Creature {
     }
 
     public void attacked(Creature attacker){
-        System.out.println(attacker);
+        //System.out.println(attacker);
         if (attacker instanceof Predator_Lizard) {
             //System.out.println("Hey!");
             this.HP -= attacker.getnormalizedHP() * 200;
@@ -256,7 +257,7 @@ public abstract class Lizard extends Creature {
 
     public void reproduce()
     {
-        System.out.println("Trying to reproduce");
+        //System.out.println("Trying to reproduce");
         reproduce.perform();
     }
 

@@ -12,7 +12,7 @@ public class Herb extends Entity {
         super(world, x, y);
         this.HP = this.maxHP;
         //this.id = 0;
-        System.out.printf("Herb created on (%d,%d)\n",x,y);
+        //System.out.printf("Herb created on (%d,%d)\n",x,y);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.dsile.core.screens.WorldScreen;
 import com.dsile.core.spawner.Spawner;
 import com.dsile.core.statistics.Statistics;
 
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -102,7 +103,7 @@ public class World {
     public int get_herb_lizard_count(){
         int count = 0;
         for(Entity e: entities){
-            if (e instanceof Herb_Lizard){
+            if (e instanceof Herb_Lizard && e.isAlive()){
                 count++;
             }
         }
@@ -112,7 +113,7 @@ public class World {
     public int get_predator_lizard_count(){
         int count = 0;
         for(Entity e: entities){
-            if (e instanceof Predator_Lizard){
+            if (e instanceof Predator_Lizard && e.isAlive()){
                 count++;
             }
         }
@@ -142,19 +143,23 @@ public class World {
     public int[] get_generations_stat(){
         int max_generations = 0;
         for (Entity e: entities){
-            if (e instanceof Herb_Lizard){
+            if (e instanceof Herb_Lizard && e.isAlive()){
                 if (((Herb_Lizard) e).getGeneration() > max_generations){
                     max_generations = ((Herb_Lizard) e).getGeneration();
                 }
             }
         }
-        int[] stat = new int[max_generations];
+        int[] stat = new int[max_generations * 2];
         for (int e : stat){
             e = 0;
         }
+        //сначала пишется количество ящерок в поколении, а затем продолжительность жизни самой старой из поколения
         for (Entity e: entities){
-            if (e instanceof Herb_Lizard){
-                stat[((Herb_Lizard) e).getGeneration() - 1]++;
+            if (e instanceof Herb_Lizard && e.isAlive()){
+                stat[(((Herb_Lizard) e).getGeneration() - 1) * 2]++;
+                if(((Herb_Lizard) e).getLife_duration() > stat[(((Herb_Lizard) e).getGeneration() - 1) * 2 + 1]){
+                    stat[(((Herb_Lizard) e).getGeneration() - 1) * 2 + 1] = ((Herb_Lizard) e).getLife_duration();
+                }
             }
         }
         return stat;

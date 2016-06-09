@@ -14,7 +14,7 @@ public class Herb_Lizard extends Lizard {
         this.data_set_filename = "Herb_Lizard_data_set.txt";
         this.vision = new Lizard_Vision(this);
         //this.id = 1;
-        System.out.printf("Herb Lizard created on (%d,%d)\n",x,y);
+        //System.out.printf("Herb Lizard created on (%d,%d)\n",x,y);
     }
 
     public Herb_Lizard(World world, int x, int y, Brain brain, boolean newborn) {
@@ -23,10 +23,10 @@ public class Herb_Lizard extends Lizard {
         this.vision = new Lizard_Vision(this);
         //this.id = 1;
         if (newborn){
-            System.out.printf("Herb Lizard was born on (%d,%d)\n", x, y);
+            //System.out.printf("Herb Lizard was born on (%d,%d)\n", x, y);
         }
         else{
-            System.out.printf("Herb Lizard created on (%d,%d)\n", x, y);
+            //System.out.printf("Herb Lizard created on (%d,%d)\n", x, y);
         }
     }
 

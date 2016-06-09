@@ -9,6 +9,8 @@ import com.dsile.core.world.World;
 
 import com.dsile.core.entities.actions.eating.Eating;
 
+import java.math.BigInteger;
+
 /**
  * Created by DeSile on 2/18/2016.
  */
@@ -21,7 +23,8 @@ public abstract class Creature extends Entity{
     protected Reproduce reproduce;
     protected String data_set_filename;
     protected int generation = 1;
-    //protected int hungrines = 0;
+    //protected BigInteger life_duration = BigInteger.ZERO;
+    protected int life_duration = 0;
 
     public Creature(World world, int x, int y, Brain brain)
     {
@@ -67,4 +70,19 @@ public abstract class Creature extends Entity{
     //protected void incGeneration() {generation++;}
 
     public void setGeneration(int new_generation_number) {this.generation = new_generation_number;}
+
+    /*protected void incLife_duration(){
+        life_duration = life_duration.add(BigInteger.ONE);
+    }
+
+    public BigInteger getLife_duration(){
+        return life_duration;
+    }*/
+    protected void incLife_duration(){
+        life_duration++;
+    }
+
+    public int getLife_duration(){
+        return life_duration;
+    }
 }

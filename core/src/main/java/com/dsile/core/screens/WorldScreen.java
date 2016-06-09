@@ -108,6 +108,12 @@ public class WorldScreen implements Screen {
 
         if (keysProcessor.isRClicked()) {
             continuously = !continuously;
+            if(continuously){
+                System.out.println("Playing");
+            }
+            else{
+                System.out.println("Stopped");
+            }
         }
 
         if (continuously) {

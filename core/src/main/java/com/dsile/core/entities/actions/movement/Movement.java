@@ -182,14 +182,14 @@ public class Movement {
     public void perform(double[] brainOutput) {
         SidesDirectionValues sides = getSidesDirection(brainOutput);
         if (sides == SidesDirectionValues.NO_DIRECTION) {
-            System.out.println("Decided to go randomly");
+            //System.out.println("Decided to go randomly");
             DirectionValues dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
             creature.setDirection(dir);
-            System.out.println(dir);
+            //System.out.println(dir);
         }
         else {
             creature.setDirection(sides);
-            System.out.println(sides);
+            //System.out.println(sides);
         }
         moveByDirection();
     }

@@ -36,7 +36,8 @@ public class WorldScreen implements Screen {
     public void show() {
 
         batch = new SpriteBatch();
-        world = new World(1000, 1000, 32, this);
+        //Размер по из клеток горизонтали, по вертикали, размер клетки в пикселях.
+        world = new World(100, 100, 8, this);
         //stage = new Stage();
         herb_stage = new Stage();
         lizard_stage = new Stage();
@@ -72,7 +73,7 @@ public class WorldScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        /*Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         cam.update();
@@ -89,7 +90,7 @@ public class WorldScreen implements Screen {
         herb_stage.draw();
         lizard_stage.draw();
         predator_lizard_stage.draw();
-*/
+
         if (keysProcessor.isSpaceClicked()) {
             //stage.act(delta);
             lizard_stage.act(delta);

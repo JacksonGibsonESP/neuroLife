@@ -8,25 +8,28 @@ import com.dsile.core.world.World;
  */
 public class Herb extends Entity {
 
+    static private Texture herb = new Texture("herb.png");
+
     public Herb(World world, int x, int y) {
         super(world, x, y);
         this.HP = this.maxHP;
+        texture = herb;
         //this.id = 0;
         //System.out.printf("Herb created on (%d,%d)\n",x,y);
     }
 
     @Override
-    /*protected void setAliveTexture() {
-        texture = new Texture("herb.png");
-    }*/
+    protected void setAliveTexture() {
+    //    texture = new Texture("herb.png");
+    }
 
-    /*protected void setDeadTexture() {
-        texture = new Texture("herb.png");
-    }*/
+    protected void setDeadTexture() {
+    //    texture = new Texture("herb.png");
+    }
 
-    /*protected void setNewbornTexture() {
-        texture = new Texture("herb.png");
-    }*/
+    protected void setNewbornTexture() {
+    //    texture = new Texture("herb.png");
+    }
 
     //@Override
     protected void dead() {

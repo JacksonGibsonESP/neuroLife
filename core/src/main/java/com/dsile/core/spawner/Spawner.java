@@ -19,6 +19,7 @@ import java.util.Set;
 public class Spawner{
     private World world;
     private Random r;
+    private double probability = 0.001;
 
     public Spawner(World world) {
         this.world = world;
@@ -136,11 +137,12 @@ public class Spawner{
 
     public void act() {
         //Подбрасываем травы
+        //probability -= 0.0001;
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.005 && !world.getCell(x, y).isHerb())
+                if (r.nextDouble() < probability && !world.getCell(x, y).isHerb())
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }

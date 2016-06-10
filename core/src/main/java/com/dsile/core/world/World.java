@@ -23,7 +23,7 @@ public class World {
     private Cell[][] cells;
     private Spawner spawner;
     private Statistics statistics;
-
+    private int cellSize;
     private Set<Entity> entities = new HashSet<>();
 
     private WorldScreen world_screen;
@@ -35,8 +35,9 @@ public class World {
         this.statistics = new Statistics(this, 10);
         this.world_screen = screen;
 
-        this.cellsX = cellsX;
-        this.cellsY = cellsY;
+        this.cellsX     = cellsX;
+        this.cellsY     = cellsY;
+        this.cellSize   = cellSize;
 
         cells = new Cell[cellsX][cellsY];
         for(int i = 0; i < cellsX; i++){
@@ -47,13 +48,13 @@ public class World {
 
     }
 
-    /*public void drawMap(SpriteBatch batch){
+    public void drawMap(SpriteBatch batch){
         for(Cell[] cc : cells){
             for(Cell c : cc){
                 c.drawCell(batch);
             }
         }
-    }*/
+    }
 
     //DANGEROUS METHOD
     public GroundCell getRandomGroundCell(){
@@ -171,5 +172,9 @@ public class World {
 
     public void removeEntity(Entity e){
         entities.remove(e);
+    }
+
+    public int getCellSize(){
+        return cellSize;
     }
 }

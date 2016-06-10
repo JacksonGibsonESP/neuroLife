@@ -13,7 +13,7 @@ import java.util.Set;
 public abstract class Cell{
 
     protected int size;
-    //protected Texture texture;
+    protected Texture texture;
     protected Set<Entity> entities;
 
     //Позиция ячейки в массиве мира.
@@ -230,9 +230,9 @@ public abstract class Cell{
         return texture;
     }*/
 
-    /*public void drawCell(SpriteBatch batch){
+    public void drawCell(SpriteBatch batch){
         batch.draw(texture, x*size, y*size, size, size);
-    }*/
+    }
 
     public int getSize(){
         return size;

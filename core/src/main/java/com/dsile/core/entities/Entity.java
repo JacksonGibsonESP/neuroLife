@@ -12,11 +12,11 @@ import com.dsile.core.world.World;
  * Created by DeSile on 2/21/2016.
  */
 public abstract class Entity extends Actor {
-    protected static int SIZE = 32;
+    protected static int SIZE;
     protected DirectionValues direction;
     protected Cell currentCell;
     protected World world;
-    //protected Texture texture;
+    protected Texture texture;
 
     protected boolean alive = true;
     protected int maxHP = 100;
@@ -30,9 +30,10 @@ public abstract class Entity extends Actor {
 
     public Entity(World world, int x, int y){
         this.world = world;
+        SIZE = this.world.getCellSize();
         this.currentCell = world.getCell(x, y).setEntity(this);
         this.setDirection(DirectionValues.random());
-        //this.setAliveTexture();
+        this.setAliveTexture();
 
         setOrigin(SIZE / 2, SIZE / 2);
         setBounds(currentCell.getDisplayX(), currentCell.getDisplayY(), SIZE, SIZE);
@@ -46,17 +47,17 @@ public abstract class Entity extends Actor {
      * @param parentAlpha ???
      */
     //@Override
-    /*public void draw(Batch batch, float parentAlpha) {
+    public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, currentCell.getDisplayX(), currentCell.getDisplayY(), this.getOriginX(), this.getOriginY(), this.getWidth(),
                 this.getHeight(), this.getScaleX(), this.getScaleY(), this.getRotation(), 0, 0,
                 texture.getWidth(), texture.getHeight(), false, false);
-    }*/
+    }
 
-    //protected abstract void setAliveTexture();
+    protected abstract void setAliveTexture();
 
-    //protected abstract void setDeadTexture();
+    protected abstract void setDeadTexture();
 
-    //protected abstract void setNewbornTexture();
+    protected abstract void setNewbornTexture();
 
     protected abstract void dead();
 

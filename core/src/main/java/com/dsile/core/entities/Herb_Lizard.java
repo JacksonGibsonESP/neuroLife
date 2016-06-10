@@ -9,6 +9,11 @@ import com.dsile.core.world.World;
  * Created by Никита on 19.05.2016.
  */
 public class Herb_Lizard extends Lizard {
+
+    static private Texture aliveTexture     = new Texture("alive_herb_lizard.png");
+    static private Texture deadTexture      = new Texture("dead_herb_lizard.png");
+    static private Texture newbornTexture   = new Texture("newborn_herb_lizard.png");
+
     public Herb_Lizard(World world, int x, int y) {
         super(world,x,y);
         this.data_set_filename = "Herb_Lizard_data_set.txt";
@@ -31,15 +36,15 @@ public class Herb_Lizard extends Lizard {
     }
 
     //@Override
-    /*protected void setAliveTexture(){
-        texture = new Texture("alive_herb_lizard.png");
+    protected void setAliveTexture(){
+        texture = aliveTexture;
     }
 
     protected void setDeadTexture(){
-        texture = new Texture("dead_herb_lizard.png");
+        texture = deadTexture;
     }
 
     protected void setNewbornTexture(){
-        texture = new Texture("newborn_herb_lizard.png");
-    }*/
+        texture = newbornTexture;
+    }
 }

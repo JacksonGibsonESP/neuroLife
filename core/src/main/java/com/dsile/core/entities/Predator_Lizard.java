@@ -30,15 +30,15 @@ public class Predator_Lizard extends Lizard {
         }
     }
 
-    /*protected void setAliveTexture(){
+    protected void setAliveTexture(){
         texture = new Texture("alive_predator_lizard.png");
-    }*/
+    }
 
-    /*protected void setDeadTexture(){
+    protected void setDeadTexture(){
         texture = new Texture("dead_predator_lizard.png");
-    }*/
+    }
 
-    /*protected void setNewbornTexture(){
+    protected void setNewbornTexture(){
         texture = new Texture("newborn_predator_lizard.png");
-    }*/
+    }
 }

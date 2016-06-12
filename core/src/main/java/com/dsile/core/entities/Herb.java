@@ -15,7 +15,9 @@ public class Herb extends Entity {
         this.HP = this.maxHP;
         texture = herb;
         //this.id = 0;
-        //System.out.printf("Herb created on (%d,%d)\n",x,y);
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Herb created on {}, {}.", x, y);
+        }
     }
 
     @Override

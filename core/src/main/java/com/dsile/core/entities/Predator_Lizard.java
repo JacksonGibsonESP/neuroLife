@@ -9,12 +9,19 @@ import com.dsile.core.world.World;
  * Created by Никита on 28.04.2016.
  */
 public class Predator_Lizard extends Lizard {
+
+    static private Texture aliveTexture     = new Texture("alive_predator_lizard.png");
+    static private Texture deadTexture      = new Texture("dead_predator_lizard.png");
+    static private Texture newbornTexture   = new Texture("newborn_predator_lizard.png");
+
     public Predator_Lizard(World world, int x, int y) {
         super(world,x,y);
         this.data_set_filename = "Predator_Lizard_data_set.txt";
         this.vision = new Predator_Vision(this);
         //this.id = 2;
-        //System.out.printf("Predator lizard created on (%d,%d)\n",x,y);
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Predator lizard created on {}, {}.", x, y);
+        }
     }
 
     public Predator_Lizard(World world, int x, int y, Brain brain, boolean newborn) {
@@ -23,22 +30,26 @@ public class Predator_Lizard extends Lizard {
         this.vision = new Predator_Vision(this);
         //this.id = 2;
         if (newborn){
-            //System.out.printf("Predator Lizard was born on (%d,%d)\n", x, y);
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug("Predator Lizard was born on {}, {}.", x, y);
+            }
         }
         else{
-            //System.out.printf("Predator Lizard created on (%d,%d)\n", x, y);
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug("Predator Lizard created on {}, {}.", x, y);
+            }
         }
     }
 
     protected void setAliveTexture(){
-        texture = new Texture("alive_predator_lizard.png");
+        texture = aliveTexture;
     }
 
     protected void setDeadTexture(){
-        texture = new Texture("dead_predator_lizard.png");
+        texture = deadTexture;
     }
 
     protected void setNewbornTexture(){
-        texture = new Texture("newborn_predator_lizard.png");
+        texture = newbornTexture;
     }
 }

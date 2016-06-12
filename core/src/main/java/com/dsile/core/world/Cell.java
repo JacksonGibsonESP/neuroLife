@@ -47,37 +47,37 @@ public abstract class Cell{
         return null;
     }
 
-    public Lizard getAliveHerb_Lizard(){
+    public Herb_Lizard getAliveHerb_Lizard(){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && entity.isAlive()){
-                return (Lizard)entity;
+            if(entity instanceof Herb_Lizard && entity.isAlive()){
+                return (Herb_Lizard)entity;
             }
         }
         return null;
     }
 
-    public Lizard getAliveHerb_Lizard(Entity caller){
+    public Herb_Lizard getAliveHerb_Lizard(Entity caller){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && entity.isAlive() && entity != caller){
-                return (Lizard)entity;
+            if(entity instanceof Herb_Lizard && entity.isAlive() && entity != caller){
+                return (Herb_Lizard)entity;
             }
         }
         return null;
     }
 
-    public Lizard getDeadHerb_Lizard(){
+    public Herb_Lizard getDeadHerb_Lizard(){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && !entity.isAlive()){
-                return (Lizard)entity;
+            if(entity instanceof Herb_Lizard && !entity.isAlive()){
+                return (Herb_Lizard)entity;
             }
         }
         return null;
     }
 
-    public Lizard getDeadHerb_Lizard(Entity caller){
+    public Herb_Lizard getDeadHerb_Lizard(Entity caller){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && !entity.isAlive() && entity != caller){
-                return (Lizard)entity;
+            if(entity instanceof Herb_Lizard && !entity.isAlive() && entity != caller){
+                return (Herb_Lizard)entity;
             }
         }
         return null;
@@ -129,7 +129,7 @@ public abstract class Cell{
 
     public boolean isAliveHerb_Lizard(Entity caller){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && entity.isAlive() && entity != caller){
+            if(entity instanceof Herb_Lizard && entity.isAlive() && entity != caller){
                 return true;
             }
         }
@@ -138,7 +138,7 @@ public abstract class Cell{
 
     public boolean isAliveHerb_Lizard(){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && entity.isAlive()){
+            if(entity instanceof Herb_Lizard && entity.isAlive()){
                 return true;
             }
         }
@@ -147,7 +147,7 @@ public abstract class Cell{
 
     public boolean isDeadHerb_Lizard(Entity caller){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && !entity.isAlive() && entity != caller){
+            if(entity instanceof Herb_Lizard && !entity.isAlive() && entity != caller){
                 return true;
             }
         }
@@ -156,7 +156,7 @@ public abstract class Cell{
 
     public boolean isDeadHerb_Lizard(){
         for(Entity entity : entities){
-            if(entity instanceof Lizard && !entity.isAlive()){
+            if(entity instanceof Herb_Lizard && !entity.isAlive()){
                 return true;
             }
         }
@@ -225,10 +225,6 @@ public abstract class Cell{
     public void removeEntity(Entity e){
         entities.remove(e);
     }
-
-    /*public Texture getTexture(){
-        return texture;
-    }*/
 
     public void drawCell(SpriteBatch batch){
         batch.draw(texture, x*size, y*size, size, size);

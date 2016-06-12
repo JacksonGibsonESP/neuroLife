@@ -3,8 +3,6 @@ package com.dsile.core.entities.actions.movement;
 import com.dsile.core.entities.Creature;
 import com.dsile.core.world.Cell;
 
-import java.util.Arrays;
-
 /**
  * Класс, отвечающий за перемещение.
  *
@@ -23,22 +21,13 @@ public class Movement {
     private Creature creature;
 
     /**
-     * Устанавливает текущее существо, устанавливает вектор скорости и начальное количество шагов в клетке.
+     * Устанавливает текущее существо.
      * @param creature перемещаемое существо.
      */
     public Movement(Creature creature){
         this.creature = creature;
     }
 
-
-    /**
-     * Выполнение шага в пространтсве.
-     * Проверяет не пора ли сменить текущую клетку, а следовательно и угол поворота.
-     * Устанавливает для существа новые координаты в непрерывном пространстве
-     */
-    public void perform(){
-
-    }
     public Cell getCellByDirection(double[] brainOutput)
     {
         Cell target_cell = null;
@@ -168,28 +157,23 @@ public class Movement {
     /**
      * Выполнение действия передвижения с учетом значений на выходе нейронной сети.
      */
-    /*public void perform(double[] brainOutput){
-        DirectionValues dir = getDirection(brainOutput);
-        if (dir == DirectionValues.NO_DIRECTION) {
-            System.out.println("Decided to go randomly");
-            dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
-        }
-        creature.setDirection(dir);
-        System.out.println(dir);
-        moveByDirection();
-    }*/
-
     public void perform(double[] brainOutput) {
         SidesDirectionValues sides = getSidesDirection(brainOutput);
         if (sides == SidesDirectionValues.NO_DIRECTION) {
-            //System.out.println("Decided to go randomly");
+            if (creature.getLogger().isDebugEnabled()) {
+                creature.getLogger().debug("Decided to go randomly");
+            }
             DirectionValues dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
             creature.setDirection(dir);
-            //System.out.println(dir);
+            if (creature.getLogger().isDebugEnabled()) {
+                creature.getLogger().debug(dir.toString());
+            }
         }
         else {
             creature.setDirection(sides);
-            //System.out.println(sides);
+            if (creature.getLogger().isDebugEnabled()) {
+                creature.getLogger().debug(sides.toString());
+            }
         }
         moveByDirection();
     }
@@ -232,7 +216,7 @@ public class Movement {
     }
 
     private void moveByDirection(){
-        int speed = 1; //по хорошему должно передаваться от сущности (могут способности вроде рывка, например, на три клетки)
+        int speed = 1; //по хорошему должно передаваться от сущности (могут быть способности вроде рывка, например, на три клетки)
         switch (creature.getDirection()){
             case EAST:
                 move(speed,0);

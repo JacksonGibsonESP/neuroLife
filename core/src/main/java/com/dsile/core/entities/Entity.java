@@ -7,11 +7,14 @@ import com.dsile.core.entities.actions.movement.DirectionValues;
 import com.dsile.core.entities.actions.movement.SidesDirectionValues;
 import com.dsile.core.world.Cell;
 import com.dsile.core.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by DeSile on 2/21/2016.
  */
 public abstract class Entity extends Actor {
+    static protected final Logger logger = LoggerFactory.getLogger(Entity.class); //Может в отдельный статический класс вынести?
     protected static int SIZE;
     protected DirectionValues direction;
     protected Cell currentCell;
@@ -20,13 +23,9 @@ public abstract class Entity extends Actor {
 
     protected boolean alive = true;
     protected int maxHP = 100;
-//    protected int maxEnergy = 1;
     protected int HP = 50;
-//    protected int energy = maxEnergy;
 
     //protected int id; //для сортировки объектов перед рисовкой на экране
-
-    //protected boolean reproducing = false;
 
     public Entity(World world, int x, int y){
         this.world = world;
@@ -353,14 +352,5 @@ public abstract class Entity extends Actor {
         return alive;
     }
 
-    //public int getId(){return id;}
-
-    /*public boolean isReproducing()
-    {
-        return reproducing;
-    }
-
-    public void switchReproducing(){
-        reproducing = !reproducing;
-    }*/
+    public Logger getLogger(){ return logger;}
 }

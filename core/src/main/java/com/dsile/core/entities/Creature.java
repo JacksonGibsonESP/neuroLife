@@ -30,7 +30,6 @@ public abstract class Creature extends Entity{
     {
         super(world,x,y);
         this.brain = brain;
-        //this.vision = new Vision(this);
         this.movement = new Movement(this);
         this.eating = new Eating(this);
         this.attack = new Attack(this);
@@ -40,7 +39,6 @@ public abstract class Creature extends Entity{
     public Creature(World world, int x, int y){
         super(world,x,y);
         this.brain = new Brain();
-        //this.vision = new Vision(this);
         this.movement = new Movement(this);
         this.eating = new Eating(this);
         this.attack = new Attack(this);
@@ -78,6 +76,7 @@ public abstract class Creature extends Entity{
     public BigInteger getLife_duration(){
         return life_duration;
     }*/
+
     protected void incLife_duration(){
         life_duration++;
     }

@@ -18,30 +18,18 @@ import java.util.Scanner;
  * Created by DeSile on 08.12.2015.
  */
 public abstract class Lizard extends Creature {
-
-    /*protected int maxHp = 50;
-    protected int maxEnergy = 20;
-    protected int hp = maxHp;
-    protected int energy = maxEnergy;*/
-
     /**
      * Создание существа (актера) в клеточном мире.
      */
     public Lizard(World world, int x, int y) {
         super(world,x,y);
-        //data_set_filename = "Lizard_data_set.txt";
-        //this.vision = new Lizard_Vision(this);
         //this.id = 1;
-        //System.out.printf("Lizard created on (%d,%d)\n",x,y);
     }
 
     public Lizard(World world, int x, int y, Brain brain, boolean newborn) {
         super(world,x,y, brain);
-        //data_set_filename = "Lizard_data_set.txt";
-        //this.vision = new Lizard_Vision(this);
         //this.id = 1;
         if (newborn){
-            //System.out.printf("Lizard was born on (%d,%d)\n",x,y);
             setNewbornTexture();
         }
     }
@@ -111,25 +99,33 @@ public abstract class Lizard extends Creature {
 
     @Override
     protected void attack(double[] signal) {
-        //System.out.println("Attacks");
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Attacks");
+        }
         attack.perform(movement.getCellByDirection(signal));
     }
 
     @Override
     protected void move(double[] signal) {
-        //System.out.println("Moves");
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Moves");
+        }
         movement.perform(signal);
     }
 
     @Override
     protected void eat() {
-        //System.out.println("Eats");
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Eats");
+        }
         eating.perform();
     }
 
     @Override
     protected void decomposed() {
-        //System.out.println("Decomposed");
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Decomposed");
+        }
         currentCell.removeEntity(this);
         world.removeEntity(this);
         remove();
@@ -148,9 +144,10 @@ public abstract class Lizard extends Creature {
         this.HP -= 10; //разложение тела
         if(this.HP <= 0){
             decomposed();
-            //System.out.println("Dead Lizard Body Decomposed");
         }
-        //System.out.printf("Dead Lizard Body Energy: %d\n", this.HP);
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Dead Lizard Body Energy: {}", this.HP);
+        }
     }
 
     /**
@@ -170,7 +167,9 @@ public abstract class Lizard extends Creature {
         }
         else {
             this.HP -= 5; //плата за жизнь
-            //System.out.printf("HP: %d\n", this.HP);
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug("HP: {}", this.HP);
+            }
             double[] thoughts = vision.accessSituation();
             //Ищем победителя среди индексов 4 - 7:
             int decision = find_winner(Arrays.copyOfRange(thoughts, 4, 8));
@@ -190,7 +189,9 @@ public abstract class Lizard extends Creature {
                     break;
             }
         }
-        //System.out.println("-------------------------------------------");
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("-------------------------------------------");
+        }
     }
 
     private int find_winner(double[] brainOutput)
@@ -208,9 +209,6 @@ public abstract class Lizard extends Creature {
 
         //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
         //Таким образом мы получаем отсортированный массив brainOutput и не потеряли индексы
-        /*System.out.println("Check before");
-        System.out.println(Arrays.toString(brainOutput));
-        System.out.println(Arrays.toString(order));*/
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (brainOutput[j] > brainOutput[j+1]) {
@@ -242,9 +240,7 @@ public abstract class Lizard extends Creature {
     }
 
     public void attacked(Creature attacker){
-        //System.out.println(attacker);
         if (attacker instanceof Predator_Lizard) {
-            //System.out.println("Hey!");
             this.HP -= attacker.getnormalizedHP() * 200;
         }
         else if (attacker instanceof Lizard) //используется только в наследнике
@@ -258,7 +254,9 @@ public abstract class Lizard extends Creature {
 
     public void reproduce()
     {
-        //System.out.println("Trying to reproduce");
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("Trying to reproduce");
+        }
         reproduce.perform();
     }
 

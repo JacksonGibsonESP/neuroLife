@@ -141,7 +141,7 @@ public class World {
         return count;
     }
 
-    public int[] get_generations_stat(){
+    public int[] get_generations_stat(){ // в дальнейшем стоит переделать, если количество поколений будет достигать больших значений; не стоит хранить нули мёртвых поколений
         int max_generations = 0;
         for (Entity e: entities){
             if (e instanceof Herb_Lizard && e.isAlive()){

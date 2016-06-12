@@ -42,7 +42,8 @@ public class Statistics{
             this.writer.write("Delta: " + this.delta + '\n'
                     + "Herb lizards count:\t"
                     + "Dead bodies count:\t"
-                    + "Herbs:\t"
+                    + "Herbs count:\t"
+                    + "Generations count:\t"
                     + "Generations stat:\n");
         }
         catch(IOException ex){
@@ -81,7 +82,8 @@ public class Statistics{
                 int [] generations_stat = world.get_generations_stat();
                 this.writer.write(world.get_herb_lizard_count() + "\t"
                         + world.get_dead_bodies_count() + "\t"
-                        + world.get_herbs_count() + "\t");
+                        + world.get_herbs_count() + "\t"
+                        + generations_stat.length / 2 + "\t");
                 for (int i = 0; i < generations_stat.length / 2; i++){
                     this.writer.write( "[" + (i + 1) + ": " + generations_stat[i * 2] + ", " + generations_stat[i * 2 + 1] + "] ");
                 }

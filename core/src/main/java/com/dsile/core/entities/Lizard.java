@@ -102,7 +102,7 @@ public abstract class Lizard extends Creature {
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("Attacks");
         }
-        attack.perform(movement.getCellByDirection(signal));
+        attack.perform(signal);
     }
 
     @Override

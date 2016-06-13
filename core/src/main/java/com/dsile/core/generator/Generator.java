@@ -2,7 +2,7 @@ package com.dsile.core.generator;
 
 import com.dsile.core.entities.actions.Actions;
 import com.dsile.core.entities.actions.movement.DirectionValues;
-import com.dsile.core.entities.actions.movement.SidesDirectionValues;
+import com.dsile.core.entities.actions.movement.DirectionValues;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.Random;
  * Created by Никита on 13.05.2016.
  */
 public class Generator {
-    private final String lizard_data_set_file_name          = "Herb_Lizard_data_set.txt";
+    private final String herb_lizard_data_set_file_name     = "Herb_Lizard_data_set.txt";
     private final String predator_lizard_data_set_file_name = "Predator_Lizard_data_set.txt";
     private FileWriter writer;
 
@@ -35,7 +35,7 @@ public class Generator {
         }
     }
 
-    private void to_file(double [] herb_field, double [] lizard_field, double [] predator_lizard_field, double hp, SidesDirectionValues dir, Actions decision)
+    private void to_file(double [] herb_field, double [] lizard_field, double [] predator_lizard_field, double hp, DirectionValues dir, Actions decision)
     {
         double [] in  = new double[28];
         double [] out = new double [8];
@@ -156,7 +156,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Ситуация замешательства, рандомное движение
         herb_field = new double[]
@@ -180,7 +180,7 @@ public class Generator {
                         0, 0, 0
                 };
 
-        dir = SidesDirectionValues.NO_DIRECTION;
+        dir = DirectionValues.NO_DIRECTION;
         decision = Actions.MOVEMENT;
         to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
         to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -208,11 +208,11 @@ public class Generator {
                         0, 0, 0
                 };
 
-        dir = SidesDirectionValues.NO_DIRECTION;
+        dir = DirectionValues.NO_DIRECTION;
         decision = Actions.MOVEMENT;
         to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
         to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-        to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+        //to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
     }
 
     private void herb_lizard_eating_random(double [] herb_field, double [] lizard_field, int i){
@@ -239,7 +239,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Поедание пищи при малом и среднем значении hp
         lizard_field = new double[]
@@ -266,7 +266,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -280,7 +280,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -295,7 +295,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -309,7 +309,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -324,7 +324,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -338,7 +338,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -353,7 +353,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -367,7 +367,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -382,7 +382,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -397,7 +397,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -411,7 +411,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -426,7 +426,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -440,7 +440,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -455,7 +455,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -469,7 +469,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -484,7 +484,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -498,7 +498,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -513,7 +513,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -527,7 +527,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -541,7 +541,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -555,7 +555,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -569,7 +569,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -583,7 +583,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -597,7 +597,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -611,7 +611,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -625,7 +625,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -639,7 +639,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -653,7 +653,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -667,7 +667,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -681,7 +681,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -695,7 +695,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -709,7 +709,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -723,7 +723,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -737,7 +737,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -751,7 +751,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -765,7 +765,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -779,7 +779,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -793,7 +793,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -807,7 +807,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -821,7 +821,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -835,7 +835,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -849,7 +849,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -863,7 +863,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -877,7 +877,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -891,7 +891,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -905,7 +905,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -919,7 +919,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -933,7 +933,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -947,7 +947,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -961,7 +961,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -975,7 +975,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -989,7 +989,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1003,7 +1003,7 @@ public class Generator {
                     };
 
             herb_lizard_eating_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1038,7 +1038,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Размножение при большом hp с ящеркой с большим hp
         herb_field = new double[]
@@ -1064,7 +1064,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1076,7 +1076,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1089,7 +1089,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1101,7 +1101,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1114,7 +1114,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1126,7 +1126,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1139,7 +1139,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1151,7 +1151,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1164,7 +1164,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1177,7 +1177,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1189,7 +1189,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1202,7 +1202,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1214,7 +1214,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1227,7 +1227,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1239,7 +1239,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1252,7 +1252,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1264,7 +1264,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1277,7 +1277,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1289,7 +1289,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1301,7 +1301,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1313,7 +1313,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1325,7 +1325,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1337,7 +1337,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1349,7 +1349,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1361,7 +1361,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1373,7 +1373,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1385,7 +1385,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1397,7 +1397,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1409,7 +1409,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1421,7 +1421,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1433,7 +1433,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1445,7 +1445,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1457,7 +1457,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1469,7 +1469,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1481,7 +1481,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1493,7 +1493,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1505,7 +1505,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1517,7 +1517,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1529,7 +1529,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1541,7 +1541,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1553,7 +1553,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1565,7 +1565,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1577,7 +1577,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1589,7 +1589,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1601,7 +1601,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1613,7 +1613,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1625,7 +1625,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1637,7 +1637,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1649,7 +1649,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1661,7 +1661,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1673,7 +1673,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1685,7 +1685,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -1697,7 +1697,7 @@ public class Generator {
                     };
 
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
         }
@@ -1708,7 +1708,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Убежать от ящерки доходяги
         herb_field = new double[]
@@ -1734,7 +1734,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1748,7 +1748,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1762,7 +1762,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1776,7 +1776,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1790,7 +1790,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1804,7 +1804,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1818,7 +1818,7 @@ public class Generator {
                             0.3, 0, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1832,7 +1832,7 @@ public class Generator {
                             0, 0.3, 0
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1846,7 +1846,7 @@ public class Generator {
                             0, 0, 0.3
                     };
             herb_lizard_reproduce_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1883,7 +1883,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Убежать от ящерки-хищника
         herb_field = new double[]
@@ -1909,7 +1909,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1923,7 +1923,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1937,7 +1937,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1951,7 +1951,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1965,7 +1965,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1979,7 +1979,7 @@ public class Generator {
                             0, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -1993,7 +1993,7 @@ public class Generator {
                             0.7, 0, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2007,7 +2007,7 @@ public class Generator {
                             0, 0.7, 0
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2021,7 +2021,7 @@ public class Generator {
                             0, 0, 0.7
                     };
             herb_lizard_escape_predator_random(herb_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2046,7 +2046,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //атака на хищника, если рядом есть здоровые травоядные
         herb_field = new double[]
@@ -2072,7 +2072,7 @@ public class Generator {
                             0, 0, 0
                     };
 
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2128,7 +2128,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2182,7 +2182,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2236,7 +2236,7 @@ public class Generator {
                             0.7, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2290,7 +2290,7 @@ public class Generator {
                             0, 0.7, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2344,7 +2344,7 @@ public class Generator {
                             0, 0, 0.7,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2398,7 +2398,7 @@ public class Generator {
                             0, 0, 0,
                             0.7, 0, 0
                     };
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2452,7 +2452,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0.7, 0
                     };
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2506,7 +2506,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0.7
                     };
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.ATTACK;
             herb_lizard_attack_predator_random(herb_field, lizard_field, i);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -2551,7 +2551,7 @@ public class Generator {
 
     public void herb_lizard_gen(){
         try {
-            this.writer = new FileWriter(lizard_data_set_file_name);
+            this.writer = new FileWriter(herb_lizard_data_set_file_name);
         }
         catch(IOException ex){
             System.out.println(ex.getMessage());
@@ -2578,7 +2578,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Ситуация замешательства, рандомное движение
         corpse_field = new double[]
@@ -2602,7 +2602,7 @@ public class Generator {
                         0, 0, 0
                 };
 
-        dir = SidesDirectionValues.NO_DIRECTION;
+        dir = DirectionValues.NO_DIRECTION;
         decision = Actions.MOVEMENT;
         to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
         to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2630,17 +2630,17 @@ public class Generator {
                         0, 0, 0
                 };
 
-        dir = SidesDirectionValues.NO_DIRECTION;
+        dir = DirectionValues.NO_DIRECTION;
         decision = Actions.MOVEMENT;
         to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
         to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+        //to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
     }
 
     private void predator_lizard_eating_random(double[] lizard_field, double[] predator_field, int i){
         if (i == 1) {
             Random r = new Random();
-            for (int k = 0; k < 9; k++) {
+            /*for (int k = 0; k < 9; k++) {
                 lizard_field[k] = 0;
                 if (r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
@@ -2652,7 +2652,7 @@ public class Generator {
                         lizard_field[k] = 0.3;
                     }
                 }
-            }
+            }*/
             for (int k = 0; k < 9; k++) {
                 predator_field[k] = 0;
                 if (r.nextDouble() < 0.8){
@@ -2674,7 +2674,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Поедание пищи при малом и среднем значении hp
         lizard_field = new double[]
@@ -2701,7 +2701,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2714,7 +2714,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2728,7 +2728,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2741,7 +2741,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2755,7 +2755,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2768,7 +2768,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2782,7 +2782,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2795,7 +2795,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2809,7 +2809,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2823,7 +2823,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2836,7 +2836,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2850,7 +2850,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2863,7 +2863,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2877,7 +2877,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2890,7 +2890,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2904,7 +2904,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2917,7 +2917,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2931,7 +2931,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2944,7 +2944,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2957,7 +2957,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2970,7 +2970,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2983,7 +2983,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2996,7 +2996,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3009,7 +3009,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3022,7 +3022,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3035,7 +3035,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3048,7 +3048,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3061,7 +3061,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3074,7 +3074,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3087,7 +3087,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3100,7 +3100,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3113,7 +3113,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3126,7 +3126,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3139,7 +3139,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3152,7 +3152,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3165,7 +3165,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3178,7 +3178,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3191,7 +3191,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3204,7 +3204,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3217,7 +3217,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3230,7 +3230,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3243,7 +3243,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3256,7 +3256,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3269,7 +3269,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3282,7 +3282,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3295,7 +3295,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3308,7 +3308,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3321,7 +3321,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3334,7 +3334,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3347,7 +3347,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3360,7 +3360,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3373,7 +3373,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3386,7 +3386,7 @@ public class Generator {
                     };
 
             predator_lizard_eating_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3395,19 +3395,26 @@ public class Generator {
 
     private void predator_lizard_hunting_random(double[] lizard_field, double[] predator_field, int i){
         Random r = new Random();
-        for (int j = 0; j < 9; j++){
-            if (lizard_field[j] == 1){
-                double tmp = r.nextDouble();
-                if (tmp >= 0.7) {
-                    predator_field[j] = 0.7;
-                } else if (tmp >= 0.5) {
-                    predator_field[j] = 0.5;
-                } else {
+        if (i < 2) {
+            for (int j = 0; j < 9; j++) {
+                if (lizard_field[j] == 1) {
                     predator_field[j] = 0.3;
                 }
             }
+        } else if ( i < 4){
+            for (int j = 0; j < 9; j++) {
+                if (lizard_field[j] == 1) {
+                    predator_field[j] = 0.5;
+                }
+            }
+        }  else if ( i < 6){
+            for (int j = 0; j < 9; j++) {
+                if (lizard_field[j] == 1) {
+                    predator_field[j] = 0.7;
+                }
+            }
         }
-        if (i == 1) {
+        if (i % 2 == 1) {
             for (int k = 0; k < 9; k++) {
                 predator_field[k] = 0;
                 if (r.nextDouble() < 0.8) {
@@ -3429,7 +3436,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Сцена охоты
         corpse_field = new double[]
@@ -3445,7 +3452,7 @@ public class Generator {
                         0, 0, 0
                 };
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 6; i++) {
             //1
             lizard_field = new double[]
                     {
@@ -3454,7 +3461,7 @@ public class Generator {
                             0, 0, 0
                     };
 
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3467,7 +3474,7 @@ public class Generator {
                             0, 0, 0
                     };
 
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3480,7 +3487,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3492,7 +3499,7 @@ public class Generator {
                             0, 1, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3505,7 +3512,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3517,7 +3524,7 @@ public class Generator {
                             0, 1, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3530,7 +3537,7 @@ public class Generator {
                             1, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3542,7 +3549,7 @@ public class Generator {
                             1, 1, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3555,7 +3562,7 @@ public class Generator {
                             0, 1, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3568,7 +3575,7 @@ public class Generator {
                             0, 0, 1,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3580,7 +3587,7 @@ public class Generator {
                             0, 1, 1,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3593,7 +3600,7 @@ public class Generator {
                             0, 0, 0,
                             1, 0, 0
                     };
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3605,7 +3612,7 @@ public class Generator {
                             0, 1, 0,
                             1, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3618,7 +3625,7 @@ public class Generator {
                             0, 0, 0,
                             0, 1, 0
                     };
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3630,7 +3637,7 @@ public class Generator {
                             0, 1, 0,
                             0, 1, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3643,7 +3650,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 1
                     };
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3655,7 +3662,7 @@ public class Generator {
                             0, 1, 0,
                             0, 0, 1
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -3670,7 +3677,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3683,7 +3690,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3696,7 +3703,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3709,7 +3716,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3722,7 +3729,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3735,7 +3742,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3748,7 +3755,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3761,7 +3768,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3774,7 +3781,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3787,7 +3794,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3800,7 +3807,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3813,7 +3820,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3826,7 +3833,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3839,7 +3846,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3852,7 +3859,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3865,7 +3872,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3878,7 +3885,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3891,7 +3898,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3904,7 +3911,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3917,7 +3924,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3930,7 +3937,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3943,7 +3950,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3956,7 +3963,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3969,7 +3976,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3982,7 +3989,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -3995,7 +4002,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4008,7 +4015,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4021,7 +4028,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4034,7 +4041,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4047,7 +4054,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4060,7 +4067,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4073,7 +4080,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4086,7 +4093,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4099,7 +4106,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4112,7 +4119,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4125,7 +4132,7 @@ public class Generator {
                     };
 
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -4163,7 +4170,7 @@ public class Generator {
         double [] lizard_field;
         double [] predator_lizard_field;
         Actions decision;
-        SidesDirectionValues dir;
+        DirectionValues dir;
 
         //Размножение при большом hp с ящеркой с большим hp
         corpse_field = new double[]
@@ -4188,7 +4195,7 @@ public class Generator {
                             0, 0, 0
                     };
 
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4200,7 +4207,7 @@ public class Generator {
                             0, 0, 0
                     };
 
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4212,7 +4219,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4223,7 +4230,7 @@ public class Generator {
                             0, 0.7, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4235,7 +4242,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4246,7 +4253,7 @@ public class Generator {
                             0, 0.7, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4258,7 +4265,7 @@ public class Generator {
                             0.7, 0, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.LEFT;
+            dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4269,7 +4276,7 @@ public class Generator {
                             0.7, 0.7, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4281,7 +4288,7 @@ public class Generator {
                             0, 0.7, 0,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4293,7 +4300,7 @@ public class Generator {
                             0, 0, 0.7,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.RIGHT;
+            dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4304,7 +4311,7 @@ public class Generator {
                             0, 0.7, 0.7,
                             0, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4316,7 +4323,7 @@ public class Generator {
                             0, 0, 0,
                             0.7, 0, 0
                     };
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4327,7 +4334,7 @@ public class Generator {
                             0, 0.7, 0,
                             0.7, 0, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4339,7 +4346,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0.7, 0
                     };
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4350,7 +4357,7 @@ public class Generator {
                             0, 0.7, 0,
                             0, 0.7, 0
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4362,7 +4369,7 @@ public class Generator {
                             0, 0, 0,
                             0, 0, 0.7
                     };
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4373,7 +4380,7 @@ public class Generator {
                             0, 0.7, 0,
                             0, 0, 0.7
                     };
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
@@ -4387,7 +4394,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4399,7 +4406,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4411,7 +4418,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4423,7 +4430,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4435,7 +4442,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4447,7 +4454,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4459,7 +4466,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4471,7 +4478,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4483,7 +4490,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_RIGHT;
+            dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4495,7 +4502,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4507,7 +4514,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD;
+            dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4519,7 +4526,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4531,7 +4538,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.BACKWARD_LEFT;
+            dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4543,7 +4550,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4555,7 +4562,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4567,7 +4574,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4579,7 +4586,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4591,7 +4598,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4603,7 +4610,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD;
+            dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4615,7 +4622,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4627,7 +4634,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4639,7 +4646,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4651,7 +4658,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_RIGHT;
+            dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4663,7 +4670,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4675,7 +4682,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4687,7 +4694,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4699,7 +4706,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4711,7 +4718,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4723,7 +4730,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4735,7 +4742,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4747,7 +4754,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.FORWARD_LEFT;
+            dir = DirectionValues.FORWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4759,7 +4766,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4771,7 +4778,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4783,7 +4790,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4795,7 +4802,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
@@ -4807,7 +4814,7 @@ public class Generator {
                     };
 
             predator_lizard_reproduction_random(corpse_field, lizard_field, i);
-            dir = SidesDirectionValues.NO_DIRECTION;
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.REPRODUCE;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
         }
@@ -4825,7 +4832,7 @@ public class Generator {
         predator_lizard_confusion_pack();
         predator_lizard_eating_pack();
         predator_lizard_hunting_pack();
-        predator_lizard_reproduction_pack();
+        //predator_lizard_reproduction_pack();
 
         try {
             writer.close();

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public abstract class Entity extends Actor {
     static protected final Logger logger = LoggerFactory.getLogger(Entity.class); //Может в отдельный статический класс вынести?
     protected static int SIZE;
-    protected DirectionValues direction;
+    protected SidesDirectionValues direction;
     protected Cell currentCell;
     protected World world;
     protected Texture texture;
@@ -31,7 +31,7 @@ public abstract class Entity extends Actor {
         this.world = world;
         SIZE = this.world.getCellSize();
         this.currentCell = world.getCell(x, y).setEntity(this);
-        this.setDirection(DirectionValues.random());
+        this.setDirection(SidesDirectionValues.random());
         this.setAliveTexture();
 
         setOrigin(SIZE / 2, SIZE / 2);
@@ -84,230 +84,246 @@ public abstract class Entity extends Actor {
         currentCell.setEntity(this);
     }
 
-    public DirectionValues getDirection(){
+    public SidesDirectionValues getDirection(){
         return direction;
     }
 
-    public void setDirection(DirectionValues val){
+    public void setDirection(SidesDirectionValues val){
         direction = val;
         setRotation(direction.getAngle());
     }
 
-    public void setDirection(SidesDirectionValues val){
+    public void setDirection(DirectionValues val){
         switch (direction){
             case NORTH:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                     case LEFT:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                 }
                 break;
             case NORTH_EAST:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                     case LEFT:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                 }
                 break;
             case EAST:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                     case LEFT:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                 }
                 break;
             case SOUTH_EAST:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                     case LEFT:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                 }
                 break;
             case SOUTH:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                     case LEFT:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                 }
                 break;
             case SOUTH_WEST:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                     case LEFT:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                 }
                 break;
             case WEST:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.NORTH_WEST;
+                        direction = SidesDirectionValues.NORTH_WEST;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                     case LEFT:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                 }
                 break;
             case NORTH_WEST:
                 switch (val){
+                    case NO_DIRECTION:
+                        break;
                     case FORWARD:
                         break;
                     case FORWARD_RIGHT:
-                        direction = DirectionValues.NORTH;
+                        direction = SidesDirectionValues.NORTH;
                         break;
                     case RIGHT:
-                        direction = DirectionValues.NORTH_EAST;
+                        direction = SidesDirectionValues.NORTH_EAST;
                         break;
                     case BACKWARD_RIGHT:
-                        direction = DirectionValues.EAST;
+                        direction = SidesDirectionValues.EAST;
                         break;
                     case BACKWARD:
-                        direction = DirectionValues.SOUTH_EAST;
+                        direction = SidesDirectionValues.SOUTH_EAST;
                         break;
                     case BACKWARD_LEFT:
-                        direction = DirectionValues.SOUTH;
+                        direction = SidesDirectionValues.SOUTH;
                         break;
                     case LEFT:
-                        direction = DirectionValues.SOUTH_WEST;
+                        direction = SidesDirectionValues.SOUTH_WEST;
                         break;
                     case FORWARD_LEFT:
-                        direction = DirectionValues.WEST;
+                        direction = SidesDirectionValues.WEST;
                         break;
                 }
                 break;

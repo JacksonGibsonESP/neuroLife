@@ -1,7 +1,7 @@
 package com.dsile.core.entities.actions.vision;
 
 import com.dsile.core.entities.Creature;
-import com.dsile.core.entities.actions.movement.DirectionValues;
+import com.dsile.core.entities.actions.movement.SidesDirectionValues;
 import com.dsile.core.neural.Brain;
 
 /**
@@ -22,7 +22,7 @@ abstract public class Vision {
     public double[] getEnvironmentByDirection(){
         //Возвращае поле зрения по направлению взгляда
         double[] env = getEnvironment();
-        DirectionValues dir = creature.getDirection();
+        SidesDirectionValues dir = creature.getDirection();
 
         double[] env_dir = new double[28];
         env_dir[env_dir.length - 1] = env[env.length - 1];

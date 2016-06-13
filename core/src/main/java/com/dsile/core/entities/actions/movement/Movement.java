@@ -3,6 +3,8 @@ package com.dsile.core.entities.actions.movement;
 import com.dsile.core.entities.Creature;
 import com.dsile.core.world.Cell;
 
+import java.util.Arrays;
+
 /**
  * Класс, отвечающий за перемещение.
  *
@@ -28,14 +30,13 @@ public class Movement {
         this.creature = creature;
     }
 
-    public Cell getCellByDirection(double[] brainOutput)
+    public Cell getCellBySidesDirection(SidesDirectionValues sdir)
     {
         Cell target_cell = null;
-        DirectionValues dir = getDirection(brainOutput);
         Cell current_cell = creature.getCurrentCell();
         int x = current_cell.getX();
         int y = current_cell.getY();
-        switch (dir)
+        switch (sdir)
         {
             case EAST:
                 target_cell = creature.getWorld().getCell(x + 1, y);
@@ -65,17 +66,256 @@ public class Movement {
                 target_cell = creature.getCurrentCell(); //берём текущую
                 break;
             }
-        //System.out.println(target_cell.getX());
-        //System.out.println(target_cell.getY());
-        if (dir != DirectionValues.NO_DIRECTION)
-            creature.setDirection(dir);
         return target_cell;
     }
 
-    public DirectionValues getDirection(double[] brainOutput)
+    public SidesDirectionValues getSidesDirection(double[] brainOutput) {
+        DirectionValues         dir     = getDirection(brainOutput);
+        SidesDirectionValues    sdir    = creature.getDirection();
+        switch (sdir){
+            case NORTH:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                }
+                break;
+            case NORTH_EAST:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                }
+                break;
+            case EAST:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                }
+                break;
+            case SOUTH_EAST:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                }
+                break;
+            case SOUTH:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                }
+                break;
+            case SOUTH_WEST:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                }
+                break;
+            case WEST:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.NORTH_WEST;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                }
+                break;
+            case NORTH_WEST:
+                switch (dir){
+                    case NO_DIRECTION:
+                        break;
+                    case FORWARD:
+                        break;
+                    case FORWARD_RIGHT:
+                        sdir = SidesDirectionValues.NORTH;
+                        break;
+                    case RIGHT:
+                        sdir = SidesDirectionValues.NORTH_EAST;
+                        break;
+                    case BACKWARD_RIGHT:
+                        sdir = SidesDirectionValues.EAST;
+                        break;
+                    case BACKWARD:
+                        sdir = SidesDirectionValues.SOUTH_EAST;
+                        break;
+                    case BACKWARD_LEFT:
+                        sdir = SidesDirectionValues.SOUTH;
+                        break;
+                    case LEFT:
+                        sdir = SidesDirectionValues.SOUTH_WEST;
+                        break;
+                    case FORWARD_LEFT:
+                        sdir = SidesDirectionValues.WEST;
+                        break;
+                }
+                break;
+        }
+
+        return sdir;
+    }
+
+    public DirectionValues getDirection(double[] signal)
     {
         //Массив означающий текущий порядок направлений массива brainOutput
         int[] order = {0,1,2,3};
+        //Скопируем массив
+        double[] brainOutput = Arrays.copyOfRange(signal, 0, 4);
         //Делаем сортировку массива brainOutput, заодно меняя места в массиве направлений
         //Таким образом мы получаем отсортированный массив brainOutput и не потеряли направления
         for (int i = 0; i < 3; i++) {
@@ -115,64 +355,29 @@ public class Movement {
                 dir = choseDirection(order[3]);
             }
         }
-        return dir;
-    }
 
-    public SidesDirectionValues getSidesDirection(double[] brainOutput){
-        DirectionValues dir = getDirection(brainOutput);
-        SidesDirectionValues sides = SidesDirectionValues.NO_DIRECTION;
-        //Приведение типов
-        switch (dir){
-            case NO_DIRECTION:
-                sides = SidesDirectionValues.NO_DIRECTION;
-                break;
-            case NORTH:
-                sides = SidesDirectionValues.FORWARD;
-                break;
-            case NORTH_EAST:
-                sides = SidesDirectionValues.FORWARD_RIGHT;
-                break;
-            case EAST:
-                sides = SidesDirectionValues.RIGHT;
-                break;
-            case SOUTH_EAST:
-                sides = SidesDirectionValues.BACKWARD_RIGHT;
-                break;
-            case SOUTH:
-                sides = SidesDirectionValues.BACKWARD;
-                break;
-            case SOUTH_WEST:
-                sides = SidesDirectionValues.BACKWARD_LEFT;
-                break;
-            case WEST:
-                sides = SidesDirectionValues.LEFT;
-                break;
-            case NORTH_WEST:
-                sides = SidesDirectionValues.FORWARD_LEFT;
-                break;
-        }
-        return sides;
+        return dir;
     }
 
     /**
      * Выполнение действия передвижения с учетом значений на выходе нейронной сети.
      */
     public void perform(double[] brainOutput) {
-        SidesDirectionValues sides = getSidesDirection(brainOutput);
-        if (sides == SidesDirectionValues.NO_DIRECTION) {
+        DirectionValues dir = getDirection(brainOutput);
+        if (dir == DirectionValues.NO_DIRECTION) {
             if (creature.getLogger().isDebugEnabled()) {
                 creature.getLogger().debug("Decided to go randomly");
             }
-            DirectionValues dir = DirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
+            SidesDirectionValues sides = SidesDirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
             creature.setDirection(dir);
             if (creature.getLogger().isDebugEnabled()) {
                 creature.getLogger().debug(dir.toString());
             }
         }
         else {
-            creature.setDirection(sides);
+            creature.setDirection(dir);
             if (creature.getLogger().isDebugEnabled()) {
-                creature.getLogger().debug(sides.toString());
+                creature.getLogger().debug(dir.toString());
             }
         }
         moveByDirection();
@@ -186,30 +391,30 @@ public class Movement {
     private DirectionValues choseDirection(int... dir){ //либо одно, либо два числа
         if(dir.length == 2){
             if((dir[0] == 0 && dir[1] == 1)||(dir[0] == 1 && dir[1] == 0)){
-                return DirectionValues.NORTH_EAST;
+                return DirectionValues.FORWARD_RIGHT;
             }
             if((dir[0] == 1 && dir[1] == 2)||(dir[0] == 2 && dir[1] == 1)){
-                return DirectionValues.NORTH_WEST;
+                return DirectionValues.FORWARD_LEFT;
             }
             if((dir[0] == 2 && dir[1] == 3)||(dir[0] == 3 && dir[1] == 2)){
-                return DirectionValues.SOUTH_WEST;
+                return DirectionValues.BACKWARD_LEFT;
             }
             if((dir[0] == 3 && dir[1] == 0)||(dir[0] == 0 && dir[1] == 3)){
-                return DirectionValues.SOUTH_EAST;
+                return DirectionValues.BACKWARD_RIGHT;
             }
         }
         if(dir.length == 1){
             if(dir[0] == 0){
-                return DirectionValues.EAST;
+                return DirectionValues.RIGHT;
             }
             if(dir[0] == 1){
-                return DirectionValues.NORTH;
+                return DirectionValues.FORWARD;
             }
             if(dir[0] == 2){
-                return DirectionValues.WEST;
+                return DirectionValues.LEFT;
             }
             if(dir[0] == 3){
-                return DirectionValues.SOUTH;
+                return DirectionValues.BACKWARD;
             }
         }
         return DirectionValues.NO_DIRECTION; //в случае нештатной ситуации

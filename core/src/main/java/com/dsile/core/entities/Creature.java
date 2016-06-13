@@ -84,4 +84,8 @@ public abstract class Creature extends Entity{
     public int getLife_duration(){
         return life_duration;
     }
+
+    public Movement getMovement(){
+        return movement;
+    }
 }

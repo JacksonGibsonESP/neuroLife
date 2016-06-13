@@ -1,46 +1,18 @@
 package com.dsile.core.neural;
 
+import com.dsile.core.neural.training.MyBackPropagation;
 import org.neuroph.core.NeuralNetwork;
-import org.neuroph.core.Neuron;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
-import org.neuroph.core.learning.LearningRule;
-import org.neuroph.core.transfer.Linear;
-import org.neuroph.nnet.MultiLayerPerceptron;
-import org.neuroph.nnet.learning.BackPropagation;
-import org.neuroph.nnet.learning.LMS;
-import org.neuroph.nnet.learning.ResilientPropagation;
-import org.neuroph.util.NeuronProperties;
-import org.neuroph.util.TransferFunctionType;
 
-import java.util.ArrayList;
-import java.util.List;
 /**
  * Created by Никита on 15.12.2015.
  */
-public class Brain {
-    private NeuralNetwork neuralNetwork;
-    private DataSet trainingSet;
-    private MyBackPropagation rule;
+public abstract class Brain {
+    protected NeuralNetwork neuralNetwork;
+    protected DataSet trainingSet;
+    protected MyBackPropagation rule;
 
-    public Brain(){
-        List<Integer> neuronsInLayers = new ArrayList<>();
-        neuronsInLayers.add(28);
-        neuronsInLayers.add(70);
-        neuronsInLayers.add(30);
-        neuronsInLayers.add(8);
-        neuralNetwork = new MultiLayerPerceptron(neuronsInLayers, new NeuronProperties(TransferFunctionType.SIGMOID, true));
-
-        rule = new MyBackPropagation();
-        neuralNetwork.setLearningRule(rule);
-
-        Neuron[] OutputLayerNeurons = neuralNetwork.getOutputNeurons();
-        for(int i = 0; i < OutputLayerNeurons.length; i++) {
-            OutputLayerNeurons[i].setTransferFunction(new Linear());
-        }
-
-        trainingSet = new DataSet(28, 8);
-    }
     public void clearTrainingSet(){
         trainingSet.clear();
     }
@@ -74,7 +46,10 @@ public class Brain {
         neuralNetwork.save(filePath);
     }
     public void loadFileToNNT(String filePath){
-        neuralNetwork = neuralNetwork.createFromFile(filePath);
+        this.neuralNetwork = this.neuralNetwork.createFromFile(filePath);
     }
     public NeuralNetwork getNNT(){return neuralNetwork;}
+    public void setNNT(NeuralNetwork ann){
+        neuralNetwork = ann;
+    }
 }

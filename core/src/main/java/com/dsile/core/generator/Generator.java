@@ -212,7 +212,7 @@ public class Generator {
         decision = Actions.MOVEMENT;
         to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
         to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-        //to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+        to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
     }
 
     private void herb_lizard_eating_random(double [] herb_field, double [] lizard_field, int i){
@@ -2634,7 +2634,7 @@ public class Generator {
         decision = Actions.MOVEMENT;
         to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
         to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
-        //to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+        to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
     }
 
     private void predator_lizard_eating_random(double[] lizard_field, double[] predator_field, int i){

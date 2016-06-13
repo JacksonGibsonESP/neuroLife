@@ -3,6 +3,7 @@ package com.dsile.core.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.dsile.core.entities.actions.vision.Predator_Vision;
 import com.dsile.core.neural.Brain;
+import com.dsile.core.neural.Predator_Lizard_Brain;
 import com.dsile.core.world.World;
 
 /**
@@ -16,6 +17,7 @@ public class Predator_Lizard extends Lizard {
 
     public Predator_Lizard(World world, int x, int y) {
         super(world,x,y);
+        this.brain = new Predator_Lizard_Brain();
         this.data_set_filename = "Predator_Lizard_data_set.txt";
         this.vision = new Predator_Vision(this);
         //this.id = 2;

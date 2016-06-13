@@ -38,7 +38,6 @@ public abstract class Creature extends Entity{
 
     public Creature(World world, int x, int y){
         super(world,x,y);
-        this.brain = new Brain();
         this.movement = new Movement(this);
         this.eating = new Eating(this);
         this.attack = new Attack(this);

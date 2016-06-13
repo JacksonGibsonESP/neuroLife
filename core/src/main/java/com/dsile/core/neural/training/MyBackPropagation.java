@@ -1,18 +1,11 @@
-package com.dsile.core.neural;
+package com.dsile.core.neural.training;
 
 import org.neuroph.nnet.learning.BackPropagation;
 
 /**
  * Created by Никита on 27.04.2016.
  */
-public class MyBackPropagation extends BackPropagation{
-    MyBackPropagation()
-    {
-        super();
-        this.setMaxError(0.01);
-        this.setMaxIterations(10000);
-        this.learningRate = 0.01;
-    }
+public abstract class MyBackPropagation extends BackPropagation{
 
     public void print_info()
     {

@@ -2,6 +2,8 @@ package com.dsile.core.entities.actions.reproduce;
 
 import com.dsile.core.entities.*;
 import com.dsile.core.neural.Brain;
+import com.dsile.core.neural.Herb_Lizard_Brain;
+import com.dsile.core.neural.Predator_Lizard_Brain;
 import com.dsile.core.world.World;
 import org.neuroph.core.NeuralNetwork;
 
@@ -24,14 +26,15 @@ public class Reproduce {
     }
 
     public void perform() { //нужен паттерн проектирования
-        Brain newborn_brain;
+
         if(creature instanceof Predator_Lizard && creature.getHP() >= 70)
         {
             Set<Entity> entities = creature.getCurrentCell().getEntityList(creature); //пытаемся размножиться
             for(Entity entity : entities){
                 if (entity instanceof Predator_Lizard && entity.isAlive() && entity.getHP() >= 70)
                 {
-                    newborn_brain = genetic_algorithm(((Predator_Lizard) entity).getBrain());
+                    Predator_Lizard_Brain newborn_brain = new Predator_Lizard_Brain();
+                    newborn_brain.getNNT().setWeights(genetic_algorithm(((Predator_Lizard) entity).getBrain()));
                     //birth
                     World world = creature.getWorld();
                     int x = creature.getCurrentCell().getX();
@@ -58,7 +61,8 @@ public class Reproduce {
             for(Entity entity : entities){
                 if (entity.getClass() == creature.getClass() && entity.isAlive() && entity.getHP() >= 70)
                 {
-                    newborn_brain = genetic_algorithm(((Herb_Lizard) entity).getBrain());
+                    Herb_Lizard_Brain newborn_brain = new Herb_Lizard_Brain();
+                    newborn_brain.getNNT().setWeights(genetic_algorithm(((Herb_Lizard) entity).getBrain()));
                     //birth
                     World world = creature.getWorld();
                     int x = creature.getCurrentCell().getX();
@@ -81,7 +85,7 @@ public class Reproduce {
         }
     }
 
-    private Brain genetic_algorithm(Brain brain)
+    private double[] genetic_algorithm(Brain brain)
     {
         NeuralNetwork parent_A = creature.getBrain().getNNT();
         NeuralNetwork parent_B = brain.getNNT();
@@ -128,11 +132,7 @@ public class Reproduce {
             creature.getLogger().debug("Weights C: " + Arrays.toString(weights_child_casted));
         }
 
-        Brain child_brain = new Brain();
-
-        child_brain.getNNT().setWeights(weights_child_casted);
-
-        return child_brain;
+        return weights_child_casted;
     }
 
 }

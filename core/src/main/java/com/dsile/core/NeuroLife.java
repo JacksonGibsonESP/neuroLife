@@ -2,12 +2,9 @@ package com.dsile.core;
 
 import com.badlogic.gdx.Game;
 import com.dsile.core.screens.WorldScreen;
-import org.neuroph.core.NeuralNetwork;
-import org.neuroph.core.data.DataSet;
-import org.neuroph.core.data.DataSetRow;
-import org.neuroph.nnet.MultiLayerPerceptron;
-import org.neuroph.nnet.learning.BackPropagation;
-import org.neuroph.util.TransferFunctionType;
+import org.slf4j.LoggerFactory;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 public class NeuroLife extends Game {
 
@@ -16,7 +13,8 @@ public class NeuroLife extends Game {
 
     @Override
     public void create() {
-        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
+        Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        root.setLevel(Level.DEBUG);
         setScreen(new WorldScreen());
     }
 

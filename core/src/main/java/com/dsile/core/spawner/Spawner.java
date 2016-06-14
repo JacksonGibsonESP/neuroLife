@@ -94,7 +94,7 @@ public class Spawner{
             }
         }*/
 
-        Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
+        /*Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
         //predator_lizard.learn();
         //predator_lizard.getBrain().saveNNToFile("predator_lizard_brain");
         predator_lizard.getBrain().loadFileToNNT("predator_lizard_brain");

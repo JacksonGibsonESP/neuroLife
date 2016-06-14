@@ -76,6 +76,7 @@ public class Movement {
             case NORTH:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -105,6 +106,7 @@ public class Movement {
             case NORTH_EAST:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -134,6 +136,7 @@ public class Movement {
             case EAST:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -163,6 +166,7 @@ public class Movement {
             case SOUTH_EAST:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -192,6 +196,7 @@ public class Movement {
             case SOUTH:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -221,6 +226,7 @@ public class Movement {
             case SOUTH_WEST:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -250,6 +256,7 @@ public class Movement {
             case WEST:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -279,6 +286,7 @@ public class Movement {
             case NORTH_WEST:
                 switch (dir){
                     case NO_DIRECTION:
+                        sdir = SidesDirectionValues.NO_DIRECTION;
                         break;
                     case FORWARD:
                         break;
@@ -368,8 +376,8 @@ public class Movement {
             if (creature.getLogger().isDebugEnabled()) {
                 creature.getLogger().debug("Decided to go randomly");
             }
-            SidesDirectionValues sides = SidesDirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
-            creature.setDirection(dir);
+            SidesDirectionValues sdir = SidesDirectionValues.random_Gauss(creature.getDirection()); //Попробую уменьшить беспорядочность рандома
+            creature.setDirection(sdir);
             if (creature.getLogger().isDebugEnabled()) {
                 creature.getLogger().debug(dir.toString());
             }

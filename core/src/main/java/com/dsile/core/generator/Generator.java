@@ -1854,26 +1854,49 @@ public class Generator {
         }
     }
 
-    private void herb_lizard_escape_predator_random(double [] herb_field, double[] lizard_field, int i){
-        if (i == 1) {
-            Random r = new Random();
+    private void herb_lizard_escape_predator_random(double [] herb_field, double[] lizard_field, double[] predator_field, int i){
+        Random r = new Random();
+        if (i < 2) {
             for (int j = 0; j < 9; j++) {
-                lizard_field[j] = 0;
-                if (r.nextDouble() < 0.8) {
-                    double tmp = r.nextDouble();
-                    if (tmp >= 0.5) {
-                        lizard_field[j] = 0.5;
-                    }
-                    else{
-                        lizard_field[j] = 0.3;
-                    }
+                if (predator_field[j] == 1) {
+                    predator_field[j] = 0.3;
                 }
             }
+        } else if ( i < 4){
             for (int j = 0; j < 9; j++) {
-                herb_field[j] = 0;
-                if (r.nextDouble() < 0.8) {
-                    herb_field[j] = 1;
+                if (predator_field[j] == 1) {
+                    predator_field[j] = 0.5;
                 }
+            }
+        }  else if ( i < 6){
+            for (int j = 0; j < 9; j++) {
+                if (predator_field[j] == 1) {
+                    predator_field[j] = 0.7;
+                }
+            }
+        }
+        if (i % 2 == 1) {
+            for (int k = 0; k < 9; k++) {
+                lizard_field[k] = 0;
+                if (r.nextDouble() < 0.8) {
+                    double tmp = r.nextDouble();
+                    if (tmp >= 0.7) {
+                        lizard_field[k] = 0.7;
+                    } else if (tmp >= 0.5) {
+                        lizard_field[k] = 0.5;
+                    } else {
+                        lizard_field[k] = 0.3;
+                    }
+                }
+                if (r.nextDouble() < 0.8){
+                    herb_field[k] = 1;
+                }
+            }
+        }
+        else {
+            for (int k = 0; k < 9; k++) {
+                lizard_field[k] = 0;
+                herb_field[k] = 0;
             }
         }
     }
@@ -1900,15 +1923,15 @@ public class Generator {
                         0, 0, 0
                 };
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 6; i++) {
             //1
             predator_lizard_field = new double[]
                     {
-                            0.7, 0, 0,
+                            1, 0, 0,
                             0, 0, 0,
                             0, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.BACKWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -1918,11 +1941,11 @@ public class Generator {
             //2
             predator_lizard_field = new double[]
                     {
-                            0, 0.7, 0,
+                            0, 1, 0,
                             0, 0, 0,
                             0, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.BACKWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -1932,11 +1955,11 @@ public class Generator {
             //3
             predator_lizard_field = new double[]
                     {
-                            0, 0, 0.7,
+                            0, 0, 1,
                             0, 0, 0,
                             0, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.BACKWARD_LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -1947,10 +1970,10 @@ public class Generator {
             predator_lizard_field = new double[]
                     {
                             0, 0, 0,
-                            0.7, 0, 0,
+                            1, 0, 0,
                             0, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -1961,10 +1984,10 @@ public class Generator {
             predator_lizard_field = new double[]
                     {
                             0, 0, 0,
-                            0, 0.7, 0,
+                            0, 1, 0,
                             0, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -1975,10 +1998,10 @@ public class Generator {
             predator_lizard_field = new double[]
                     {
                             0, 0, 0,
-                            0, 0, 0.7,
+                            0, 0, 1,
                             0, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.LEFT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -1990,9 +2013,9 @@ public class Generator {
                     {
                             0, 0, 0,
                             0, 0, 0,
-                            0.7, 0, 0
+                            1, 0, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.FORWARD_RIGHT;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -2004,9 +2027,9 @@ public class Generator {
                     {
                             0, 0, 0,
                             0, 0, 0,
-                            0, 0.7, 0
+                            0, 1, 0
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.FORWARD;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
@@ -2018,10 +2041,24 @@ public class Generator {
                     {
                             0, 0, 0,
                             0, 0, 0,
-                            0, 0, 0.7
+                            0, 0, 1
                     };
-            herb_lizard_escape_predator_random(herb_field, lizard_field, i);
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
             dir = DirectionValues.FORWARD_LEFT;
+            decision = Actions.MOVEMENT;
+            to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
+            to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+            to_file(herb_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
+
+            //Комбинации
+            predator_lizard_field = new double[]
+                    {
+                            1, 1, 1,
+                            1, 1, 1,
+                            1, 1, 1
+                    };
+            herb_lizard_escape_predator_random(herb_field, lizard_field, predator_lizard_field, i);
+            dir = DirectionValues.NO_DIRECTION;
             decision = Actions.MOVEMENT;
             to_file(herb_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(herb_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
@@ -2562,7 +2599,7 @@ public class Generator {
         herb_lizard_eating_pack();
         herb_lizard_reproduction_pack();
         //erb_lizard_disgusting_pack();
-        //herb_lizard_escape_predator_pack();
+        herb_lizard_escape_predator_pack();
         //herb_lizard_attack_predator_pack();
 
         try {
@@ -2640,7 +2677,7 @@ public class Generator {
     private void predator_lizard_eating_random(double[] lizard_field, double[] predator_field, int i){
         if (i == 1) {
             Random r = new Random();
-            /*for (int k = 0; k < 9; k++) {
+            for (int k = 0; k < 9; k++) {
                 lizard_field[k] = 0;
                 if (r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
@@ -2652,14 +2689,12 @@ public class Generator {
                         lizard_field[k] = 0.3;
                     }
                 }
-            }*/
+            }
             for (int k = 0; k < 9; k++) {
                 predator_field[k] = 0;
                 if (r.nextDouble() < 0.8){
                     double tmp = r.nextDouble();
-                    if (tmp >= 0.7) {
-                        predator_field[k] = 0.7;
-                    } else if (tmp >= 0.5){
+                    if (tmp >= 0.5){
                         predator_field[k] = 0.5;
                     } else {
                         predator_field[k] = 0.3;
@@ -2705,6 +2740,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+//            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2718,6 +2754,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+//            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //2
             corpse_field = new double[]
@@ -2732,6 +2769,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+//            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2745,6 +2783,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //3
             corpse_field = new double[]
@@ -2759,6 +2798,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+//            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2772,6 +2812,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+//            to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //4
             corpse_field = new double[]
@@ -2786,6 +2827,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2799,6 +2841,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //5
             corpse_field = new double[]
@@ -2813,6 +2856,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //6
             corpse_field = new double[]
@@ -2827,6 +2871,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2840,6 +2885,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //7
             corpse_field = new double[]
@@ -2854,6 +2900,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2867,6 +2914,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //8
             corpse_field = new double[]
@@ -2881,6 +2929,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2894,6 +2943,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //9
             corpse_field = new double[]
@@ -2908,6 +2958,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2921,6 +2972,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //Комбинации:
             corpse_field = new double[]
@@ -2935,6 +2987,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2948,6 +3001,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2961,6 +3015,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2974,6 +3029,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -2987,6 +3043,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3000,6 +3057,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3013,6 +3071,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3026,6 +3085,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3039,6 +3099,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3052,6 +3113,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3065,6 +3127,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3078,6 +3141,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3091,6 +3155,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3104,6 +3169,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3117,6 +3183,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3130,6 +3197,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3143,6 +3211,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3156,6 +3225,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3169,6 +3239,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3182,6 +3253,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3195,6 +3267,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3208,6 +3281,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3221,6 +3295,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3234,6 +3309,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3247,6 +3323,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3260,6 +3337,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3273,6 +3351,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3286,6 +3365,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3299,6 +3379,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3312,6 +3393,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3325,6 +3407,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3338,6 +3421,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3351,6 +3435,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3364,6 +3449,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3377,6 +3463,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             corpse_field = new double[]
                     {
@@ -3390,6 +3477,7 @@ public class Generator {
             decision = Actions.EATING;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
         }
     }
 
@@ -3398,19 +3486,19 @@ public class Generator {
         if (i < 2) {
             for (int j = 0; j < 9; j++) {
                 if (lizard_field[j] == 1) {
-                    predator_field[j] = 0.3;
+                    lizard_field[j] = 0.3;
                 }
             }
         } else if ( i < 4){
             for (int j = 0; j < 9; j++) {
                 if (lizard_field[j] == 1) {
-                    predator_field[j] = 0.5;
+                    lizard_field[j] = 0.5;
                 }
             }
         }  else if ( i < 6){
             for (int j = 0; j < 9; j++) {
                 if (lizard_field[j] == 1) {
-                    predator_field[j] = 0.7;
+                    lizard_field[j] = 0.7;
                 }
             }
         }
@@ -3419,14 +3507,17 @@ public class Generator {
                 predator_field[k] = 0;
                 if (r.nextDouble() < 0.8) {
                     double tmp = r.nextDouble();
-                    if (tmp >= 0.7) {
-                        predator_field[k] = 0.7;
-                    } else if (tmp >= 0.5) {
+                    if (tmp >= 0.5) {
                         predator_field[k] = 0.5;
                     } else {
                         predator_field[k] = 0.3;
                     }
                 }
+            }
+        }
+        else {
+            for (int k = 0; k < 9; k++) {
+                predator_field[k] = 0;
             }
         }
     }
@@ -3466,6 +3557,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3479,6 +3571,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //2
             lizard_field = new double[]
@@ -3492,6 +3585,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3504,6 +3598,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //3
             lizard_field = new double[]
@@ -3517,6 +3612,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3529,6 +3625,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //4
             lizard_field = new double[]
@@ -3542,6 +3639,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3554,6 +3652,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //5
             lizard_field = new double[]
@@ -3567,6 +3666,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //6
             lizard_field = new double[]
@@ -3580,6 +3680,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3592,6 +3693,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //7
             lizard_field = new double[]
@@ -3605,6 +3707,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3617,6 +3720,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //8
             lizard_field = new double[]
@@ -3630,6 +3734,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3642,6 +3747,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //9
             lizard_field = new double[]
@@ -3655,6 +3761,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3667,6 +3774,7 @@ public class Generator {
             predator_lizard_hunting_random(lizard_field, predator_lizard_field, i);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             //Комбинации:
             lizard_field = new double[]
@@ -3681,6 +3789,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3694,6 +3803,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3707,6 +3817,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3720,6 +3831,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3733,6 +3845,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3746,6 +3859,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3759,6 +3873,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3772,6 +3887,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3785,6 +3901,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3798,6 +3915,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3811,6 +3929,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3824,6 +3943,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3837,6 +3957,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3850,6 +3971,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3863,6 +3985,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3876,6 +3999,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3889,6 +4013,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3902,6 +4027,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3915,6 +4041,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3928,6 +4055,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3941,6 +4069,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3954,6 +4083,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3967,6 +4097,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3980,6 +4111,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -3993,6 +4125,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4006,6 +4139,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4019,6 +4153,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4032,6 +4167,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4045,6 +4181,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4058,6 +4195,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4071,6 +4209,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4084,6 +4223,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4097,6 +4237,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4110,6 +4251,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4123,6 +4265,7 @@ public class Generator {
             decision = Actions.MOVEMENT;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
 
             lizard_field = new double[]
                     {
@@ -4136,6 +4279,7 @@ public class Generator {
             decision = Actions.ATTACK;
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.3, dir, decision);
             to_file(corpse_field, lizard_field, predator_lizard_field, 0.5, dir, decision);
+ //           to_file(corpse_field, lizard_field, predator_lizard_field, 0.7, dir, decision);
         }
     }
 
@@ -4832,7 +4976,7 @@ public class Generator {
         predator_lizard_confusion_pack();
         predator_lizard_eating_pack();
         predator_lizard_hunting_pack();
-        //predator_lizard_reproduction_pack();
+        predator_lizard_reproduction_pack();
 
         try {
             writer.close();

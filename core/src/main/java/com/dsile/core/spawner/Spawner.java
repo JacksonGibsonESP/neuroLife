@@ -33,7 +33,7 @@ public class Spawner{
         generator.predator_lizard_gen();
 
         //Заполним мир ящерками
-        boolean first = true;
+        /*boolean first = true;
         Brain brain = null;
         for(int y = 0; y < world.getWorldYsize(); y++)
         {
@@ -43,10 +43,10 @@ public class Spawner{
                 {
                     if(first) {
                         Lizard lizard = new Herb_Lizard(world, x, y);
-                        lizard.learn();
+                        //lizard.learn();
                         brain = lizard.getBrain();
-                        brain.saveNNToFile("herb_lizard_brain");
-                        //brain.loadFileToNNT("herb_lizard_brain");
+                        //brain.saveNNToFile("herb_lizard_brain");
+                        brain.loadFileToNNT("herb_lizard_brain");
                         first = false;
                         world.add_to_entities(lizard);
                     }
@@ -55,7 +55,7 @@ public class Spawner{
                     }
                 }
             }
-        }
+        }*/
 
 /*        //Заполним мир ящерками-хищниками-падальщиками
         first = true;
@@ -83,7 +83,7 @@ public class Spawner{
         }
 */
         //Заполним мир травой
-        for(int y = 0; y < world.getWorldYsize(); y++)
+        /*for(int y = 0; y < world.getWorldYsize(); y++)
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
@@ -92,21 +92,25 @@ public class Spawner{
                     world.add_to_entities((new Herb(world, x, y)));
                 }
             }
-        }
+        }*/
 
-/*        Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
+        Predator_Lizard predator_lizard = new Predator_Lizard(world,6,7);
         //predator_lizard.learn();
         //predator_lizard.getBrain().saveNNToFile("predator_lizard_brain");
         predator_lizard.getBrain().loadFileToNNT("predator_lizard_brain");
         predator_lizard.setDirection(SidesDirectionValues.SOUTH);
+        predator_lizard.setHP(100);
         world.add_to_entities(predator_lizard);
 
         //world.add_to_entities((new Herb(world, 6, 6)));
+        predator_lizard = new Predator_Lizard(world, 7, 6, predator_lizard.getBrain(), false);
+        //predator_lizard.setHP(100);
+        world.add_to_entities(predator_lizard);
 
         Herb_Lizard lizard = new Herb_Lizard(world, 6, 6);
-        //lizard.learn();
-        //lizard.getBrain().saveNNToFile("herb_lizard_brain");
-        lizard.getBrain().loadFileToNNT("herb_lizard_brain");
+        lizard.learn();
+        lizard.getBrain().saveNNToFile("herb_lizard_brain");
+        //lizard.getBrain().loadFileToNNT("herb_lizard_brain");
         //lizard.setHP(100);
 
         lizard.setDirection(SidesDirectionValues.NORTH);
@@ -124,7 +128,7 @@ public class Spawner{
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();
         //entities.add(lizard2);
-*/
+
         /*for(Entity e : entities)
         {
             e.setHP(100);

@@ -1,6 +1,7 @@
 package com.dsile.core.entities.actions.eating;
 
 import com.dsile.core.entities.Creature;
+import com.dsile.core.entities.Herb_Lizard;
 import com.dsile.core.entities.Lizard;
 import com.dsile.core.entities.Predator_Lizard;
 
@@ -16,7 +17,7 @@ public class Eating {
     }
 
     public void perform() {
-        if(creature instanceof Lizard && creature.getCurrentCell().isHerb())
+        if(creature instanceof Herb_Lizard && creature.getCurrentCell().isHerb())
         {
             creature.incHP(creature.getCurrentCell().getHerb().bitten()); //кусаем и получаем некоторый прирост hp
         }

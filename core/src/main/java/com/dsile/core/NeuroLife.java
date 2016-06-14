@@ -16,7 +16,7 @@ public class NeuroLife extends Game {
 
     @Override
     public void create() {
-        //System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
+        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
         setScreen(new WorldScreen());
     }
 

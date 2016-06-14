@@ -89,7 +89,9 @@ public abstract class Entity extends Actor {
     }
 
     public void setDirection(SidesDirectionValues val){
-        direction = val;
+        if(val != SidesDirectionValues.NO_DIRECTION) {
+            direction = val;
+        }
         setRotation(direction.getAngle());
     }
 

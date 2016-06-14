@@ -18,8 +18,8 @@ public class Predator_Lizard_Brain extends Brain {
     public Predator_Lizard_Brain(){
         List<Integer> neuronsInLayers = new ArrayList<>();
         neuronsInLayers.add(28);
-        neuronsInLayers.add(70);
-        neuronsInLayers.add(30);
+        neuronsInLayers.add(80);
+        neuronsInLayers.add(40);
         neuronsInLayers.add(8);
         this.neuralNetwork = new MultiLayerPerceptron(neuronsInLayers, new NeuronProperties(TransferFunctionType.SIGMOID, true));
 

@@ -196,9 +196,9 @@ public abstract class Lizard extends Creature {
 
     private int find_winner(double[] brainOutput)
     {
-        if (this.getnormalizedHP() < 0.7) {
+        /*if (this.getnormalizedHP() < 0.7) {
             brainOutput[3] = 0;
-        }
+        }*/
         //System.out.println(Arrays.toString(brainOutput));
         //Метод возвращает индекс победителя
         //Массив означающий текущий порядок индексов массива brainOutput

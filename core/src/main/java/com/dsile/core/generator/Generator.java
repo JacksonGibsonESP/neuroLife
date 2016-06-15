@@ -2599,7 +2599,7 @@ public class Generator {
         herb_lizard_eating_pack();
         herb_lizard_reproduction_pack();
         //erb_lizard_disgusting_pack();
-        herb_lizard_escape_predator_pack();
+        //herb_lizard_escape_predator_pack();
         //herb_lizard_attack_predator_pack();
 
         try {

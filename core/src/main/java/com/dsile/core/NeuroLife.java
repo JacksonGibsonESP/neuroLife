@@ -13,8 +13,8 @@ public class NeuroLife extends Game {
 
     @Override
     public void create() {
-        Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-        root.setLevel(Level.DEBUG);
+        //Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        //root.setLevel(Level.DEBUG);
         setScreen(new WorldScreen());
     }
 

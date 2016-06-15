@@ -30,7 +30,7 @@ public class WorldScreen implements Screen {
 
         batch = new SpriteBatch();
         //Размер по из клеток горизонтали, по вертикали, размер клетки в пикселях.
-        world = new World(100, 100, 32, this);
+        world = new World(30, 20, 32, this);
         //stage = new Stage();
         herb_stage = new Stage();
         herb_lizard_stage = new Stage();

@@ -8,7 +8,7 @@ import com.dsile.core.world.World;
  */
 public class Herb extends Entity {
 
-    static private Texture herb = new Texture("herb.png");
+    static private Texture herb = new Texture("herb_b&w.png");
 
     public Herb(World world, int x, int y) {
         super(world, x, y);

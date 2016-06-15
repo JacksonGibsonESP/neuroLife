@@ -11,9 +11,9 @@ import com.dsile.core.world.World;
  */
 public class Herb_Lizard extends Lizard {
 
-    static private Texture aliveTexture     = new Texture("alive_herb_lizard.png");
-    static private Texture deadTexture      = new Texture("dead_herb_lizard.png");
-    static private Texture newbornTexture   = new Texture("newborn_herb_lizard.png");
+    static private Texture aliveTexture     = new Texture("alive_herb_lizard_b&w.png");
+    static private Texture deadTexture      = new Texture("dead_herb_lizard_b&w.png");
+    static private Texture newbornTexture   = new Texture("newborn_herb_lizard_b&w.png");
 
     public Herb_Lizard(World world, int x, int y) {
         super(world,x,y);

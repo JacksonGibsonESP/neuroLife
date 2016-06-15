@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class GroundCell extends Cell {
 
-    private static Texture sand = new Texture("sand.png");
+    private static Texture sand = new Texture("sand_b&w.png");
 
     public GroundCell(int size, int x, int y) {
         super(size,x,y);

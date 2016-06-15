@@ -16,7 +16,7 @@ import java.util.Random;
 public class Spawner{
     private World world;
     private Random r;
-    private double probability = 0.001;
+    private double probability = 0.0025;
 
     public Spawner(World world) {
         this.world = world;
@@ -39,14 +39,14 @@ public class Spawner{
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.02)
+                if (r.nextDouble() < 0.06)
                 {
                     if(first) {
                         Lizard lizard = new Herb_Lizard(world, x, y);
-                        lizard.learn();
+                        //lizard.learn();
                         brain = lizard.getBrain();
-                        brain.saveNNToFile("herb_lizard_brain");
-                        //brain.loadFileToNNT("herb_lizard_brain");
+                        //brain.saveNNToFile("herb_lizard_brain");
+                        brain.loadFileToNNT("herb_lizard_brain");
                         first = false;
                         world.add_to_entities(lizard);
                     }
@@ -87,7 +87,7 @@ public class Spawner{
         {
             for (int x = 0; x < world.getWorldXsize(); x++)
             {
-                if (r.nextDouble() < 0.5)
+                if (r.nextDouble() < 0.4)
                 {
                     world.add_to_entities((new Herb(world, x, y)));
                 }
@@ -106,29 +106,29 @@ public class Spawner{
         predator_lizard = new Predator_Lizard(world, 7, 6, predator_lizard.getBrain(), false);
         //predator_lizard.setHP(100);
         world.add_to_entities(predator_lizard);
-
-        Herb_Lizard lizard = new Herb_Lizard(world, 6, 6);
-        lizard.learn();
-        lizard.getBrain().saveNNToFile("herb_lizard_brain");
-        //lizard.getBrain().loadFileToNNT("herb_lizard_brain");
-        //lizard.setHP(100);
+*/
+/*        Herb_Lizard lizard = new Herb_Lizard(world, 6, 6);
+        //lizard.learn();
+        //lizard.getBrain().saveNNToFile("herb_lizard_brain");
+        lizard.getBrain().loadFileToNNT("herb_lizard_brain");
+        lizard.setHP(100);
 
         lizard.setDirection(SidesDirectionValues.NORTH);
         world.add_to_entities(lizard);
 
-        //lizard = new Herb_Lizard(world,6,7, lizard.getBrain(), false);
-        lizard.setHP(70);
+        lizard = new Herb_Lizard(world,6,7, lizard.getBrain(), false);
+        lizard.setHP(100);
 
-        //world.add_to_entities(lizard);
+        world.add_to_entities(lizard);
 
         //world.add_to_entities((new Herb(world, 5, 7)));
 
-        world.add_to_entities((new Herb(world, 6, 6)));
+        world.add_to_entities((new Herb(world, 5, 6)));
 
         //Lizard lizard2 = new Lizard(this,6,7);
         //lizard2.learn();
         //entities.add(lizard2);
-
+*/
         /*for(Entity e : entities)
         {
             e.setHP(100);
